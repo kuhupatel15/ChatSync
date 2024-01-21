@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 #email2,#username,#password{
     background-color: #000;
     color: rgb(226 232 240);
