@@ -4,12 +4,15 @@ import chatsync from './assets/chatsync.jpg'
 import './index.css'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {login} from '../store/reducers/AuthSlice'
+import {userData} from '../store/reducers/UserSlice'
 const SignUp = () => {
   const { register, handleSubmit } = useForm()
-  
+  const dispatch=useDispatch();
+  const ud = useSelector((state)=> state.User.userData)
   const submithandler = (data) =>{
-    console.log(data)
+    dispatch(userData(data))
   }
 
   return (
