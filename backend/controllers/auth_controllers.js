@@ -128,8 +128,8 @@ exports.ForgotPassword = async (req, res) => {
 
 exports.ResetPassword = async (req, res) => {
   try {
-    const { id, token } = req.params
-    const { password } = req.body
+    // const {  } = req.params
+    const { id, token, password } = req.body
 
     jwt.verify(token, env_config.jwt_secret, (err, decoded) => {
       if (err) {

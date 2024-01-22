@@ -39,10 +39,24 @@ export const Verify = async({otp,userID})=>{
       }
 }
 
-export const Forgot_email = async(userEmail)=>{
+export const Forgot_email = async(
+    {userEmail})=>{
     try {
         let response = await baseUrl.post('/user/forgot-password', 
         {userEmail},{}
+        )
+        return response ; 
+      }
+      catch (error) {
+        console.log(error);
+      }
+}
+
+export const Reset_Password = async(
+    {id, token, password})=>{
+    try {
+        let response = await baseUrl.post('/user/reset-password', 
+        {id, token, password},{}
         )
         return response ; 
       }
