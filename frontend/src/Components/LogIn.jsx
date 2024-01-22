@@ -36,7 +36,7 @@ const LogIn = () => {
         </div>
         <TextInput id="password"  {...register("password")} className='text-slate-300' placeholder='Password' type="password" required shadow />
       </div>
-      <button className='ml-0'>Forget password?</button>
+      <Link to={'/forgot_email'}><button className='ml-0'>Forget password?</button></Link>
       <Button gradientDuoTone="purpleToBlue" type="submit">Log-In</Button>
       <p className='text-white'>Does not have an account ? <Link to={'/'}><button>Sign Up</button></Link></p>
     </form>

@@ -38,6 +38,7 @@ exports.sendOTPverification = async ({ _id, userEmail }, res) => {
  
 exports.sendOTPforPasswordChange = async ({ _id, userEmail }, res) => {
     try {
+        console.log(_id,userEmail)
         const token = jwt.sign({id: _id}, env_config.jwt_secret, {expiresIn: "1h"})
         var mailOptions = {
             from: env_config.auth_mail,

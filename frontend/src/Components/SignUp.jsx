@@ -8,14 +8,22 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 // import {login} from '../../store/reducers/AuthSlice';
 import {userData} from '../../store/reducers/UserSlice';
+import {Register} from '../utils/authentication'
 const SignUp = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
   const dispatch=useDispatch();
   // const ud = useSelector((state)=> state.User.userData)
-  const submithandler = (data) =>{
-    dispatch(userData(data))
+
+
+
+  const submithandler =async (data) =>{
     
+    
+    const user=await Register(data);
+    console.log(user.data)
+    dispatch(userData(user.data))
+    navigate('/otp')
   }
 
   return (

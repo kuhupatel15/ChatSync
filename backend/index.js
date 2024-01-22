@@ -1,12 +1,14 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
-const bcrypt = require("bcrypt");
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
-require("./middlewares/mongoConnection.js").connectDB();
-require("dotenv").config({ path: './.env' });
-const session = require("express-session");
-const cookieparser = require("cookie-parser");
+require('./middlewares/mongoConnection.js').connectDB();
+require('dotenv').config({ path: './.env' });
+const session = require('express-session');
+const cookieparser = require('cookie-parser');
+const cors = require('cors');
+
 app.use(
     session({
         resave: true,
@@ -16,17 +18,20 @@ app.use(
 );
 app.use(cookieparser());
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false, limit: '50mb' }));
-const logger = require("morgan");
-app.use(logger("tiny"));
+const logger = require('morgan');
+app.use(logger('tiny'));
 
-app.use("/user", require("./routes/userRoutes.js"));
-const cors = require("cors");
-app.use(cors({ credentials: true, origin: true }));
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}));
 
-app.listen(
-    3000,
-    console.log('Server is running on 3000')
-)
+app.use('/user', require('./routes/userRoutes.js'));
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
