@@ -65,6 +65,7 @@ exports.VerifyOTP = async (req, res) => {
 exports.UserLogin = async (req, res) => {
   try {
     let { userEmail, password } = req.body;
+    console.log(req.body)
     const user = await User.findOne({ userEmail });
 
     if (user) {

@@ -12,3 +12,7 @@
     background-image: url(./assets/chatsync.jpg);
     background-size: cover;
 }
+.otp-input{
+    background-color: #000;
+    color: rgb(226 232 240); 
+}

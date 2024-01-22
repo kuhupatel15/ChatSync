@@ -1,18 +1,21 @@
 import React from 'react'
 import { Button, Label, TextInput } from 'flowbite-react';
 import { Link } from 'react-router-dom'
-import './index.css'
+import '../index.css'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
-import { login } from "../store/reducers/AuthSlice"
-
+import { login } from "../../store/reducers/AuthSlice"
+import { Login } from '../utils/authentication';
 const LogIn = () => {
 
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm()
    
-  const submithandler = (data) =>{
+  const submithandler =async (data) =>{
     dispatch(login(data));
+    console.log(data)
+    const userData = await Login(data);
+    console.log(userData);
   }
   
   return (

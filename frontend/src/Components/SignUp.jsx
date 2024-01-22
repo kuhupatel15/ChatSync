@@ -1,18 +1,21 @@
 import React from 'react'
 import { Button, Label, TextInput } from 'flowbite-react';
-import chatsync from './assets/chatsync.jpg'
-import './index.css'
-import { Link } from 'react-router-dom'
+import '../index.css'
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { Link,useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import {login} from '../store/reducers/AuthSlice'
-import {userData} from '../store/reducers/UserSlice'
+// import {login} from '../../store/reducers/AuthSlice';
+import {userData} from '../../store/reducers/UserSlice';
 const SignUp = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
   const dispatch=useDispatch();
-  const ud = useSelector((state)=> state.User.userData)
+  // const ud = useSelector((state)=> state.User.userData)
   const submithandler = (data) =>{
     dispatch(userData(data))
+    
   }
 
   return (
