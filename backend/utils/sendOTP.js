@@ -44,7 +44,7 @@ exports.sendOTPforPasswordChange = async ({ _id, userEmail }, res) => {
             from: env_config.auth_mail,
             to: userEmail,
             subject: 'Verify your email for password change',
-            html: `http://localhost:3000/user/reset-password/${_id}/${token}`
+            html: `${env_config.frontend_url}/user/reset-password/${_id}/${token}`
         };
         await transporter.sendMail(mailOptions);
         res.status(200).json({ msg: "Password reset link has been sent to your mail. " })

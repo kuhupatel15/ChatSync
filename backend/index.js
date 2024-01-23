@@ -22,10 +22,11 @@ app.use(bodyParser.json());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false, limit: '50mb' }));
 const logger = require('morgan');
+const env_config = require('./config/env_config.js');
 app.use(logger('tiny'));
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: `${env_config.frontend_url}`,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));

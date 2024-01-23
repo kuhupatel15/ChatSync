@@ -8,8 +8,8 @@ const { sendOTPverification, sendOTPforPasswordChange } = require("../utils/send
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-      user: env_config.auth_mail,
-      pass: env_config.auth_mail_pass
+    user: env_config.auth_mail,
+    pass: env_config.auth_mail_pass
   }
 })
 
@@ -40,7 +40,7 @@ exports.UserRegister = async (req, res, next) => {
   user.save().then((result) => {
     sendOTPverification(result, res)
   })
-  res.status(200).json({ msg: "Check your mail to verify", Status: "Not verified",user })
+  res.status(200).json({ msg: "Check your mail to verify", Status: "Not verified", user })
 };
 
 exports.VerifyOTP = async (req, res) => {
@@ -73,7 +73,6 @@ exports.VerifyOTP = async (req, res) => {
 exports.UserLogin = async (req, res) => {
   try {
     let { userEmail, password } = req.body;
-    console.log(req.body)
     const user = await User.findOne({ userEmail });
 
     if (user) {
@@ -83,13 +82,13 @@ exports.UserLogin = async (req, res) => {
           expiresIn: env_config.jwt_token_expire,
         });
         await User.findOneAndUpdate({ userEmail: user.userEmail }, { token });
-        res.json({ msg: "User successfully logged in", user });
+        res.status(200).json({ msg: "User successfully logged in", user });
       } else {
         res.status(401).json({ msg: "Invalid password" });
       }
     }
     else {
-      res.json({ msg: "User not found" })
+      res.status(400).json({ msg: "User not found" })
     }
   } catch (err) {
     res.status(500).json({ msg: err.message });
@@ -99,25 +98,23 @@ exports.UserLogin = async (req, res) => {
 exports.ForgotPassword = async (req, res) => {
   try {
     const { userEmail } = req.body;
-    // console.log(userEmail)
     if (!userEmail) {
       res.status(400).json({ msg: 'Please provide the email' })
     }
 
     let user = await User.findOne({ userEmail });
     if (user) {
-      console.log(user)
-      const token = jwt.sign({id: user._id}, env_config.jwt_secret, {expiresIn: "1h"})
-        var mailOptions = {
-            from: env_config.auth_mail,
-            to: user.userEmail,
-            subject: 'Verify your email for password change',
-            html: `http://localhost:3000/user/reset-password/${user._id}/${token}`
-        };
-        await transporter.sendMail(mailOptions);
-        res.status(200).json({ msg: "Password reset link has been sent to your mail. " })
+      const token = jwt.sign({ id: user._id }, env_config.jwt_secret, { expiresIn: "1h" })
+      var mailOptions = {
+        from: env_config.auth_mail,
+        to: user.userEmail,
+        subject: 'Verify your email for password change',
+        html: `${env_config.frontend_url}/user/reset-password/${user._id}/${token}`
+      };
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ msg: "Password reset link has been sent to your mail. " })
     }
-    else{
+    else {
       res.status(409).json({ msg: 'User does not exists' })
     }
   }
@@ -128,11 +125,11 @@ exports.ForgotPassword = async (req, res) => {
 
 exports.ResetPassword = async (req, res) => {
   try {
-    // const {  } = req.params
     const { id, token, password } = req.body
-
+    console.log(id, token, password)
     jwt.verify(token, env_config.jwt_secret, (err, decoded) => {
       if (err) {
+        console.log(err)
         return res.json({ msg: "Error with token : " + err })
       } else {
         bcrypt.hash(password, 10)

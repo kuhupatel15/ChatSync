@@ -6,6 +6,6 @@ app.post('/register', UserRegister);
 app.post('/verifyotp', VerifyOTP);
 app.post('/login', UserLogin);
 app.post('/forgot-password', ForgotPassword);
-app.post('/reset-password/:id/:token', ResetPassword );
+app.post('/reset-password', ResetPassword );
 
 module.exports = app;

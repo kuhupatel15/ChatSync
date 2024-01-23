@@ -1,27 +1,25 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom'
-import SignUp from './Components/SignUp';
-import LogIn from './Components/LogIn';
-import OTP from './Components/OTP';
-import Homepage from './Components/Homepage';
-import Forgot from './Components/Forgot';
-import Reset from './Components/Reset';
-function App() {
-  
-  
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Verify_otp from './components/Verify_otp';
+import Homepage from './components/Home_Page';
+import Forgot from './components/Forgot_Password';
+import Reset from './components/Reset_Password';
+import { Toaster } from 'react-hot-toast';
 
+function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<SignUp />}></Route>
-        <Route path='/login' element={<LogIn></LogIn>}></Route>
-        <Route path='/otp' element={<OTP></OTP>}></Route>
-        <Route path='/home' element={<Homepage></Homepage>}></Route>
-        <Route path='/forgot_email' element={<Forgot></Forgot>} ></Route>
-        <Route path='user/reset-password/:id/:token' element={<Reset></Reset>}></Route>
-
+        <Route path='/' element={<Signup />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/verify-otp' element={<Verify_otp />}></Route>
+        <Route path='/home' element={<Homepage />}></Route>
+        <Route path='/forgot-password' element={<Forgot />} ></Route>
+        <Route path='user/reset-password/:id/:token' element={<Reset />}></Route>
       </Routes>
-      
+      <Toaster />
     </>
   )
 }
