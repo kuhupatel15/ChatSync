@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const env_config = require('../config/env_config')
 const { sendOTPverification, sendOTPforPasswordChange } = require("../utils/sendOTP.js")
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -75,8 +76,10 @@ exports.UserLogin = async (req, res) => {
     let { userEmail, password } = req.body;
     const user = await User.findOne({ userEmail });
     if (user) {
-      const passCheck = bcrypt.compareSync(password, user.password);
+      const passCheck = bcrypt.compare(password, user.password);
+      console.log(passCheck)
       if (passCheck) {
+        
         const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
           expiresIn: env_config.jwt_token_expire,
         });

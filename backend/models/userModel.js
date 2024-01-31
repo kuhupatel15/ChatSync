@@ -30,11 +30,6 @@ const User = new mongoose.Schema({
     default:
       "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
   },
-  isAdmin: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
   verified: {
     type: Boolean,
     default: false,
