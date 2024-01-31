@@ -30,7 +30,7 @@ const LogIn = () => {
           <div className="mb-2 block ">
             <Label htmlFor="email2" value="Your email" className='text-slate-300' />
           </div>
-          <TextInput  {...register("email")} id="email2" type="email" className='text-slate-300' placeholder="name@gmail.com" required shadow />
+          <TextInput  {...register("userEmail")} id="email2" type="email" className='text-slate-300' placeholder="name@gmail.com" required shadow />
         </div>
 
         <div>

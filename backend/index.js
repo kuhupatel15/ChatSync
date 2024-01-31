@@ -32,6 +32,9 @@ app.use(cors({
 }));
 
 app.use('/user', require('./routes/userRoutes.js'));
+app.use('/chat', require('./routes/chatRoutes.js'));
+
+
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

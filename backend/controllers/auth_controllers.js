@@ -33,7 +33,7 @@ exports.UserRegister = async (req, res, next) => {
     password: hashedPassword,
   });
 
-  const token = jwt.sign({ userEmail }, env_config.jwt_secret, {
+  const token = jwt.sign({ _id: user._id } , env_config.jwt_secret, {
     expiresIn: env_config.jwt_token_expire,
   });
   user.token = token;
@@ -74,11 +74,10 @@ exports.UserLogin = async (req, res) => {
   try {
     let { userEmail, password } = req.body;
     const user = await User.findOne({ userEmail });
-
     if (user) {
       const passCheck = bcrypt.compareSync(password, user.password);
       if (passCheck) {
-        const token = jwt.sign({ userEmail }, env_config.jwt_secret, {
+        const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
           expiresIn: env_config.jwt_token_expire,
         });
         await User.findOneAndUpdate({ userEmail: user.userEmail }, { token });
@@ -126,7 +125,6 @@ exports.ForgotPassword = async (req, res) => {
 exports.ResetPassword = async (req, res) => {
   try {
     const { id, token, password } = req.body
-    console.log(id, token, password)
     jwt.verify(token, env_config.jwt_secret, (err, decoded) => {
       if (err) {
         console.log(err)
@@ -147,6 +145,16 @@ exports.ResetPassword = async (req, res) => {
   }
   catch (error) {
     res.status(500).json({ error })
+  }
+}
+
+exports.GetAllUsers = async (req, res) => {
+  try {
+   const allusers = await User.find();
+   return res.status(200).json(allusers)
+  }
+  catch (error) {
+    return res.status(500).json({ error })
   }
 }
 
