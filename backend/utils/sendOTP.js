@@ -15,6 +15,7 @@ let transporter = nodemailer.createTransport({
 
 exports.sendOTPverification = async ({ _id, userEmail }, res) => {
     try {
+        console.log(_id, userEmail)
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`
         var mailOptions = {
             from: env_config.auth_mail,
@@ -22,12 +23,15 @@ exports.sendOTPverification = async ({ _id, userEmail }, res) => {
             subject: 'Verify your email',
             html: `<p>Enter <b>${otp}</b> on site to get your email verified .</p>`
         };
-        const hashedOTP = await bcrypt.hash(otp, 10);
-        const newOTPverification = await new userVerification({
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedOTP = await bcrypt.hash(otp, salt);
+
+        const newOTPverification = userVerification.create({
             userID: _id,
             otp: hashedOTP
         })
-        await newOTPverification.save();
+        
         await transporter.sendMail(mailOptions);
         res.status(200).json({ msg: "Verification email sent" })
     }

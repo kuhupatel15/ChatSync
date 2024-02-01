@@ -63,7 +63,7 @@ exports.createGroup = async (req, res) => {
             users: users,
             groupAdmin: req.user
         })
-        return res.status(200).json(grpchat);
+        return res.status(200).json({ msg: `Group ${grpchat.chatName} has been created successfully`, grpchat });
     }
     catch (err) {
         console.log(err)
@@ -74,8 +74,9 @@ exports.createGroup = async (req, res) => {
 exports.renameGroup = async (req, res) => {
     try {
         const { chatId, newgrpname } = req.body;
+        console.log(chatId, newgrpname)
         const updatedChat = await Chat.findByIdAndUpdate(chatId, { chatName: newgrpname, }, { new: true, })
-        return res.status(200).json(updatedChat);
+        return res.status(200).json({ msg: `Group has been renamed successfully`, updatedChat });
     }
     catch (err) {
         console.log(err)
@@ -89,7 +90,7 @@ exports.removeMemberFromGrp = async (req, res) => {
         const checkIfAdmin = Chat.findOne({ _id: chatId });
         if (checkIfAdmin.groupAdmin === req.user._id) {
             const updatedChat = await Chat.findByIdAndUpdate(chatId, { $pull: { users: memberId }, }, { new: true, })
-            return res.status(200).json(updatedChat);
+            return res.status(200).json({ msg: "Removed successfully.", updatedChat });
         }
         else {
             return res.status(404).json({ msg: "You are not admin." });
@@ -107,7 +108,7 @@ exports.addMemberInGrp = async (req, res) => {
         const checkIfAdmin = Chat.findOne({ _id: chatId });
         if (checkIfAdmin.groupAdmin === req.user._id) {
             const updatedChat = await Chat.findByIdAndUpdate(chatId, { $push: { users: memberId }, }, { new: true, })
-            return res.status(200).json(updatedChat);
+            return res.status(200).json({ msg: "Added successfully.", updatedChat });
         }
         else {
             return res.status(404).json({ msg: "You are not admin." });

@@ -14,49 +14,64 @@ let transporter = nodemailer.createTransport({
   }
 })
 
-
 exports.UserRegister = async (req, res, next) => {
   const { userName, userEmail, password } = req.body;
+  try {
+    if (!userName || !userEmail || !password) {
+      return res.status(400).json({ msg: 'Please select all fields' })
+    }
 
-  if (!userName || !userEmail || !password) {
-    res.status(400).json({ msg: 'Please select all fields' })
+    let user = await User.findOne({ userEmail });
+
+    if (user) {
+      return res.status(409).json({ msg: 'User already exists' })
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    user = await User.create({
+      userName,
+      userEmail,
+      password: hash,
+    });
+
+    await user.save().then((result) => {
+      sendOTPverification(result, res)
+    })
+
+    const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
+      expiresIn: env_config.jwt_token_expire,
+    });
+
+    return res.status(200).json({
+      msg: "Check your mail to verify",
+      token,
+      Status: "Not verified",
+      user,
+    })
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  let user = await User.findOne({ userEmail });
-  if (user) {
-    res.status(409).json({ msg: 'User already exists' })
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  user = await User.create({
-    userName,
-    userEmail,
-    password: hashedPassword,
-  });
-
-  const token = jwt.sign({ _id: user._id } , env_config.jwt_secret, {
-    expiresIn: env_config.jwt_token_expire,
-  });
-  user.token = token;
-  user.save().then((result) => {
-    sendOTPverification(result, res)
-  })
-  res.status(200).json({ msg: "Check your mail to verify", Status: "Not verified", user })
 };
 
 exports.VerifyOTP = async (req, res) => {
   try {
     let { userID, otp } = req.body;
+
     if (!userID || !otp) {
       res.status(400).json({ msg: "Empty otp details are not allowed." })
     }
+
     const userToBeVerified = await userVerification.find({ userID })
     if (userToBeVerified.length <= 0) {
       res.status(400).json({ msg: "Account record doesn't exist" })
     }
+
     else {
       const hashedotp = userToBeVerified[0].otp;
-      const validotp = bcrypt.compare(otp, hashedotp)
+      const validotp = await bcrypt.compare(otp, hashedotp)
       if (!validotp) {
         res.status(400).json({ msg: "Invalid otp" })
       }
@@ -73,27 +88,22 @@ exports.VerifyOTP = async (req, res) => {
 
 exports.UserLogin = async (req, res) => {
   try {
-    let { userEmail, password } = req.body;
+    const { userEmail, password } = req.body;
     const user = await User.findOne({ userEmail });
-    if (user) {
-      const passCheck = bcrypt.compare(password, user.password);
-      console.log(passCheck)
-      if (passCheck) {
-        
-        const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
-          expiresIn: env_config.jwt_token_expire,
-        });
-        await User.findOneAndUpdate({ userEmail: user.userEmail }, { token });
-        res.status(200).json({ msg: "User successfully logged in", user });
-      } else {
-        res.status(401).json({ msg: "Invalid password" });
-      }
+    if (!user) {
+      return res.status(400).json({ msg: "User not found" });
     }
-    else {
-      res.status(400).json({ msg: "User not found" })
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
     }
+    const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
+      expiresIn: env_config.jwt_token_expire,
+    });
+    return res.status(200).json({ token, user, msg:"User logged in successfully" });
   } catch (err) {
-    res.status(500).json({ msg: err.message });
+    console.error(err);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };
 
@@ -153,8 +163,8 @@ exports.ResetPassword = async (req, res) => {
 
 exports.GetAllUsers = async (req, res) => {
   try {
-   const allusers = await User.find();
-   return res.status(200).json(allusers)
+    const allusers = await User.find();
+    return res.status(200).json(allusers)
   }
   catch (error) {
     return res.status(500).json({ error })

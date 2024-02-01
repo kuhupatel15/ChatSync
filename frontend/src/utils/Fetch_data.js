@@ -11,11 +11,13 @@ export const Login = async ({ userEmail, password }) => {
     let response = await baseUrl.post('/user/login',
       { userEmail, password }, {}
     )
+    localStorage.setItem("jwt_token", response.data.token);
     toast.success(response.data.msg);
     return response;
   }
   catch (error) {
     console.log(error);
+    toast.error(error.response.data.msg)
   }
 }
 
@@ -24,11 +26,13 @@ export const Register = async ({ userEmail, userName, password }) => {
     let response = await baseUrl.post('/user/register',
       { userEmail, userName, password }, {}
     )
+    localStorage.setItem("jwt_token", response.data.token);
     toast.success(response.data.msg);
     return response;
   }
   catch (error) {
     console.log(error);
+    toast.error(error.response.data.msg)
   }
 }
 
@@ -65,6 +69,149 @@ export const Reset_Password = async ({ id, token, password }) => {
       { id, token, password }, {}
     )
     toast.success(response.data.msg);
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const Get_all_users = async () => {
+  try {
+    let response = await baseUrl.get('/user/get-all-users', {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      }
+    })
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const Add_chat = async ({ receiver_id }) => {
+  try {
+    let response = await baseUrl.post('/chat/add-chat', { receiver_id }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const Fetch_chat = async () => {
+  try {
+    let response = await baseUrl.get('/chat/fetch-chats', {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const Create_group = async ({ users, grpname }) => {
+  try {
+    let response = await baseUrl.post('/chat/create-group', { users, grpname }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    toast.success(response.data.msg);
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export const Rename_group = async ({ chatId, newgrpname }) => {
+  try {
+    let response = await baseUrl.post('/chat/rename-group', { chatId, newgrpname }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    toast.success(response.data.msg)
+    return response;
+  }
+  catch (error) {
+    toast.error(response.data.msg);
+    console.log(error);
+  }
+}
+
+export const Remove_member_from_group = async ({ chatId, memberId }) => {
+  try {
+    let response = await baseUrl.post('/chat/remove-from-group', { chatId, memberId }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    toast.success(response.data.msg);
+    return response;
+  }
+  catch (error) {
+    toast.error(response.data.msg);
+    console.log(error);
+  }
+}
+
+export const Add_to_group = async ({ chatId, memberId }) => {
+  try {
+    let response = await baseUrl.post('/chat/add-to-group', { chatId, memberId }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    toast.success(response.data.msg);
+    return response;
+  }
+  catch (error) {
+    toast.error(response.data.msg);
+    console.log(error);
+  }
+}
+
+export const Send_message = async ({ content, chatId }) => {
+  try {
+    let response = await baseUrl.post('/message/send-message', { content, chatId }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    return response;
+  }
+  catch (error) {
+    toast.error(response.data.msg);
+    console.log(error);
+  }
+}
+
+export const Get_all_messages = async ({ chatId }) => {
+  try {
+    let response = await baseUrl.get(`/message/get-all-messages/${chatId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
     return response;
   }
   catch (error) {
