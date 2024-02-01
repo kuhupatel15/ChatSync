@@ -24,15 +24,12 @@ const Home_Page = () => {
   }, [])
 
   return (
-    <div>Homepage
-
-      <div className='flex h-[100vh]'>
-        <div className='w-[40vw] h-full bg-[#37393F]'>
-          <button onClick={getdata}>Send</button>
-          <Logout />
-
-        </div>
-        <div className='w-[60vw] h-full'></div>
+    <div className='flex h-[100vh]'>
+      <div className='w-[40vw] h-full bg-[#37393F]'>
+        <button onClick={getdata}>Send</button>
+      </div>
+      <div className='w-[60vw] h-full'>
+        <Logout />
       </div>
     </div>
   )
