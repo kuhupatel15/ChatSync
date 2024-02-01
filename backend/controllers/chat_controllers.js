@@ -51,3 +51,70 @@ exports.fetchChat = async (req, res) => {
         return res.status(500).json({ err })
     }
 }
+
+exports.createGroup = async (req, res) => {
+    try {
+        const { users, grpname } = req.body;
+        //var members = JSON.parse(users);
+        users.push(req.user);
+        var grpchat = await Chat.create({
+            chatName: grpname,
+            isGroupChat: true,
+            users: users,
+            groupAdmin: req.user
+        })
+        return res.status(200).json(grpchat);
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(500).json({ err })
+    }
+}
+
+exports.renameGroup = async (req, res) => {
+    try {
+        const { chatId, newgrpname } = req.body;
+        const updatedChat = await Chat.findByIdAndUpdate(chatId, { chatName: newgrpname, }, { new: true, })
+        return res.status(200).json(updatedChat);
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(500).json({ err })
+    }
+}
+
+exports.removeMemberFromGrp = async (req, res) => {
+    try {
+        const { chatId, memberId } = req.body;
+        const checkIfAdmin = Chat.findOne({ _id: chatId });
+        if (checkIfAdmin.groupAdmin === req.user._id) {
+            const updatedChat = await Chat.findByIdAndUpdate(chatId, { $pull: { users: memberId }, }, { new: true, })
+            return res.status(200).json(updatedChat);
+        }
+        else {
+            return res.status(404).json({ msg: "You are not admin." });
+        }
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(500).json({ err })
+    }
+}
+
+exports.addMemberInGrp = async (req, res) => {
+    try {
+        const { chatId, memberId } = req.body;
+        const checkIfAdmin = Chat.findOne({ _id: chatId });
+        if (checkIfAdmin.groupAdmin === req.user._id) {
+            const updatedChat = await Chat.findByIdAndUpdate(chatId, { $push: { users: memberId }, }, { new: true, })
+            return res.status(200).json(updatedChat);
+        }
+        else {
+            return res.status(404).json({ msg: "You are not admin." });
+        }
+    }
+    catch (err) {
+        console.log(err)
+        return res.status(500).json({ err })
+    }
+}
