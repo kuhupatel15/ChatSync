@@ -110,6 +110,7 @@ exports.UserLogin = async (req, res) => {
 exports.ForgotPassword = async (req, res) => {
   try {
     const { userEmail } = req.body;
+    
     if (!userEmail) {
       res.status(400).json({ msg: 'Please provide the email' })
     }
@@ -168,6 +169,16 @@ exports.GetAllUsers = async (req, res) => {
   }
   catch (error) {
     return res.status(500).json({ error })
+  }
+}
+
+
+exports.uploadController = async (req, res) => {
+  try{
+    res.json('Successfully uploaded ' + req.file.location + ' location!')
+  }
+  catch(err){
+    res.json(err)
   }
 }
 

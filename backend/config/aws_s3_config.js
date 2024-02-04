@@ -1,10 +1,12 @@
-import { S3 } from "@aws-sdk/client-s3";
-import { env_conf } from "../config/env_config";
+const { S3 } = require("@aws-sdk/client-s3");
+const env_config  = require ("../config/env_config");
 
-export const s3config = new S3({
-  region: env_conf.aws_bucket_region,
+const s3config = new S3({
+  region: env_config.aws_bucket_region,
   credentials: {
-    accessKeyId: env_conf.aws_access_key,
-    secretAccessKey: env_conf.aws_secret_key,
+    accessKeyId: env_config.aws_access_key,
+    secretAccessKey: env_config.aws_secret_key,
   },
 });
+
+module.exports = s3config;

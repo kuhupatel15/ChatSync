@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Logout from './Logout_btn'
-import { Add_chat, Create_group, Fetch_chat, Get_all_messages, Get_all_users, Rename_group, Send_message } from '../utils/Fetch_data'
+import { Add_chat, Add_to_group, Create_group, Fetch_chat, Get_all_messages, Get_all_users, Remove_member_from_group, Rename_group, Send_message } from '../utils/Fetch_data'
 
 const Home_Page = () => {
 
@@ -15,7 +15,8 @@ const Home_Page = () => {
     //   users: ["65bbb355740a25af8d0d32e2", "65bbc6d9d9e8a9b627af8c30"], 
     //   grpname: "mc" 
     // });
-    // const response = await Rename_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "asdadsa" })
+    // const response = await Rename_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
+    const response = await Remove_member_from_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
     console.log(response)
   }
 

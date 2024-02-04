@@ -74,7 +74,12 @@ exports.createGroup = async (req, res) => {
 exports.renameGroup = async (req, res) => {
     try {
         const { chatId, newgrpname } = req.body;
-        console.log(chatId, newgrpname)
+
+        const grp = await Chat.findOne({ _id: chatId });
+        if (grp.groupAdmin !== req.user._id) {
+            return res.status(401).json({ msg: 'Only group admins can change the name of the group' })
+        }
+
         const updatedChat = await Chat.findByIdAndUpdate(chatId, { chatName: newgrpname, }, { new: true, })
         return res.status(200).json({ msg: `Group has been renamed successfully`, updatedChat });
     }
@@ -87,14 +92,15 @@ exports.renameGroup = async (req, res) => {
 exports.removeMemberFromGrp = async (req, res) => {
     try {
         const { chatId, memberId } = req.body;
-        const checkIfAdmin = Chat.findOne({ _id: chatId });
-        if (checkIfAdmin.groupAdmin === req.user._id) {
-            const updatedChat = await Chat.findByIdAndUpdate(chatId, { $pull: { users: memberId }, }, { new: true, })
-            return res.status(200).json({ msg: "Removed successfully.", updatedChat });
+
+        const grp = await Chat.findOne({ _id: chatId });
+        if (grp.groupAdmin !== req.user._id) {
+            return res.status(401).json({ msg: 'Only group admins can change the name of the group' })
         }
-        else {
-            return res.status(404).json({ msg: "You are not admin." });
-        }
+
+        const updatedChat = await Chat.findByIdAndUpdate(chatId, { $pull: { users: memberId }, }, { new: true, })
+        return res.status(200).json({ msg: "Removed successfully.", updatedChat });
+
     }
     catch (err) {
         console.log(err)
@@ -105,14 +111,15 @@ exports.removeMemberFromGrp = async (req, res) => {
 exports.addMemberInGrp = async (req, res) => {
     try {
         const { chatId, memberId } = req.body;
-        const checkIfAdmin = Chat.findOne({ _id: chatId });
-        if (checkIfAdmin.groupAdmin === req.user._id) {
-            const updatedChat = await Chat.findByIdAndUpdate(chatId, { $push: { users: memberId }, }, { new: true, })
-            return res.status(200).json({ msg: "Added successfully.", updatedChat });
+
+        const grp = await Chat.findOne({ _id: chatId });
+        if (grp.groupAdmin !== req.user._id) {
+            return res.status(401).json({ msg: 'Only group admins can change the name of the group' })
         }
-        else {
-            return res.status(404).json({ msg: "You are not admin." });
-        }
+
+        const updatedChat = await Chat.findByIdAndUpdate(chatId, { $push: { users: memberId }, }, { new: true, })
+        return res.status(200).json({ msg: "Added successfully.", updatedChat });
+
     }
     catch (err) {
         console.log(err)

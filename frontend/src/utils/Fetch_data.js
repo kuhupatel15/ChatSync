@@ -149,7 +149,7 @@ export const Rename_group = async ({ chatId, newgrpname }) => {
     return response;
   }
   catch (error) {
-    toast.error(response.data.msg);
+    toast.error(error.response.data.msg);
     console.log(error);
   }
 }
@@ -166,7 +166,7 @@ export const Remove_member_from_group = async ({ chatId, memberId }) => {
     return response;
   }
   catch (error) {
-    toast.error(response.data.msg);
+    toast.error(error.response.data.msg);
     console.log(error);
   }
 }
@@ -183,7 +183,7 @@ export const Add_to_group = async ({ chatId, memberId }) => {
     return response;
   }
   catch (error) {
-    toast.error(response.data.msg);
+    toast.error(error.response.data.msg);
     console.log(error);
   }
 }
@@ -199,7 +199,7 @@ export const Send_message = async ({ content, chatId }) => {
     return response;
   }
   catch (error) {
-    toast.error(response.data.msg);
+    toast.error(error.response.data.msg);
     console.log(error);
   }
 }
