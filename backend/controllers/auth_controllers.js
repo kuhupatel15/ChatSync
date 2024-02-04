@@ -172,7 +172,6 @@ exports.GetAllUsers = async (req, res) => {
   }
 }
 
-
 exports.uploadController = async (req, res) => {
   try{
     res.json('Successfully uploaded ' + req.file.location + ' location!')

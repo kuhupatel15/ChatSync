@@ -18,6 +18,7 @@ const LogIn = () => {
   const submithandler = async (data) => {
     dispatch(login(data));
     const res = await Login(data);
+    console.log(res)
     if(res) navigate('/home')
   }
 
