@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const User = new mongoose.Schema({
   userName: {
     type: String,
+    unique:true,
     required: [true, "Please enter your name"],
   },
 
