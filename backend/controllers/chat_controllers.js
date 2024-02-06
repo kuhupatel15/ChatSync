@@ -23,7 +23,7 @@ exports.addChat = async (req, res) => {
                 { users: { $elemMatch: { $eq: receiver_id } } },
             ],
         })
-
+        
         if (isChat.length > 0) {
             return res.status(200).json({ msg: "chat exists", isChat })
         }
@@ -43,11 +43,14 @@ exports.addChat = async (req, res) => {
 
 exports.fetchChat = async (req, res) => {
     try {
-        const chat = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+        
+        const chat = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } }).populate("users")
             .sort({ updatedAt: -1 })
+            
         return res.status(200).json({ chat });
     }
     catch (err) {
+        console.log(err)
         return res.status(500).json({ err })
     }
 }

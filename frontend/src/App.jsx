@@ -7,7 +7,6 @@ import Forgot from './components/Forgot_Password';
 import Reset from './components/Reset_Password';
 import { Toaster } from 'react-hot-toast';
 import Protected from './Layouts/Protected';
-
 function App() {
   return (
     <>
@@ -16,8 +15,11 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/verify-otp' element={<Verify_otp />}></Route>
         <Route path='/home' element={<Protected Component={Home_page} />}></Route>
+        <Route path='/chat/:chatid' element={<Protected Component={Home_page} />}></Route>
+
         <Route path='/forgot-password' element={<Forgot />} ></Route>
         <Route path='user/reset-password/:id/:token' element={<Reset />}></Route>
+
       </Routes>
       <Toaster />
     </>
