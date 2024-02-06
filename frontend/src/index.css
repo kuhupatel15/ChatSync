@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#email2,#username,#password{
+#email2,#username,#password,#email4,#search,#message{
     background-color: #000;
     color: rgb(226 232 240);
     border: none;
@@ -14,5 +14,14 @@
 }
 .otp-input{
     background-color: #000;
-    color: rgb(226 232 240); 
+    color: #e2e8f0; 
+}
+
+.scrollbar-hide::-webkit-scrollbar{
+    display: none;
+}
+
+.message{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }

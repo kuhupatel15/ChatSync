@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from "../../store/reducers/AuthSlice"
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { HiOutlineLogout } from "react-icons/hi";
 
 const Logout = () => {
 
@@ -19,7 +20,9 @@ const Logout = () => {
     }
 
     return (
-        <Button onClick={submithandler} gradientDuoTone="purpleToBlue">Log out</Button>
+<Button outline gradientDuoTone="purpleToBlue" onClick={submithandler} className='text-3xl'>
+            <HiOutlineLogout className='text-xl'></HiOutlineLogout>
+          </Button>
     )
 }
 

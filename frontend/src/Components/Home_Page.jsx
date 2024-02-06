@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import Logout from './Logout_btn'
 import { Add_chat, Add_to_group, Create_group, Fetch_chat, Get_all_messages, Get_all_users, Remove_member_from_group, Rename_group, Send_message } from '../utils/Fetch_data'
+import AddChatNav from './AddChat/AddChatNav'
+import UserChatsContainer from './AddChat/UserChatsContainer'
+import ChatWindow from './ConversationContainer/ChatWindow'
+import { Button } from 'flowbite-react'
 
 const Home_Page = () => {
 
-
   const getdata = async () => {
     // const response = await Get_all_users();
-    // const response = await Add_chat("65bbb355740a25af8d0d32e2")
+    const response = await Add_chat({receiver_id: "65bfea7f10ffeedb377b524d"})
     // const response = await Fetch_chat()
     // const response = await Send_message("hello sarthak", "65bbc361d42d5ac5949b8c2e")
     // const response = await Get_all_messages("")
@@ -16,7 +19,7 @@ const Home_Page = () => {
     //   grpname: "mc" 
     // });
     // const response = await Rename_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
-    const response = await Remove_member_from_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
+    // const response = await Remove_member_from_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
     console.log(response)
   }
 
@@ -26,14 +29,16 @@ const Home_Page = () => {
 
   return (
     <div className='flex h-[100vh]'>
-      <div className='w-[40vw] h-full bg-[#37393F]'>
-        <button onClick={getdata}>Send</button>
+      <div className='w-[40vw] h-full bg-[#2F3136]'>
+        <AddChatNav />
+        <Button onClick={getdata}>Send</Button>
+        <UserChatsContainer />
       </div>
-      <div className='w-[60vw] h-full'>
-        <Logout />
+      <div className='w-[60vw] bg-[#36393F]'>
+        <ChatWindow />
       </div>
     </div>
   )
 }
 
-export default Home_Page
+export default Home_Page;
