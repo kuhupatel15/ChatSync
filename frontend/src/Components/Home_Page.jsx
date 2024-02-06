@@ -34,7 +34,7 @@ const Home_Page = () => {
     <div className='flex h-[100vh]'>
       <div className='w-[40vw] h-full bg-[#2F3136]'>
         <AddChatNav />
-        <Button onClick={getdata}>Send</Button>
+        {/* <Button onClick={getdata}>Send</Button> */}
         <UserChatsContainer />
       </div>
       <div className='w-[60vw] bg-[#36393F]'>

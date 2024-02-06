@@ -18,13 +18,13 @@ const UserChatsContainer = () => {
   
   return (
     <div className='max-h-[40vw] overflow-scroll scrollbar-hide' >
-        {users.map((user)=>(
+        {/* {users && users.map((user)=>(
           <div key={user.users[1]._id}>
             <UserChat name={user.users[1].userName} 
             chatid={user.users[1]._id}
             />
           </div>
-        ))}
+        ))} */}
     </div>
   )
 }

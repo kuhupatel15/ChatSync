@@ -2,16 +2,6 @@ const express = require('express');
 const User = require('../models/userModel');
 const Chat = require('../models/chatModel')
 
-exports.SearchUser = async (req, res) => {
-    try {
-        const user = await User.find({ userName: { $regex: req.body.query } })
-        if (user) {
-            return res.status(200).json({ user })
-        }
-    } catch (err) {
-        return res.status(500).json({ msg: err.message })
-    }
-}
 
 exports.addChat = async (req, res) => {
     try {

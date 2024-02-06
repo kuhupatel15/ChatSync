@@ -100,7 +100,7 @@ exports.UserLogin = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
       expiresIn: env_config.jwt_token_expire,
     });
-    return res.status(200).json({ token, user, msg:"User logged in successfully" });
+    return res.status(200).json({ token, user, msg: "User logged in successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Internal Server Error" });
@@ -110,7 +110,7 @@ exports.UserLogin = async (req, res) => {
 exports.ForgotPassword = async (req, res) => {
   try {
     const { userEmail } = req.body;
-    
+
     if (!userEmail) {
       res.status(400).json({ msg: 'Please provide the email' })
     }
@@ -172,11 +172,23 @@ exports.GetAllUsers = async (req, res) => {
   }
 }
 
+exports.SearchUser = async (req, res) => {
+  try {
+    const users = await User.find({ userName: { $regex: req.params.query } })
+    if (users) {
+      return res.status(200).json(users)
+    }
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ msg: err.message })
+  }
+}
+
 exports.uploadController = async (req, res) => {
-  try{
+  try {
     res.json('Successfully uploaded ' + req.file.location + ' location!')
   }
-  catch(err){
+  catch (err) {
     res.json(err)
   }
 }

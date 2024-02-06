@@ -91,6 +91,21 @@ export const Get_all_users = async () => {
   }
 }
 
+export const Search_user = async ({ query}) => {
+  try {
+    let response = await baseUrl.get(`/user/search/${query}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+    return response;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
 export const Add_chat = async ({ receiver_id }) => {
   try {
     let response = await baseUrl.post('/chat/add-chat', { receiver_id }, {
