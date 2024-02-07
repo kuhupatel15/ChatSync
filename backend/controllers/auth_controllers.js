@@ -175,8 +175,9 @@ exports.GetAllUsers = async (req, res) => {
 exports.SearchUser = async (req, res) => {
   try {
     const users = await User.find({ userName: { $regex: req.params.query } })
-    if (users) {
-      return res.status(200).json(users)
+    const filteredusers = users.filter(user => user._id.toString() !== req.user._id.toString());
+    if (filteredusers) {
+      return res.status(200).json(filteredusers)
     }
   } catch (err) {
     console.log(err)

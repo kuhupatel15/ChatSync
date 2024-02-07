@@ -13,7 +13,6 @@ const Home_Page = () => {
     // const response = await Get_all_users();
     // const response = await Add_chat({receiver_id: "65bfea7f10ffeedb377b524d"})
     const response = await Fetch_chat()
-    const response2 = await Send_message({content:"hello sarthak", chatId:"65bfea7f10ffeedb377b524d"})
     // const response = await Get_all_messages("")
     // const response = await Create_group({ 
     //   users: ["65bbb355740a25af8d0d32e2", "65bbc6d9d9e8a9b627af8c30"], 
@@ -26,9 +25,9 @@ const Home_Page = () => {
   }
   // console.log(users)
 
-  useEffect(() => {
-    getdata()
-  }, [])
+  // useEffect(() => {
+  //   getdata()
+  // }, [chats])
 
   return (
     <div className='flex h-[100vh]'>

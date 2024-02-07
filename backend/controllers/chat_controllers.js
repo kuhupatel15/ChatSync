@@ -6,6 +6,7 @@ const Chat = require('../models/chatModel')
 exports.addChat = async (req, res) => {
     try {
         const { receiver_id } = req.body;
+        console.log(receiver_id)
         var isChat = await Chat.find({
             isGroupChat: false,
             $and: [

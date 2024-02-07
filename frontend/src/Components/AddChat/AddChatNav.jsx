@@ -6,27 +6,26 @@ import Logout from '../Logout_btn';
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
 import { Add_chat, Search_user } from '../../utils/Fetch_data';
-
+import {ChatState} from '../../Context/ChatProvider'
 
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([])
-
+  const {chats,setChats} = ChatState()
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };
 
   const search_users = async (param) => {
-    console.log(param)
     const response = await Search_user({ query: param })
     setusers(response.data)
   }
 
   const create_chat = async (id) => {
-    alert();
     const response = await Add_chat({ receiver_id: id })
-    console.log(response.data)
+    setChats(response.data)
   }
+  console.log(chats)
 
   return (
     <div>
@@ -41,9 +40,9 @@ const AddChatNav = () => {
       </div>
 
       <div className='h-[5vw] w-full border-black border-b-[1px] border-t-[1px] flex flex-col items-center p-2'>
-        <TextInput autoComplete='off' id="search" className='w-full' type="text" icon={HiSearch} placeholder="Add new conversation...." required onChange={(e) => search_users(e.target.value)} onClick={toggleDiv} onBlur={toggleDiv} />
+        <TextInput autoComplete='off' id="search" className='w-full' type="text" icon={HiSearch} placeholder="Add new conversation...." required onChange={(e) => search_users(e.target.value)} onClick={toggleDiv} />
         {showDiv && (
-          <ListGroup className="z-[9999] w-full">
+          <ListGroup onInputCapture={(e)=>console.log(e)} className="z-[9999] w-full">
             {users.length === 0 && (
               <ListGroup.Item>
                 <span className="ml-4 space-y-1 font-medium dark:text-white">No results</span>
@@ -51,7 +50,7 @@ const AddChatNav = () => {
             )}
 
             {users.map((user) => (
-              <ListGroup.Item className='z-[99999]' key={user._id} onClick={()=>create_chat(user.id)}>
+              <ListGroup.Item className='z-[99999]' key={user._id} onClick={() => create_chat(user._id)} >
                 <Avatar img={user.profileImg} rounded size="sm" />
                 <span className="ml-4 space-y-1 font-medium dark:text-white">{user.userName}</span>
               </ListGroup.Item>
