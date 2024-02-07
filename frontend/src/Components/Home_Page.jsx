@@ -13,7 +13,7 @@ const Home_Page = () => {
     // const response = await Get_all_users();
     // const response = await Add_chat({receiver_id: "65bfea7f10ffeedb377b524d"})
     const response = await Fetch_chat()
-    // const response = await Send_message("hello sarthak", "65bbc361d42d5ac5949b8c2e")
+    const response2 = await Send_message({content:"hello sarthak", chatId:"65bfea7f10ffeedb377b524d"})
     // const response = await Get_all_messages("")
     // const response = await Create_group({ 
     //   users: ["65bbb355740a25af8d0d32e2", "65bbc6d9d9e8a9b627af8c30"], 
@@ -21,10 +21,10 @@ const Home_Page = () => {
     // });
     // const response = await Rename_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
     // const response = await Remove_member_from_group({ chatId: "65bbc9d6e09f5e95cbd1dfd7", newgrpname: "gakpo" })
-    console.log(response.data)
+    // console.log(response.data)
     setusers(response.data.chat.users);
   }
-  console.log(users)
+  // console.log(users)
 
   useEffect(() => {
     getdata()
