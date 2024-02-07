@@ -16,6 +16,7 @@ exports.GetAllMessages = async (req, res) => {
 exports.sendMessage = async (req, res) => {
     try {
         const { content, chatId } = req.body;
+        console.log(content, chatId)
         var message = await Message.create({
             content,
             sender: req.user._id,

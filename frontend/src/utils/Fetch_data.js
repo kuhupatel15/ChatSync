@@ -108,6 +108,7 @@ export const Search_user = async ({ query}) => {
 
 export const Add_chat = async ({ receiver_id }) => {
   try {
+    console.log(receiver_id)
     let response = await baseUrl.post('/chat/add-chat', { receiver_id }, {
       headers: {
         "Content-Type": "application/json",
@@ -205,6 +206,7 @@ export const Add_to_group = async ({ chatId, memberId }) => {
 
 export const Send_message = async ({ content, chatId }) => {
   try {
+    console.log(chatId)
     let response = await baseUrl.post('/message/send-message', { content, chatId }, {
       headers: {
         "Content-Type": "application/json",

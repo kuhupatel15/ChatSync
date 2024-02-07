@@ -4,7 +4,7 @@ import { HiEllipsisVertical } from "react-icons/hi2";
 import { ChatState } from '../../Context/ChatProvider';
 const ConversationNav = () => {
   const {selectedChat} = ChatState();
-  console.log(selectedChat)
+  // console.log(selectedChat)
   return (
     <div>
         <div className='w-full h-[5vw] flex border-b-[1px] border-black justify-between items-center p-[2vw]'>
