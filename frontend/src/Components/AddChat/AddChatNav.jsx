@@ -7,15 +7,20 @@ import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
 import { Add_chat, Search_user } from '../../utils/Fetch_data';
 import {ChatState} from '../../Context/ChatProvider'
+import { userData} from '../../../store/reducers/UserSlice.js'
+import { useSelector } from 'react-redux'
 
+// import {getAllChats} from './UserChatsContainer'
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([])
-  const {chats,setChats} = ChatState()
+  const {setChats,chats,fetchAgain,setFetchAgain} = ChatState();
+  const loggedUser = useSelector((state) => state.User.userdata)
+
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };
-
+  console.log(loggedUser)
   const search_users = async (param) => {
     const response = await Search_user({ query: param })
     setusers(response.data)
@@ -23,14 +28,18 @@ const AddChatNav = () => {
 
   const create_chat = async (id) => {
     const response = await Add_chat({ receiver_id: id })
-    setChats(response.data)
+    console.log(response.data)
+    toggleDiv();
+    setFetchAgain(!fetchAgain)
   }
   console.log(chats)
 
   return (
     <div>
       <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]'>
-        <Avatar rounded size="md" />
+      <div className='flex gap-4 items-center'><Avatar rounded size="md" />
+        <h6 className='text-white'>{loggedUser.userName}</h6>
+        </div>
         <div className='flex gap-4 text-3xl text-[#8E9297]'>
           <Button outline gradientDuoTone="purpleToBlue" className='text-3xl'>
             <HiOutlineUserGroup className='text-xl'></HiOutlineUserGroup>

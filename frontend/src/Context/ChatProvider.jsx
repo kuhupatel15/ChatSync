@@ -4,16 +4,21 @@ const ChatContext = createContext();
 
 const ChatProvider = ({children})=>{
     const [selectedChat, setSelectedChat] = useState();
-//   const [users, setusers] = useState([]);
+  const [loggedUser, setloggedUser] = useState({});
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
+  const [fetchAgain,setFetchAgain]=useState(false)
     return(
         <ChatContext.Provider value={
             {
                 selectedChat,
                 setSelectedChat,
                 chats,
-                setChats
+                setChats,
+                loggedUser,
+                setloggedUser,
+                fetchAgain,
+                setFetchAgain
             }
         }>
             {children}

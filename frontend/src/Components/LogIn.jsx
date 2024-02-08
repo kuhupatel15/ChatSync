@@ -6,19 +6,21 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import { login } from "../../store/reducers/AuthSlice"
 import { Login } from '../utils/Fetch_data';
-
-
+import { ChatState } from '../Context/ChatProvider';
+import { userData } from '../../store/reducers/UserSlice';
 const LogIn = () => {
 
   const navigate = useNavigate();
-
+  const {setloggedUser}=ChatState();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm()
 
   const submithandler = async (data) => {
     dispatch(login(data));
     const res = await Login(data);
-    console.log(res)
+    setloggedUser(res.data.user)
+    console.log(res.data.user)
+    dispatch(userData(res.data.user))
     if(res) navigate('/home')
   }
 

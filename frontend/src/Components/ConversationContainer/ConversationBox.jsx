@@ -21,7 +21,7 @@ const ConversationBox = () => {
   },[])
 
   return (
-    <div className='h-[41vw] p-2 overflow-scroll scrollbar-hide'>
+    <div className='h-[41vw]  p-2 overflow-scroll scrollbar-hide'>
       {messages && messages.map((message) => (
         <Message content={message.content}></Message>
       ))}
