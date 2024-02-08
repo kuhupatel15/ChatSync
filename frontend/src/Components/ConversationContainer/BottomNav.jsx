@@ -21,7 +21,7 @@ const BottomNav = () => {
 
       <HiOutlinePaperClip className='text-2xl '></HiOutlinePaperClip>
 
-      <form onSubmit={(e) => {e.preventDefault();sendmessage(e)}}>
+      <form onSubmit={(e) => {e.preventDefault();sendmessage(e)} } className='flex'>
         <TextInput id="message" name='message' className='w-full' type="text" placeholder="Type a new message...." required />=
         <button type='submit'>
           <IoIosSend className='text-2xl'></IoIosSend>
