@@ -8,6 +8,8 @@ const ChatProvider = ({children})=>{
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
   const [fetchAgain,setFetchAgain]=useState(false)
+  const [messages, setmessages] = useState([])
+
     return(
         <ChatContext.Provider value={
             {
@@ -18,7 +20,8 @@ const ChatProvider = ({children})=>{
                 loggedUser,
                 setloggedUser,
                 fetchAgain,
-                setFetchAgain
+                setFetchAgain,
+                messages, setmessages
             }
         }>
             {children}
