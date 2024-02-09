@@ -90,8 +90,8 @@ exports.UserLogin = async (req, res) => {
   try {
     const { userEmail, password } = req.body;
     const user = await User.findOne({ userEmail });
-    if (!user) {
-      return res.status(400).json({ msg: "User not found" });
+    if (!user || user.verified===false) {
+      return res.status(400).json({ msg: "User not found or user not verified" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -116,7 +116,7 @@ exports.ForgotPassword = async (req, res) => {
     }
 
     let user = await User.findOne({ userEmail });
-    if (user) {
+    if (user && user.verified===true) {
       const token = jwt.sign({ id: user._id }, env_config.jwt_secret, { expiresIn: "1h" })
       var mailOptions = {
         from: env_config.auth_mail,
@@ -128,7 +128,7 @@ exports.ForgotPassword = async (req, res) => {
       res.status(200).json({ msg: "Password reset link has been sent to your mail. " })
     }
     else {
-      res.status(409).json({ msg: 'User does not exists' })
+      res.status(409).json({ msg: 'User does not exists or not verified' })
     }
   }
   catch (error) {

@@ -9,10 +9,10 @@ import ChatProvider from './Context/ChatProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <ChatProvider>
     <BrowserRouter>
+    <ChatProvider>
       <App />
-    </BrowserRouter>
     </ChatProvider>
+    </BrowserRouter>
   </Provider>
 )

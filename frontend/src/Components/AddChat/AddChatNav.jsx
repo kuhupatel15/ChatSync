@@ -14,8 +14,8 @@ import { useSelector } from 'react-redux'
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([])
-  const {setChats,chats,fetchAgain,setFetchAgain} = ChatState();
-  const loggedUser = useSelector((state) => state.User.userdata)
+  const {setChats,chats,fetchAgain,setFetchAgain,loggedUser} = ChatState();
+  // const loggedUser = useSelector((state) => state.User.userdata)
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);

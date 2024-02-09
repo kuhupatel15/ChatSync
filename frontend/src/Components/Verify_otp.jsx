@@ -17,6 +17,7 @@ const Verify_otp = () => {
 
   const handleVerify = async () => {
     const res = await Verify({ otp, userID });
+    
     navigate('/home')
   }
 

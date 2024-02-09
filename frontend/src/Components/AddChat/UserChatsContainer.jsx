@@ -6,8 +6,8 @@ import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
 const UserChatsContainer = () => {
-  const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
-  const loggedUser = useSelector((state) => state.User.userdata)
+  const {setSelectedChat,chats,setChats,fetchAgain,loggedUser}=ChatState();
+  // const loggedUser = useSelector((state) => state.User.userdata)
 
   const [temp, settemp] = useState()
   const getallchats = async() => {
@@ -26,7 +26,7 @@ const UserChatsContainer = () => {
           // user.users && user.users[1] && user.users[1].userName ?
           <div key={user._id} onClick={()=>setSelectedChat(user)}>
             <UserChat name={getOppUserName(loggedUser,user.users)} 
-            chatid={getOppUser(loggedUser,user.users)._id} 
+            chatid={user._id} 
             />
           </div>
           // :
