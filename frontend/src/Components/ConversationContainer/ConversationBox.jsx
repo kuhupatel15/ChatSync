@@ -12,7 +12,7 @@ const ConversationBox = () => {
   const [messages, setmessages] = useState([])
   const {chatid} = useParams();
   // const [chatId,setchatId]=useState(null);
-  
+  const i=0;
   console.log(chatid)
   const getmessages = async () => {
     const response = await Get_all_messages({ chatId: chatid })
@@ -25,7 +25,7 @@ const ConversationBox = () => {
   },[selectedChat,fetchAgain])
   
   return (
-    <div className='h-[41vw]  p-2 overflow-scroll scrollbar-hide'>
+    <div className='h-[41vw] p-2 overflow-scroll scrollbar-hide'>
       {messages && messages.map((message) => (
         <Message content={message.content}></Message>
       ))}
