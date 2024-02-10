@@ -9,14 +9,14 @@ import { Add_chat, Search_user } from '../../utils/Fetch_data';
 import {ChatState} from '../../Context/ChatProvider'
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
-
+import {UserState} from "../../Context/UserProvider.jsx"
 // import {getAllChats} from './UserChatsContainer'
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([])
-  const {setChats,chats,fetchAgain,setFetchAgain,loggedUser} = ChatState();
+  const {setChats,chats,fetchAgain,setFetchAgain} = ChatState();
   // const loggedUser = useSelector((state) => state.User.userdata)
-
+  const {loggedUser,setLoggedUser} =UserState();
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };

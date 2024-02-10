@@ -3,8 +3,11 @@ import {  Avatar, Button } from 'flowbite-react';
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { ChatState } from '../../Context/ChatProvider';
 import { getOppUserName } from '../../utils/ChatLogics';
+import { UserState } from '../../Context/UserProvider.jsx'
+
 const ConversationNav = () => {
-  const {selectedChat,loggedUser} = ChatState();
+  const {selectedChat} = ChatState();
+  const {loggedUser}=UserState();
   console.log(selectedChat)
   return (
     <div>

@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import OutgoingMsg from './OutgoingMsg'
 import { isSendByUser } from '../../utils/msg'
+import { UserState } from '../../Context/UserProvider.jsx'
+
 // import { ChatState } from '../../Context/ChatProvider'}
 const ConversationBox = () => {
-  const { selectedChat, fetchAgain, setFetchAgain, loggedUser } = ChatState();
+  const { selectedChat, fetchAgain, setFetchAgain } = ChatState();
   // console.log(selectedChat)
+  const {loggedUser} =UserState();
   const [messages, setmessages] = useState([])
   const { chatid } = useParams();
   // const [chatId,setchatId]=useState(null);

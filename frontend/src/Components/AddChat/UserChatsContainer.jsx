@@ -5,10 +5,11 @@ import {ChatState} from '../../Context/ChatProvider.jsx'
 import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
+import { UserState } from '../../Context/UserProvider.jsx'
 const UserChatsContainer = () => {
-  const {setSelectedChat,chats,setChats,fetchAgain,loggedUser}=ChatState();
+  const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
   // const loggedUser = useSelector((state) => state.User.userdata)
-
+  const {loggedUser} =UserState();
   const [temp, settemp] = useState()
   const getallchats = async() => {
     const response = await Fetch_chat();

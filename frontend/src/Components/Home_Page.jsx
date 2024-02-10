@@ -7,6 +7,7 @@ import ChatWindow from './ConversationContainer/ChatWindow'
 import { Button } from 'flowbite-react'
 import { ChatState} from '../Context/ChatProvider.jsx'
 import DefaulChatBox from './DefaulChatBox'
+import UserProvider from '../Context/UserProvider.jsx'
 const Home_Page = () => {
   // const [users,setusers] =useState([]);
   const {selectedChat} = ChatState();
@@ -31,6 +32,7 @@ const Home_Page = () => {
   // }, [])
 
   return (
+    <UserProvider>
     <div className='flex h-[100vh]'>
       <div className='w-[40vw] h-full bg-[#2F3136]'>
         <AddChatNav />
@@ -41,6 +43,7 @@ const Home_Page = () => {
        {selectedChat ? <ChatWindow />:<DefaulChatBox />}
       </div>
     </div>
+    </UserProvider>
   )
 }
 
