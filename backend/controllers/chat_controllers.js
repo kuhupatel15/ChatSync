@@ -36,7 +36,7 @@ exports.addChat = async (req, res) => {
 exports.fetchChat = async (req, res) => {
     try {
         
-        const chat = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } }).populate("users")
+        const chat = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } }).populate("users","-password").populate("latestMessage")
             .sort({ updatedAt: -1 })
             
         return res.status(200).json({ chat });

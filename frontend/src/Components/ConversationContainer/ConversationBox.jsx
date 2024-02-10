@@ -4,30 +4,40 @@ import { ChatState } from '../../Context/ChatProvider'
 import { Get_all_messages } from '../../utils/Fetch_data'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import OutgoingMsg from './OutgoingMsg'
+import { isSendByUser } from '../../utils/msg'
 // import { ChatState } from '../../Context/ChatProvider'}
 const ConversationBox = () => {
-  const { selectedChat,fetchAgain,setFetchAgain } = ChatState();
-  // const {fetchAgain,setFetchAgain}=ChatState()
-  console.log(selectedChat)
+  const { selectedChat, fetchAgain, setFetchAgain, loggedUser } = ChatState();
+  // console.log(selectedChat)
   const [messages, setmessages] = useState([])
-  const {chatid} = useParams();
+  const { chatid } = useParams();
   // const [chatId,setchatId]=useState(null);
-  const i=0;
-  console.log(chatid)
+  const i = 0;
+  // console.log(chatid)
   const getmessages = async () => {
     const response = await Get_all_messages({ chatId: chatid })
     setmessages(response.data)
-    
+
   }
 
   useEffect(() => {
     getmessages();
-  },[selectedChat,fetchAgain])
-  
+  }, [selectedChat, fetchAgain])
+  console.log(messages)
   return (
-    <div className='h-[41vw] p-2 overflow-scroll scrollbar-hide'>
+    <div className='h-[41vw] p-2 overflow-scroll scrollbar-hide flex flex-col'>
       {messages && messages.map((message) => (
-        <Message content={message.content}></Message>
+        isSendByUser(loggedUser._id, message.sender) ?
+          <Message
+            content={message.content}
+            time={message.createdAt}
+          />
+          : <OutgoingMsg
+            content={message.content}
+            time={message.createdAt}
+          />
+
       ))}
     </div>
   )

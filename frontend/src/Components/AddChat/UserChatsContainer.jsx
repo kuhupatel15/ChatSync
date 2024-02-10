@@ -26,7 +26,9 @@ const UserChatsContainer = () => {
           // user.users && user.users[1] && user.users[1].userName ?
           <div key={user._id} onClick={()=>setSelectedChat(user)}>
             <UserChat name={getOppUserName(loggedUser,user.users)} 
-            chatid={user._id} 
+            chatid={user._id}
+            lastmsg={user.latestMessage.content}
+            lastmsgtime={user.latestMessage.createdAt} 
             />
           </div>
           // :
