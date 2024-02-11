@@ -22,6 +22,7 @@ exports.sendMessage = async (req, res) => {
             sender: req.user._id,
             chat: chatId
         })
+        message.populate("chat")
         await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
         return res.status(200).json(message);
     }

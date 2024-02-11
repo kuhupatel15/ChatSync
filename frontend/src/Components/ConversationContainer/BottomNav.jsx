@@ -5,6 +5,9 @@ import { IoIosSend } from "react-icons/io";
 import { ChatState } from '../../Context/ChatProvider'
 import { Send_message } from '../../utils/Fetch_data'
 import { useParams } from 'react-router-dom';
+import io from 'socket.io-client';
+var socket;
+const Endpoint = 'http://localhost:3000';
 
 const BottomNav = () => {
   const { selectedChat ,setmessages,messages,setFetchAgain,fetchAgain} = ChatState();
@@ -13,7 +16,8 @@ const BottomNav = () => {
   const sendmessage = async (e) => {
 
     const response = await Send_message({content: e.target.message.value, chatId:chatid })
-    setFetchAgain(!fetchAgain)
+    setFetchAgain(!fetchAgain);
+    socket.emit('new-message',response.data)
   }
   
   return (

@@ -36,21 +36,38 @@ app.use('/chat', require('./routes/chatRoutes.js'));
 app.use('/message', require('./routes/messageRoutes.js'));
 
 
-const server=app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });
 
-const io=require('socket.io')(server,{
-    pingTimeout:60000,
-    cors:{
-        origin:"http://localhost:5173"
+const io = require('socket.io')(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: "http://localhost:5173"
     }
 })
 
 io.on("connection", (socket) => {
     console.log("Connected to socket.io");
     socket.on("setup", (userData) => {
-      socket.join(userData._id);
-      socket.emit("connected");
+        socket.join(userData._id);
+        socket.emit("connected");
+    });
+
+    socket.on("join-room", (roomid) => {
+        socket.join(roomid);
+        socket.emit("room joined by :");
+    });
+
+    socket.on("new-message", (msg) => {
+        var chat = msg.chat;
+
+        if(!chat.users) return console.log('chat.users not defined')
+
+        chat.users.map((user)=>{
+            if(user._id == msg.sender._id) return;
+
+            socket.in(user._id).emit("message-recieved", msg)
+        })
     });
 })  

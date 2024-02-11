@@ -17,6 +17,8 @@ const UserChatsContainer = () => {
     setChats(response.data.chat);
     // settemp(response.data.chat)
   }
+
+
   useEffect(()=>{
     getallchats();
   }, [fetchAgain])
