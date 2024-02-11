@@ -10,7 +10,7 @@ import { UserState } from '../../Context/UserProvider.jsx'
 
 // import { ChatState } from '../../Context/ChatProvider'}
 const ConversationBox = () => {
-  const { selectedChat, fetchAgain, setFetchAgain } = ChatState();
+  const { selectedChat,setSelectedChat ,fetchAgain, setFetchAgain } = ChatState();
   // console.log(selectedChat)
   const {loggedUser} =UserState();
   const [messages, setmessages] = useState([])
@@ -23,13 +23,13 @@ const ConversationBox = () => {
     setmessages(response.data)
 
   }
-
+  
   useEffect(() => {
     getmessages();
   }, [selectedChat, fetchAgain])
   console.log(messages)
   return (
-    <div className='h-[41vw] p-2 overflow-scroll scrollbar-hide flex flex-col'>
+    <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col'>
       {messages && messages.map((message) => (
         isSendByUser(loggedUser._id, message.sender) ?
           <Message

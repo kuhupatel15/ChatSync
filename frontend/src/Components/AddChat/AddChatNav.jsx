@@ -10,9 +10,11 @@ import {ChatState} from '../../Context/ChatProvider'
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
 import {UserState} from "../../Context/UserProvider.jsx"
+import { GroupChatState } from '../../Context/GroupChatProvider.jsx';
 // import {getAllChats} from './UserChatsContainer'
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
+  const {setgroupDrawerOpen,groupDrawerOpen}=GroupChatState()
   const [users, setusers] = useState([])
   const {setChats,chats,fetchAgain,setFetchAgain} = ChatState();
   // const loggedUser = useSelector((state) => state.User.userdata)
@@ -37,12 +39,12 @@ const AddChatNav = () => {
   return (
     <div>
       <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]'>
-      <div className='flex gap-4 items-center'><Avatar rounded size="md" />
+      <div className='flex gap-4 items-center'><Avatar  rounded size="md" />
         <h6 className='text-white'>{loggedUser.userName}</h6>
         </div>
-        <div className='flex gap-4 text-3xl text-[#8E9297]'>
+        <div className='flex gap-4 text-3xl text-[#8E9297]' onClick={()=>setgroupDrawerOpen(!groupDrawerOpen)}>
           <Button outline gradientDuoTone="purpleToBlue" className='text-3xl'>
-            <HiOutlineUserGroup className='text-xl'></HiOutlineUserGroup>
+            <HiOutlineUserGroup className='text-xl' ></HiOutlineUserGroup>
           </Button>
           <Logout />
         </div>

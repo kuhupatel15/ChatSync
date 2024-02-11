@@ -8,6 +8,8 @@ import { Button } from 'flowbite-react'
 import { ChatState} from '../Context/ChatProvider.jsx'
 import DefaulChatBox from './DefaulChatBox'
 import UserProvider from '../Context/UserProvider.jsx'
+import NewGroupDrawer from './GroupChat/NewGroupDrawer.jsx'
+import GroupChatProvider from '../Context/GroupChatProvider.jsx'
 const Home_Page = () => {
   // const [users,setusers] =useState([]);
   const {selectedChat} = ChatState();
@@ -33,16 +35,18 @@ const Home_Page = () => {
 
   return (
     <UserProvider>
+      <GroupChatProvider>
     <div className='flex h-[100vh]'>
-      <div className='w-[40vw] h-full bg-[#2F3136]'>
+      <div className='w-[40vw] relative h-full bg-[#2F3136]'>
         <AddChatNav />
-        {/* <Button onClick={getdata}>Send</Button> */}
         <UserChatsContainer />
+        <NewGroupDrawer></NewGroupDrawer>
       </div>
       <div className='w-[60vw] bg-[#36393F]'>
        {selectedChat ? <ChatWindow />:<DefaulChatBox />}
       </div>
     </div>
+    </GroupChatProvider>
     </UserProvider>
   )
 }
