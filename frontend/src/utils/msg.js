@@ -11,6 +11,6 @@ export const isSendByUser = (sender,userId)=>{
     // console.log(message.sender)
     // console.log(typeof sender,typeof userId)
 
-    console.log(sender===userId)
+    
     return (sender!==userId)
 }

@@ -5,19 +5,17 @@ import { IoIosSend } from "react-icons/io";
 import { ChatState } from '../../Context/ChatProvider'
 import { Send_message } from '../../utils/Fetch_data'
 import { useParams } from 'react-router-dom';
-import io from 'socket.io-client';
-var socket;
-const Endpoint = 'http://localhost:3000';
 
 const BottomNav = () => {
-  const { selectedChat ,setmessages,messages,setFetchAgain,fetchAgain} = ChatState();
+  const { selectedChat ,setmessages,messages,setFetchAgain,fetchAgain,passsocket} = ChatState();
   const {chatid} = useParams();
 
   const sendmessage = async (e) => {
-
+    console.log(passsocket)
     const response = await Send_message({content: e.target.message.value, chatId:chatid })
+    if(response.data){passsocket&&passsocket.emit('new-message',response.data)}
+    // console.log(response.data);
     setFetchAgain(!fetchAgain);
-    socket.emit('new-message',response.data)
   }
   
   return (

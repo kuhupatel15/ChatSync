@@ -22,7 +22,7 @@ const AddChatNav = () => {
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };
-  console.log(loggedUser)
+  // console.log(loggedUser)
   const search_users = async (param) => {
     const response = await Search_user({ query: param })
     setusers(response.data)
@@ -30,11 +30,11 @@ const AddChatNav = () => {
 
   const create_chat = async (id) => {
     const response = await Add_chat({ receiver_id: id })
-    console.log(response.data)
+    
     toggleDiv();
     setFetchAgain(!fetchAgain)
   }
-  console.log(chats)
+  
 
   return (
     <div>

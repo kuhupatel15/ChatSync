@@ -8,7 +8,7 @@ import { UserState } from '../../Context/UserProvider.jsx'
 const ConversationNav = () => {
   const {selectedChat} = ChatState();
   const {loggedUser}=UserState();
-  console.log(selectedChat)
+  // console.log(selectedChat)
   return (
     <div>
         <div className='w-full h-[5vw] flex border-b-[1px] border-black justify-between items-center p-[2vw]'>

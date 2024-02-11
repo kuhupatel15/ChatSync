@@ -61,13 +61,19 @@ io.on("connection", (socket) => {
 
     socket.on("new-message", (msg) => {
         var chat = msg.chat;
+        console.log(msg.sender)
+        if (!chat.users) return console.log('chat.users not defined')
 
-        if(!chat.users) return console.log('chat.users not defined')
-
-        chat.users.map((user)=>{
-            if(user._id == msg.sender._id) return;
-
-            socket.in(user._id).emit("message-recieved", msg)
+        chat.users.forEach((user) => {
+            if (user == msg.sender) return;
+            console.log(user, msg)
+            socket.in("65c511e318a35a63efdb7d94").emit("message-recieved", "hi", (ack) => {
+                if (ack === 'success') {
+                    console.log('Socket emit successful');
+                } else {
+                    console.log('Socket emit failed');
+                }
+            });
         })
     });
 })  
