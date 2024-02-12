@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Verify_otp from './components/Verify_otp';
-import Home_page from './components/Home_Page';
-import Forgot from './components/Forgot_Password';
-import Reset from './components/Reset_Password';
+import Signup from './components/Signup.jsx';
+import Login from './components/Login.jsx';
+import Verify_otp from './components/Verify_otp.jsx';
+import Home_page from './components/Home_Page.jsx';
+import Forgot from './components/Forgot_Password.jsx';
+import Reset from './components/Reset_Password.jsx';
 import { Toaster } from 'react-hot-toast';
-import Protected from './Layouts/Protected';
+import Protected from './Layouts/Protected.jsx';
 function App() {
   return (
     <>

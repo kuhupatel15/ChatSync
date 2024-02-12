@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { logout } from '../../store/reducers/AuthSlice';
+import { logout } from '../../store/reducers/AuthSlice.js';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';

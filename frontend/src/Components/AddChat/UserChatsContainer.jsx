@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
-import UserChat from './UserChat'
-import { Fetch_chat } from '../../utils/Fetch_data'
+import UserChat from './UserChat.jsx'
+import { Fetch_chat } from '../../utils/Fetch_data.js'
 import {ChatState} from '../../Context/ChatProvider.jsx'
 import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'

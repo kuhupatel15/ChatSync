@@ -6,7 +6,7 @@ import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { Verify } from '../utils/Fetch_data';
+import { Verify } from '../utils/Fetch_data.js';
 
 const Verify_otp = () => {
 

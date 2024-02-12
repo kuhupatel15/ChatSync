@@ -1,5 +1,5 @@
 import React from 'react'
-import {getTime} from'../../utils/msg'
+import {getTime} from'../../utils/msg.js'
 
 const OutgoingMsg = (props) => {
   return (

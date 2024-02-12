@@ -1,11 +1,11 @@
 import Message from './Message'
-import GroupChatMessage from './GroupChatMessage'
-import { ChatState } from '../../Context/ChatProvider'
-import { Get_all_messages } from '../../utils/Fetch_data'
+import GroupChatMessage from './GroupChatMessage.jsx'
+import { ChatState } from '../../Context/ChatProvider.jsx'
+import { Get_all_messages } from '../../utils/Fetch_data.js'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import OutgoingMsg from './OutgoingMsg'
-import { isSendByUser } from '../../utils/msg'
+import OutgoingMsg from './OutgoingMsg.jsx'
+import { isSendByUser } from '../../utils/msg.js'
 import { UserState } from '../../Context/UserProvider.jsx'
 // import { ChatState } from '../../Context/ChatProvider'}
 const ConversationBox = () => {

@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
-import { login } from "../../store/reducers/AuthSlice"
-import { Login } from '../utils/Fetch_data';
-import { ChatState } from '../Context/ChatProvider';
-import { userData } from '../../store/reducers/UserSlice';
+import { login } from "../../store/reducers/AuthSlice.js"
+import { Login } from '../utils/Fetch_data.js';
+import { ChatState } from '../Context/ChatProvider.jsx';
+import { userData } from '../../store/reducers/UserSlice.js';
 const LogIn = () => {
 
   const navigate = useNavigate();

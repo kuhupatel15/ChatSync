@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 // import {login} from '../../store/reducers/AuthSlice';
-import { userData } from '../../store/reducers/UserSlice';
-import { Register } from '../utils/Fetch_data'
+import { userData } from '../../store/reducers/UserSlice.js';
+import { Register } from '../utils/Fetch_data.js'
 
 const Signup = () => {
   const navigate = useNavigate();

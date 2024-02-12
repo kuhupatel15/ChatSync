@@ -1,6 +1,6 @@
 import { Avatar, Badge } from 'flowbite-react'
 import { Link, } from 'react-router-dom'
-import { getTime } from '../../utils/msg'
+import { getTime } from '../../utils/msg.js'
 
 const UserChat = (props) => {
 

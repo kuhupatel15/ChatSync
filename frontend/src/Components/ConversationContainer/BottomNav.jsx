@@ -2,8 +2,8 @@ import React from 'react'
 import { TextInput, Button } from 'flowbite-react'
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { IoIosSend } from "react-icons/io";
-import { ChatState } from '../../Context/ChatProvider'
-import { Send_message } from '../../utils/Fetch_data'
+import { ChatState } from '../../Context/ChatProvider.jsx'
+import { Send_message } from '../../utils/Fetch_data.js'
 import { useParams } from 'react-router-dom';
 
 const BottomNav = () => {

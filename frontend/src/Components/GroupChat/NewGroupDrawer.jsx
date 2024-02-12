@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import UserChatsContainer from '../AddChat/UserChatsContainer'
 import { RxCross1 } from "react-icons/rx";
-import { GroupChatState } from '../../Context/GroupChatProvider';
+import { GroupChatState } from '../../Context/GroupChatProvider.jsx';
 const NewGroupDrawer = () => {
     const {groupDrawerOpen,setgroupDrawerOpen}=GroupChatState();
   return (

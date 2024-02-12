@@ -1,8 +1,8 @@
 import React from 'react'
 import {  Avatar, Button } from 'flowbite-react';
 import { HiEllipsisVertical } from "react-icons/hi2";
-import { ChatState } from '../../Context/ChatProvider';
-import { getOppUserName } from '../../utils/ChatLogics';
+import { ChatState } from '../../Context/ChatProvider.jsx';
+import { getOppUserName } from '../../utils/ChatLogics.js';
 import { UserState } from '../../Context/UserProvider.jsx'
 
 const ConversationNav = () => {

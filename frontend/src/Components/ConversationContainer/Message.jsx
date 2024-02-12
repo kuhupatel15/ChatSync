@@ -1,5 +1,5 @@
 import React from 'react'
-import {getTime} from'../../utils/msg'
+import {getTime} from'../../utils/msg.js'
 // import { get } from 'react-hook-form'
 const Message = (props) => {
   return (

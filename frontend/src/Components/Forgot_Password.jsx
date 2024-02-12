@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { Forgot_Password } from '../utils/Fetch_data';
+import { Forgot_Password } from '../utils/Fetch_data.js';
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 

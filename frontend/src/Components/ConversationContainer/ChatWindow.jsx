@@ -1,6 +1,6 @@
-import ConversationNav from '../ConversationContainer/ConversationNav'
-import ConversationBox from '../ConversationContainer/ConversationBox';
-import BottomNav from '../ConversationContainer/BottomNav'
+import ConversationNav from '../ConversationContainer/ConversationNav.jsx'
+import ConversationBox from '../ConversationContainer/ConversationBox.jsx';
+import BottomNav from '../ConversationContainer/BottomNav.jsx'
 import io from 'socket.io-client';
 var socket,selectedChatCompare;
 import { UserState } from '../../Context/UserProvider.jsx'

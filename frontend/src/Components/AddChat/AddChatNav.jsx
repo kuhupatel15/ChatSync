@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Label, TextInput, Avatar, Button } from 'flowbite-react';
 import { HiSearch } from 'react-icons/hi';
 import { HiOutlineUserGroup } from "react-icons/hi";
-import Logout from '../Logout_btn';
+import Logout from '../Logout_btn.jsx';
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
-import { Add_chat, Search_user } from '../../utils/Fetch_data';
-import {ChatState} from '../../Context/ChatProvider'
+import { Add_chat, Search_user } from '../../utils/Fetch_data.js';
+import {ChatState} from '../../Context/ChatProvider.jsx'
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
 import {UserState} from "../../Context/UserProvider.jsx"
