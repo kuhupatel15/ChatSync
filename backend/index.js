@@ -50,24 +50,25 @@ const io = require('socket.io')(server, {
 io.on("connection", (socket) => {
     console.log("Connected to socket.io");
     socket.on("setup", (userData) => {
-        socket.join(userData._id);
+        socket.join(userData);
+        // console.log(userData)
         socket.emit("connected");
     });
-
+    
     socket.on("join-room", (roomid) => {
+        console.log(roomid)
         socket.join(roomid);
-        socket.emit("room joined by :");
+        console.log("User Joined Room: " + roomid);
     });
 
     socket.on("new-message", (msg) => {
         var chat = msg.chat;
-        console.log(msg.sender)
         if (!chat.users) return console.log('chat.users not defined')
 
         chat.users.forEach((user) => {
             if (user == msg.sender) return;
-            console.log(user, msg)
-            socket.in("65c511e318a35a63efdb7d94").emit("message-recieved", "hi", (ack) => {
+            // console.log(user, msg)
+            socket.to(user).emit("message-recieved", msg, (ack) => {
                 if (ack === 'success') {
                     console.log('Socket emit successful');
                 } else {

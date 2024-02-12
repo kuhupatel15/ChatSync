@@ -5,6 +5,9 @@ import {ChatState} from '../../Context/ChatProvider.jsx'
 import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
+const Endpoint = 'http://localhost:3000';
+import io from 'socket.io-client';
+
 import { UserState } from '../../Context/UserProvider.jsx'
 const UserChatsContainer = () => {
   const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
@@ -17,7 +20,16 @@ const UserChatsContainer = () => {
     setChats(response.data.chat);
     // settemp(response.data.chat)
   }
-
+  const {setSocket,passsocket}=ChatState();
+  var socket;
+  useEffect(()=>{
+      socket=io(Endpoint);
+      setSocket(socket)
+      console.log("client socket")
+      socket.emit('setup',loggedUser._id)
+  },[])
+  console.log(passsocket)
+  
 
   useEffect(()=>{
     getallchats();
@@ -30,8 +42,8 @@ const UserChatsContainer = () => {
           <div key={user._id} onClick={()=>setSelectedChat(user)}>
             <UserChat name={getOppUserName(loggedUser,user.users)} 
             chatid={user._id}
-            lastmsg={user.latestMessage.content}
-            lastmsgtime={user.latestMessage.createdAt} 
+            lastmsg={user.latestMessage&&user.latestMessage.content}
+            lastmsgtime={user.latestMessage&&user.latestMessage.createdAt} 
             />
           </div>
           // :
