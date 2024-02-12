@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Signup from './Components/Signup.jsx';
-import Login from './Components/Login.jsx';
+import LogIn from './Components/LogIn.jsx';
 import Verify_otp from './Components/Verify_otp.jsx';
 import Home_page from './Components/Home_Page.jsx';
 import Forgot from './Components/Forgot_Password.jsx';
@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Signup />}></Route>
-        <Route path='/login' element={<Login />}></Route>
+        <Route path='/login' element={<LogIn />}></Route>
         <Route path='/verify-otp' element={<Verify_otp />}></Route>
         <Route path='/home' element={<Protected Component={Home_page} />}></Route>
         <Route path='/chat/:chatid' element={<Protected Component={Home_page} />}></Route>
