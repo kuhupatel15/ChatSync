@@ -26,7 +26,7 @@ const env_config = require('./config/env_config.js');
 app.use(logger('tiny'));
 
 app.use(cors({
-    origin: `${env_config.frontend_url}`,
+    origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
