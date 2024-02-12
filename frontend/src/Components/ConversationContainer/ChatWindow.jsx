@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 var socket,selectedChatCompare;
 import { UserState } from '../../Context/UserProvider.jsx'
 import { useEffect } from 'react';
-const Endpoint = import.meta.env.VITE_BACKEND_URL;
+const Endpoint = "https://chat-sync-backend-jpn0.onrender.com";
 
 import { ChatState } from '../../Context/ChatProvider.jsx';
 const ChatWindow = () => {

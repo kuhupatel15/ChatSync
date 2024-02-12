@@ -1,5 +1,5 @@
 import axios from 'axios';
-const Endpoint = import.meta.env.VITE_BACKEND_URL;
+const Endpoint = "https://chat-sync-backend-jpn0.onrender.com";
 
 
 const baseUrl = axios.create({

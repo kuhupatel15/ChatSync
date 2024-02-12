@@ -10,7 +10,8 @@ import io from 'socket.io-client';
 // import { UserState } from '../../Context/UserProvider.jsx'
 const UserChatsContainer = () => {
   const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
-const Endpoint = import.meta.env.VITE_BACKEND_URL;
+const Endpoint = "https://chat-sync-backend-jpn0.onrender.com";
+
   // const loggedUser = useSelector((state) => state.User.userdata)
   const {loggedUser} =UserState();
   const [temp, settemp] = useState()
