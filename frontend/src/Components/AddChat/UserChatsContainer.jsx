@@ -6,9 +6,11 @@ import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
 const Endpoint = 'http://localhost:3000';
+import { UserState } from '../../Context/UserProvider.jsx'
+
 import io from 'socket.io-client';
 
-import { UserState } from '../../Context/UserProvider.jsx'
+// import { UserState } from '../../Context/UserProvider.jsx'
 const UserChatsContainer = () => {
   const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
   // const loggedUser = useSelector((state) => state.User.userdata)
@@ -25,7 +27,7 @@ const UserChatsContainer = () => {
   useEffect(()=>{
       socket=io(Endpoint);
       setSocket(socket)
-      console.log("client socket")
+      console.log(loggedUser._id)
       socket.emit('setup',loggedUser._id)
   },[])
   console.log(passsocket)

@@ -6,13 +6,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from '../store/store.js'
 import ChatProvider from './Context/ChatProvider.jsx'
+import UserProvider from './Context/UserProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-    <ChatProvider>
-      <App />
-    </ChatProvider>
+      <UserProvider>
+        <ChatProvider>
+          <App />
+        </ChatProvider>
+      </UserProvider>
     </BrowserRouter>
   </Provider>
 )

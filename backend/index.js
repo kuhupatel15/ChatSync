@@ -51,12 +51,12 @@ io.on("connection", (socket) => {
     console.log("Connected to socket.io");
     socket.on("setup", (userData) => {
         socket.join(userData);
-        // console.log(userData)
+        console.log(userData);
         socket.emit("connected");
     });
     
     socket.on("join-room", (roomid) => {
-        console.log(roomid)
+        // console.log(roomid)
         socket.join(roomid);
         console.log("User Joined Room: " + roomid);
     });
@@ -64,10 +64,10 @@ io.on("connection", (socket) => {
     socket.on("new-message", (msg) => {
         var chat = msg.chat;
         if (!chat.users) return console.log('chat.users not defined')
-
+        console.log(chat.users)
+    console.log(msg.sender)
         chat.users.forEach((user) => {
-            if (user == msg.sender) return;
-            // console.log(user, msg)
+            if (user == msg.sender) return ;
             socket.to(user).emit("message-recieved", msg, (ack) => {
                 if (ack === 'success') {
                     console.log('Socket emit successful');

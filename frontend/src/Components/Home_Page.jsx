@@ -34,7 +34,7 @@ const Home_Page = () => {
   // }, [])
 
   return (
-    <UserProvider>
+    // <UserProvider>
       <GroupChatProvider>
     <div className='flex h-[100vh]'>
       <div className='w-[40vw] relative h-full bg-[#2F3136]'>
@@ -47,7 +47,7 @@ const Home_Page = () => {
       </div>
     </div>
     </GroupChatProvider>
-    </UserProvider>
+    // </UserProvider>
   )
 }
 

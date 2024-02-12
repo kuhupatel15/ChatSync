@@ -25,15 +25,16 @@ const ConversationBox = () => {
   // },[])
   const getmessages = async () => {
     if (!selectedChat) return;
-    const response = await Get_all_messages({ chatId: chatid })
+    const response = await Get_all_messages({ chatId: selectedChat._id })
     setmessages(response.data)
     console.log('getmessages')
-    passsocket.emit('join-room', selectedChat._id,(ack) => {
-      if (ack === 'success') {
-          console.log('Socket emit join successful');
-      } else {
-          console.log('Socket emit join failed');
-      }
+    passsocket.emit('join-room', selectedChat._id, (ack) => {
+      console.log(ack)
+      // if (ack === 'success') {
+      //     console.log('Socket emit join successful');
+      // } else {
+      //     console.log('Socket emit join failed');
+      // }
   })
     console.log(passsocket,selectedChat._id)
   }
@@ -52,7 +53,7 @@ const ConversationBox = () => {
         !selectedChatCompare||
         selectedChatCompare._id !== msg.chat._id
         ) { 
-          //notif
+          console.log("kkkk")
         }
       else{
         setmessages([...messages,msg])
