@@ -1,36 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const User = new mongoose.Schema(
+  {
+    userName: {
+      type: String,
+      unique: true,
+      required: [true, "Please enter your name"],
+    },
 
-const User = new mongoose.Schema({
-  userName: {
-    type: String,
-    unique:true,
-    required: [true, "Please enter your name"],
-  },
+    userEmail: {
+      type: String,
+      required: [true, "Please enter your email"],
+      unique: true,
+    },
 
-  userEmail: {
-    type: String,
-    required: [true, "Please enter your email"],
-    unique: true,
-  },
+    password: {
+      type: String,
+      required: [true, "Please enter your password"],
+      // select: false,
+    },
+    profileImg: {
+      type: "String",
 
-  password: {
-    type: String,
-    required: [true, "Please enter your password"],
-    // select: false,
+      default:
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
-  profileImg: {
-    type: "String",
-    
-    default:
-      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-  },
-  verified: {
-    type: Boolean,
-    default: false,
-  },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 // User.methods.matchPassword = async function (enteredPassword) {
 //   return await bcrypt.compare(enteredPassword, this.password);
@@ -45,5 +47,4 @@ const User = new mongoose.Schema({
 //   this.password = await bcrypt.hash(this.password, salt);
 // });
 
-
-module.exports = mongoose.model('UserData', User);
+module.exports = mongoose.model("UserData", User);

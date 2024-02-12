@@ -1,14 +1,14 @@
 import React from 'react'
 import { Button, Label, TextInput } from 'flowbite-react';
-import '../index.css'
+import '../../index.css'
 import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { Verify } from '../utils/Fetch_data.js';
+import { Verify } from '../../utils/FetchData.js';
 
-const Verify_otp = () => {
+const VerifyOtp = () => {
 
   const userID = useSelector((state) => state.User.userdata.user._id)
   const navigate = useNavigate()
@@ -17,7 +17,6 @@ const Verify_otp = () => {
 
   const handleVerify = async () => {
     const res = await Verify({ otp, userID });
-    
     navigate('/home')
   }
 
@@ -41,4 +40,4 @@ const Verify_otp = () => {
   )
 }
 
-export default Verify_otp
+export default VerifyOtp

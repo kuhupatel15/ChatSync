@@ -1,24 +1,25 @@
 import { Routes, Route } from 'react-router-dom'
-import SignUp from './Components/SignUp.jsx';
-import LogIn from './Components/LogIn.jsx';
-import Verify_otp from './Components/Verify_otp.jsx';
-import Home_page from './Components/Home_Page.jsx';
-import Forgot from './Components/Forgot_Password.jsx';
-import Reset from './Components/Reset_Password.jsx';
+import Signup from './components/auth/Signup.jsx';
+import Login from './components/auth/Login.jsx';
+import VerifyOtp from './components/auth/VerifyOtp.jsx';
+import HomePage from './components/HomePage.jsx';
+import ForgotPassword from './components/auth/ForgotPassword.jsx';
+import ResetPassword from './components/auth/ResetPassword.jsx';
 import { Toaster } from 'react-hot-toast';
-import Protected from './Layouts/Protected.jsx';
+import Protected from './layouts/Protected.jsx';
+
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<SignUp />}></Route>
-        <Route path='/login' element={<LogIn />}></Route>
-        <Route path='/verify-otp' element={<Verify_otp />}></Route>
-        <Route path='/home' element={<Protected Component={Home_page} />}></Route>
-        <Route path='/chat/:chatid' element={<Protected Component={Home_page} />}></Route>
+        <Route path='/' element={<Signup />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/verify-otp' element={<VerifyOtp />}></Route>
+        <Route path='/home' element={<Protected Component={HomePage} />}></Route>
+        <Route path='/chat/:chatid' element={<Protected Component={HomePage} />}></Route>
 
-        <Route path='/forgot-password' element={<Forgot />} ></Route>
-        <Route path='user/reset-password/:id/:token' element={<Reset />}></Route>
+        <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
+        <Route path='user/reset-password/:id/:token' element={<ResetPassword />}></Route>
 
       </Routes>
       <Toaster />

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button } from 'flowbite-react';
-import '../index.css'
+import '../../index.css'
 import { useDispatch } from 'react-redux'
-import { logout } from "../../store/reducers/AuthSlice"
+import { logout } from "../../../store/reducers/AuthSlice.js"
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogout } from "react-icons/hi";
 
-const Logout = () => {
+const LogoutBtn = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -20,10 +20,10 @@ const Logout = () => {
     }
 
     return (
-<Button outline gradientDuoTone="purpleToBlue" onClick={submithandler} className='text-3xl'>
+        <Button outline gradientDuoTone="purpleToBlue" onClick={submithandler} className='text-3xl'>
             <HiOutlineLogout className='text-xl'></HiOutlineLogout>
-          </Button>
+        </Button>
     )
 }
 
-export default Logout
+export default LogoutBtn

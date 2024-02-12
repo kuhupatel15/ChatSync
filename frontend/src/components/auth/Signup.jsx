@@ -1,19 +1,16 @@
 import React from 'react'
 import { Button, Label, TextInput } from 'flowbite-react';
-import '../index.css'
-import toast from 'react-hot-toast';
+import '../../index.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-// import {login} from '../../store/reducers/AuthSlice';
-import { userData } from '../../store/reducers/UserSlice.js';
-import { Register } from '../utils/Fetch_data.js'
+import { userData } from '../../../store/reducers/UserSlice.js';
+import { Register } from '../../utils/FetchData.js'
 
 const Signup = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch();
-  // const ud = useSelector((state)=> state.User.userData)
 
   const submithandler = async (data) => {
     const user = await Register(data);

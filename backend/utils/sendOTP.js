@@ -15,7 +15,6 @@ let transporter = nodemailer.createTransport({
 
 exports.sendOTPverification = async ({ _id, userEmail }, res) => {
     try {
-        console.log(_id, userEmail)
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`
         var mailOptions = {
             from: env_config.auth_mail,
@@ -42,7 +41,6 @@ exports.sendOTPverification = async ({ _id, userEmail }, res) => {
  
 exports.sendOTPforPasswordChange = async ({ _id, userEmail }, res) => {
     try {
-        console.log(_id,userEmail)
         const token = jwt.sign({id: _id}, env_config.jwt_secret, {expiresIn: "1h"})
         var mailOptions = {
             from: env_config.auth_mail,

@@ -1,46 +1,40 @@
-import { createContext,useState,useContext,useEffect } from "react";
-// import { useNavigate} from 'react-router-dom'
-
-
+import { createContext, useState, useContext, useEffect } from "react";
 const ChatContext = createContext();
 
-const ChatProvider = ({children})=>{
-    // const navigate = useNavigate();
-    const [selectedChat, setSelectedChat] = useState();
-  // const [loggedUser, setloggedUser] = useState({});
+const ChatProvider = ({ children }) => {
+  const [selectedChat, setSelectedChat] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
-  const [fetchAgain,setFetchAgain]=useState(false)
+  const [fetchAgain, setFetchAgain] = useState(false)
   const [messages, setmessages] = useState([])
-    const [passsocket,setSocket]=useState(null)
+  const [passsocket, setSocket] = useState(null)
+
+  // const [loggedUser, setloggedUser] = useState({});
   // useEffect(() => {
   //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   //   setloggedUser(userInfo);
-
   //   if (!userInfo){ navigate("/");}
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [navigate]);
 
-    return(
-        <ChatContext.Provider value={
-            {
-                selectedChat,
-                setSelectedChat,
-                chats,
-                setChats,
-                fetchAgain,
-                setFetchAgain,
-                messages, setmessages,
-                passsocket,setSocket
-            }
-        }>
-            {children}
-        </ChatContext.Provider>
-    )
+  return (
+    <ChatContext.Provider value={
+      {
+        selectedChat,
+        setSelectedChat,
+        chats,
+        setChats,
+        fetchAgain,
+        setFetchAgain,
+        messages, setmessages,
+        passsocket, setSocket
+      }
+    }>
+      {children}
+    </ChatContext.Provider>
+  )
 }
 export const ChatState = () => {
-    return useContext(ChatContext);
-  };
-  
+  return useContext(ChatContext);
+};
+
 export default ChatProvider;
-  

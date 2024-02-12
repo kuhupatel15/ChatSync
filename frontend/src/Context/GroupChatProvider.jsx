@@ -1,21 +1,24 @@
-
-import { createContext, useState,useContext } from 'react'
+import { createContext, useState, useContext } from 'react'
 const GroupChatContext = createContext();
-const GroupChatProvider = ({children}) => {
-  const [groupDrawerOpen,setgroupDrawerOpen]  =useState(false)
+
+const GroupChatProvider = ({ children }) => {
+  const [groupDrawerOpen, setgroupDrawerOpen] = useState(true);
+
   return (
     <GroupChatContext.Provider
-        value={
-            {
-                groupDrawerOpen,
-                setgroupDrawerOpen
-            }
-        } 
-    >{children}</GroupChatContext.Provider>
+      value={
+        {
+          groupDrawerOpen,
+          setgroupDrawerOpen
+        }
+      }>
+      {children}
+    </GroupChatContext.Provider>
   )
 }
-export const GroupChatState =()=>{
-        return useContext(GroupChatContext)
+
+export const GroupChatState = () => {
+  return useContext(GroupChatContext)
 }
 
 export default GroupChatProvider

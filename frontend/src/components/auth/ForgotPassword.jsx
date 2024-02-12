@@ -1,15 +1,14 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { Forgot_Password } from '../utils/Fetch_data.js';
-import { Link, useNavigate } from 'react-router-dom'
+import { Forgot_Password } from '../../utils/FetchData.js';
 import toast from 'react-hot-toast';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
 
   const submitEmail = async (data) => {
     let res = await Forgot_Password(data);
+    if (res) toast.loading("Mail has been sent to reset the password")
   }
 
   return (

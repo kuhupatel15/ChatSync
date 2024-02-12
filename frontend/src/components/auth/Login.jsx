@@ -1,29 +1,25 @@
 import React from 'react'
 import { Button, Label, TextInput } from 'flowbite-react';
 import { Link, useNavigate } from 'react-router-dom'
-import '../index.css'
+import '../../index.css'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
-import { login } from "../../store/reducers/AuthSlice.js"
-import { Login } from '../utils/Fetch_data.js';
-import { ChatState } from '../Context/ChatProvider.jsx';
-import { userData } from '../../store/reducers/UserSlice.js';
-const LogIn = () => {
+import { login } from "../../../store/reducers/AuthSlice.js"
+import { LogIn } from '../../utils/FetchData.js';
+import { userData } from '../../../store/reducers/UserSlice.js';
+
+const Login = () => {
 
   const navigate = useNavigate();
-  // const {setloggedUser}=ChatState();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm()
 
   const submithandler = async (data) => {
     dispatch(login(data));
-    const res = await Login(data);
-    
-    console.log(res.data.user)
+    const res = await LogIn(data);
     dispatch(userData(res.data.user))
     localStorage.setItem("userInfo", JSON.stringify(res.data.user));
-
-    if(res) navigate('/home')
+    if (res) navigate('/home')
   }
 
   return (
@@ -53,4 +49,4 @@ const LogIn = () => {
   )
 }
 
-export default LogIn
+export default Login
