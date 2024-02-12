@@ -5,7 +5,8 @@ import io from 'socket.io-client';
 var socket,selectedChatCompare;
 import { UserState } from '../../Context/UserProvider.jsx'
 import { useEffect } from 'react';
-const Endpoint = 'http://localhost:3000';
+const Endpoint = import.meta.env.VITE_BACKEND_URL;
+
 import { ChatState } from '../../Context/ChatProvider.jsx';
 const ChatWindow = () => {
     const {loggedUser} =UserState();

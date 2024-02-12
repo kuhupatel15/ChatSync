@@ -5,14 +5,12 @@ import {ChatState} from '../../Context/ChatProvider.jsx'
 import {getOppUserName,getOppUser} from "../../utils/ChatLogics.js"
 import { userData} from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
-const Endpoint = 'http://localhost:3000';
 import { UserState } from '../../Context/UserProvider.jsx'
-
 import io from 'socket.io-client';
-
 // import { UserState } from '../../Context/UserProvider.jsx'
 const UserChatsContainer = () => {
   const {setSelectedChat,chats,setChats,fetchAgain}=ChatState();
+const Endpoint = import.meta.env.VITE_BACKEND_URL;
   // const loggedUser = useSelector((state) => state.User.userdata)
   const {loggedUser} =UserState();
   const [temp, settemp] = useState()
