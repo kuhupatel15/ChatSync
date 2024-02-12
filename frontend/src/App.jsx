@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import Signup from './Components/Signup.jsx';
+import SignUp from './Components/SignUp.jsx';
 import LogIn from './Components/LogIn.jsx';
 import Verify_otp from './Components/Verify_otp.jsx';
 import Home_page from './Components/Home_Page.jsx';
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Signup />}></Route>
+        <Route path='/' element={<SignUp />}></Route>
         <Route path='/login' element={<LogIn />}></Route>
         <Route path='/verify-otp' element={<Verify_otp />}></Route>
         <Route path='/home' element={<Protected Component={Home_page} />}></Route>
