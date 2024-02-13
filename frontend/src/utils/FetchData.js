@@ -138,6 +138,7 @@ export const Fetch_chat = async () => {
 
 export const Create_group = async ({ users, grpname }) => {
   try {
+    console.log(users, grpname)
     let response = await baseUrl.post(
       "/chat/create-group",
       { users, grpname },
