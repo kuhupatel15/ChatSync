@@ -44,7 +44,7 @@ const AddChatNav = () => {
         </div>
         <div className='flex gap-4 text-3xl text-[#8E9297]' onClick={() => setgroupDrawerOpen(!groupDrawerOpen)}>
           <Button outline gradientDuoTone="purpleToBlue" className='text-3xl'>
-            <HiOutlineUserGroup className='text-xl' ></HiOutlineUserGroup>
+            <HiOutlineUserGroup className='text-xl' />
           </Button>
           <Logout />
         </div>

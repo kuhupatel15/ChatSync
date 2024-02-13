@@ -21,7 +21,7 @@ const LogoutBtn = () => {
 
     return (
         <Button outline gradientDuoTone="purpleToBlue" onClick={submithandler} className='text-3xl'>
-            <HiOutlineLogout className='text-xl'></HiOutlineLogout>
+            <HiOutlineLogout className='text-xl' />
         </Button>
     )
 }
