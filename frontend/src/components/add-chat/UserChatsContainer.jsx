@@ -12,7 +12,9 @@ import io from 'socket.io-client';
 const UserChatsContainer = () => {
   const [temp, settemp] = useState()
 
-  const { loggedUser } = UserState();
+  // const { loggedUser } = UserState();
+  const loggedUser = useSelector((state)=>state.User.userdata)
+  console.log(loggedUser)
   const { setSelectedChat, chats, setChats, fetchAgain, setSocket, passsocket } = ChatState();
   var socket;
 
@@ -24,7 +26,7 @@ const UserChatsContainer = () => {
   useEffect(() => {
     socket = io(backendUri);
     setSocket(socket)
-    socket.emit('setup', loggedUser._id)
+    if(loggedUser) socket.emit('setup', loggedUser._id)
   }, [])
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const UserChatsContainer = () => {
   }, [fetchAgain])
 
   return (
-    <div className='max-h-[40vw] overflow-scroll scrollbar-hide' >
+    <div className='max-h-[40vw] my-2 flex flex-col gap-1 overflow-scroll scrollbar-hide' >
       {chats && chats.length > 0 && chats.map((user) => (
         <div key={user._id} onClick={() => setSelectedChat(user)}>
           <UserChat name={getOppUserName(loggedUser, user.users)}

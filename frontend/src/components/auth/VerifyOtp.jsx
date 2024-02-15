@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Label, TextInput } from 'flowbite-react';
+import { Input, Button } from "@nextui-org/react";
 import '../../index.css'
 import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
@@ -34,7 +34,7 @@ const VerifyOtp = () => {
           inputStyle={{ width: "3rem", height: "3.5rem" }}
           renderInput={(props) => <input {...props} className='otp-input ml-[2.3vw]' />}
         />
-        <Button gradientDuoTone="purpleToBlue" onClick={handleVerify}>Verify account</Button>
+        <Button color="primary" onClick={handleVerify}>Verify account</Button>
       </div>
     </div>
   )

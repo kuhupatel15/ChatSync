@@ -15,7 +15,7 @@ const ChatWindow = () => {
     // console.log(passsocket)
 
     return (
-        <div className='w-[60vw] bg-[#36393F] flex flex-col h-screen'>
+        <div className='w-[60vw] bg-[#36393F] flex flex-col h-screen border-l border-gray-600'>
             <ConversationNav />
             <ConversationBox />
             <BottomNav />

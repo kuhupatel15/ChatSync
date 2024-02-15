@@ -3,13 +3,16 @@ const GroupChatContext = createContext();
 
 const GroupChatProvider = ({ children }) => {
   const [groupDrawerOpen, setgroupDrawerOpen] = useState(true);
+  const [grpDetsDrawerOpen, setgrpDetsDrawerOpen] = useState(true)
 
   return (
     <GroupChatContext.Provider
       value={
         {
           groupDrawerOpen,
-          setgroupDrawerOpen
+          setgroupDrawerOpen,
+          grpDetsDrawerOpen,
+          setgrpDetsDrawerOpen
         }
       }>
       {children}

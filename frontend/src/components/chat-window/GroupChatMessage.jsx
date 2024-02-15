@@ -1,4 +1,4 @@
-import { Avatar } from 'flowbite-react'
+import {Avatar} from "@nextui-org/react";
 
 const GroupChatMessage = () => {
     return (

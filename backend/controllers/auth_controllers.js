@@ -164,7 +164,7 @@ exports.ResetPassword = async (req, res) => {
 
 exports.GetAllUsers = async (req, res) => {
   try {
-    const allusers = await User.find();
+    const allusers = await User.find({ _id: { $ne: req.user._id } });
     return res.status(200).json(allusers)
   }
   catch (error) {

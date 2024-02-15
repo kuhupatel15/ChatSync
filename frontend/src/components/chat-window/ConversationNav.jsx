@@ -1,9 +1,10 @@
 import React from 'react'
-import { Avatar, Button } from 'flowbite-react';
-import { HiEllipsisVertical } from "react-icons/hi2";
+import { Avatar, Button, Divider } from "@nextui-org/react";
+import { CiMenuKebab } from "react-icons/ci";
 import { ChatState } from '../../context/ChatProvider.jsx';
 import { getOppUserName } from '../../utils/ChatLogics.js';
 import { UserState } from '../../context/UserProvider.jsx'
+
 
 const ConversationNav = () => {
   const { selectedChat } = ChatState();
@@ -11,20 +12,21 @@ const ConversationNav = () => {
 
   return (
     <div>
-      <div className='w-full h-[5vw] flex border-b-[1px] border-black justify-between items-center p-[2vw]'>
+      <div className='w-full h-[5vw] flex justify-between items-center p-[2vw]'>
         {selectedChat &&
           <div className='flex gap-4 items-center'>
-            <Avatar rounded size="md" />
+            <Avatar src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" size="md" />
             <h6 className='text-white'>{!selectedChat.isGroupChat ? getOppUserName(loggedUser, selectedChat.users) : selectedChat.chatName}
             </h6>
           </div>
         }
         <div className='flex gap-4 text-3xl text-[#8E9297]'>
-          <Button outline gradientDuoTone="purpleToBlue" className='text-3xl'>
-            <HiEllipsisVertical className='text-[1.5vw]' />
+          <Button isIconOnly color="default" variant="faded" aria-label="Take a photo">
+            <CiMenuKebab className='text-xl' />
           </Button>
         </div>
       </div>
+      <Divider />
     </div>
   )
 }

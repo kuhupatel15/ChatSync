@@ -1,19 +1,22 @@
+const {nextui} = require("@nextui-org/react");
+
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    'node_modules/flowbite-react/lib/esm/**/*.js',
-
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+  
   theme: {
     extend: {},
   },
-  plugins: [
-    // eslint-disable-next-line no-undef
-    require('flowbite/plugin')
-  ],
-  variants: {
-    extend: {
-    },
-  }}
+  darkMode: "class",
+  plugins: [nextui()],
+}
+
+
+// tailwind.config.js
+
+

@@ -4,6 +4,7 @@ import ChatWindow from './chat-window/ChatWindow.jsx'
 import { ChatState } from '../context/ChatProvider.jsx'
 import DefaulChatBox from './DefaultChatBox.jsx'
 import NewGrpDrawer from './group-chat/NewGrpDrawer.jsx'
+import GrpDetsDrawer from './group-chat/GrpDetsDrawer.jsx'
 import GroupChatProvider from '../context/GroupChatProvider.jsx'
 
 const HomePage = () => {
@@ -12,7 +13,7 @@ const HomePage = () => {
   return (
     <div>
       <GroupChatProvider>
-        <div className='flex h-[100vh]'>
+        <div className='flex h-[100vh] overflow-hidden'>
           <div className='w-[40vw] relative h-full bg-[#2F3136]'>
             <AddChatNav />
             <UserChatsContainer />
