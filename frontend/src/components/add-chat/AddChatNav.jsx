@@ -41,24 +41,25 @@ const AddChatNav = () => {
 
   return (
     <div>
-      <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]'>
+      <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]  border-b-[1px] border-black'>
         <div className='flex gap-4 items-center'>
           <Avatar src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" size="md" />
           <h6 className='text-white'>{loggedUser?.userName}</h6>
         </div>
         <div className='flex gap-4 text-3xl text-[#8E9297]' >
-          <Button isIconOnly color="default" variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
+          <Button isIconOnly className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
             <HiOutlineUserGroup className='text-xl' />
           </Button>
           <Logout />
         </div>
       </div>
 
-      <div className='h-[5vw] w-full mb-4 flex flex-col items-center p-2'>
+      <div className='h-[5vw] w-full flex flex-col items-center p-2 border-b-[1px] border-black'>
         <Input
           autoComplete='off'
+          size="sm"
           isRequired
-          className='w-full'
+          className='w-full h-[2vh]'
           type="text"
           placeholder="Add new conversation...."
           onChange={(e) => search_users(e.target.value)}

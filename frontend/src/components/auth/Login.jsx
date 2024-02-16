@@ -30,24 +30,26 @@ const Login = () => {
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
 
-      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[58vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[60vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
         <h1 className='text-white text-xl text-center font-bold'>Welcome Back !</h1>
         <div>
+          <label htmlFor="Email" className='ml-2 '>Email</label>
           <Input
             isRequired
             type="email"
-            label="Email"
-            size="md"
+            
+            size="sm"
             placeholder="name@gmail.com"
-            className="w-full"
+            className="w-full mt-2"
             {...register("userEmail")}
           />
         </div>
 
         <div>
+        <label htmlFor="Password" className='ml-2 '>Password</label>
           <Input
-            size="md"
-            label="Password"
+            size="sm"
+          
             isRequired
             placeholder="Enter your password"
             endContent={
@@ -60,15 +62,15 @@ const Login = () => {
               </button>
             }
             type={isVisible ? "text" : "password"}
-            className="w-full"
+            className="w-full mt-2"
             {...register("password")}
           />
-        <Link to={'/forgot-password'}><button className='ml-0'>Forget password?</button></Link>
+        <Link to={'/forgot-password'}><button className='ml-0 text-sky-400 mt-2'>Forget password?</button></Link>
         </div>
-        <Button className="mt-2" color="primary" type="submit">
+        <Button className="mt-2 bg-gradient-to-br from-purple-500  to-cyan-500"  type="submit">
           Log-In
         </Button>
-        <p className='text-white'>Does not have an account ? <Link to={'/'}><button>Sign Up</button></Link></p>
+        <p className='text-white'>Does not have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
       </form>
 
     </div>

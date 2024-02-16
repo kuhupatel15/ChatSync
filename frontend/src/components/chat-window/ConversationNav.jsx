@@ -21,12 +21,12 @@ const ConversationNav = () => {
           </div>
         }
         <div className='flex gap-4 text-3xl text-[#8E9297]'>
-          <Button isIconOnly color="default" variant="faded" aria-label="Take a photo">
+          <Button isIconOnly className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
             <CiMenuKebab className='text-xl' />
           </Button>
         </div>
       </div>
-      <Divider />
+      {/* <Divider /> */}
     </div>
   )
 }

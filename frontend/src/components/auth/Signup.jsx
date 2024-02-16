@@ -25,44 +25,40 @@ const Signup = () => {
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
 
-      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[65vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[70vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
         <h1 className='text-white text-xl text-center font-bold'>Create an account</h1>
         <div>
-          <div className="mb-2 block ">
-            <span htmlFor="email2" value="Your email" className='text-slate-300' />
-          </div>
+        <label htmlFor="Email" className='ml-2 '>Email</label>
+
           <Input
             isRequired
             type="userEmail"
-            label="Email"
-            size="md"
+            
+            size="sm"
             placeholder="name@gmail.com"
-            className="w-full"
+            className="w-full mt-2"
             {...register("userEmail")}
           />
         </div>
         <div>
-          <div className="mb-2 block">
-            <span htmlFor="username" className='text-slate-300' value="Username" />
-          </div>
+        <label htmlFor="Username" className='ml-2 '>Username</label>
           <Input
             isRequired
-            size="md"
+            size="sm"
             type="userName"
-            label="Name"
+            
             {...register("userName")}
             id="userName"
             placeholder="Enter you name"
-            className="w-full"
+            className="w-full mt-2"
           />
         </div>
         <div>
-          <div className="mb-2 block">
-            <label htmlFor="password" className='text-slate-300' value="Your password" required />
-          </div>
+          
+          <label htmlFor="Password" className='ml-2 '>Password</label>
           <Input
-            size="md"
-            label="Password"
+            size="sm"
+            
             isRequired
             placeholder="Enter your password"
             endContent={
@@ -75,14 +71,14 @@ const Signup = () => {
               </button>
             }
             type={isVisible ? "text" : "password"}
-            className="w-full"
+            className="w-full mt-2"
             {...register("password")}
           />
-          <Button className="mt-2" color="primary" type="submit">
+          <Button className="w-full mt-4 bg-gradient-to-br from-purple-500  to-cyan-500"  type="submit">
             Register new account
           </Button>
         </div>
-        <p>Already have an account ? <Link to={'/login'}><button>Login</button></Link></p>
+        <p>Already have an account ? <Link to={'/login'}><button className='text-sky-400'>Login</button></Link></p>
       </form>
     </div>
   )

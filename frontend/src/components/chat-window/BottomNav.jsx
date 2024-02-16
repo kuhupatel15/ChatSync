@@ -20,9 +20,10 @@ const BottomNav = () => {
   }
 
   return (
-    <div className='flex items-center gap-2 p-2'>
+    <div className='flex items-center gap-2 p-2 '>
       <Input
         isRequired
+        size='sm'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         name='message'
@@ -30,8 +31,8 @@ const BottomNav = () => {
         type="text"
         placeholder="Type a new message...."
         endContent={
-          <Button className="w-max" color="primary" onClick={sendmessage}>
-            <IoIosSend className='text-2xl' />
+          <Button className="w-max  bg-gradient-to-br from-purple-500  to-cyan-500"  onClick={sendmessage}>
+            <IoIosSend className='text-xl' />
           </Button>
         }
       />

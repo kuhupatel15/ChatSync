@@ -53,7 +53,7 @@ const ConversationBox = () => {
   })
 
   return (
-    <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col'>
+    <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col border-t-[1px] border-black'>
       {messages && messages.map((message) => (
         isSendByUser(loggedUser._id, message.sender) ?
           <IncomingMessage

@@ -8,7 +8,7 @@ const UserChat = (props) => {
 
   return (
     <Link to={`/chat/${props.chatid}`}>
-      <div className="hover:cursor-pointer">
+      <div className="hover:bg-zinc-800 px-2 py-4">
         <div className="flex px-4 w-full items-center gap-6">
           <div className="relative col-span-6 md:col-span-4">
             <Avatar src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" size="lg" />
@@ -25,7 +25,7 @@ const UserChat = (props) => {
             </div>
           </div>
         </div>
-        <Divider className="my-3" />
+        {/* <Divider className="my-3" /> */}
       </div>
     </Link>
   )

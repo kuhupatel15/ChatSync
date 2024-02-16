@@ -22,8 +22,8 @@ const LogoutBtn = () => {
 
     return (
         <div>
-            <Button isIconOnly onPress={onOpen} color="default" variant="faded" aria-label="Take a photo">
-                <HiOutlineLogout className='text-xl' />
+            <Button isIconOnly onPress={onOpen} className='mt-2  bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
+                <HiOutlineLogout className='text-2xl' />
             </Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
