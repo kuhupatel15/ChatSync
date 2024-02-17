@@ -37,7 +37,7 @@ const Login = () => {
           <Input
             isRequired
             type="email"
-            
+
             size="sm"
             placeholder="name@gmail.com"
             className="w-full mt-2"
@@ -46,10 +46,10 @@ const Login = () => {
         </div>
 
         <div>
-        <label htmlFor="Password" className='ml-2 '>Password</label>
+          <label htmlFor="Password" className='ml-2 '>Password</label>
           <Input
             size="sm"
-          
+
             isRequired
             placeholder="Enter your password"
             endContent={
@@ -65,11 +65,13 @@ const Login = () => {
             className="w-full mt-2"
             {...register("password")}
           />
-        <Link to={'/forgot-password'}><button className='ml-0 text-sky-400 mt-2'>Forget password?</button></Link>
+          <div className='flex flex-col'>
+            <Link to={'/forgot-password'} className='ml-0 text-sky-400 mt-2'>Forget password?</Link>
+            <Button className="mt-2 bg-gradient-to-br from-purple-500  to-cyan-500" type="submit">
+              Log-In
+            </Button>
+          </div>
         </div>
-        <Button className="mt-2 bg-gradient-to-br from-purple-500  to-cyan-500"  type="submit">
-          Log-In
-        </Button>
         <p className='text-white'>Does not have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
       </form>
 
