@@ -27,7 +27,7 @@ app.use(logger("tiny"));
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: env_config.frontend_url,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
@@ -44,8 +44,8 @@ const server = app.listen(3000, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:5173",
-    // origin: env_config.frontend_url
+    // origin: "http://localhost:5173",
+    origin: env_config.frontend_url
   },
 });
 
