@@ -7,7 +7,7 @@ import { Divider } from "@nextui-org/react";
 const UserChat = (props) => {
 
   return (
-    <Link to={`/chat/${props.chatid}`}>
+    
       <div className="hover:bg-zinc-800 px-2 py-4">
         <div className="flex px-4 w-full items-center gap-6">
           <div className="relative col-span-6 md:col-span-4">
@@ -25,9 +25,9 @@ const UserChat = (props) => {
             </div>
           </div>
         </div>
-        {/* <Divider className="my-3" /> */}
+      
       </div>
-    </Link>
+    
   )
 }
 

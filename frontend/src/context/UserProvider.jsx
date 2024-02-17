@@ -35,7 +35,7 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [loggedUser, setLoggedUser] = useState(null);
+    const [loggedUser, setLoggedUser] = useState();
 
     useEffect(() => {
         try {
@@ -49,7 +49,7 @@ const UserProvider = ({ children }) => {
             console.error("Error parsing user info:", error);
             navigate("/");
         }
-    }, []);
+    },[]);
 
     return (
         <UserContext.Provider value={{ loggedUser, setLoggedUser }}>

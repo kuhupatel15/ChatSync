@@ -8,14 +8,14 @@ import { login } from "../../../store/reducers/AuthSlice.js"
 import { LogIn } from '../../utils/FetchData.js';
 import { userData } from '../../../store/reducers/UserSlice.js';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
-
+import { UserState } from '../../context/UserProvider.jsx';
 
 const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-
+  const {setLoggedUser} = UserState();
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -24,6 +24,7 @@ const Login = () => {
     const res = await LogIn(data);
     dispatch(userData(res.data.user))
     localStorage.setItem("userInfo", JSON.stringify(res.data.user));
+    
     if (res) navigate('/home')
   }
 

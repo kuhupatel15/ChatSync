@@ -8,8 +8,8 @@ export const getTime =(msgtime)=>{
 }
 
 export const isSendByUser = (sender,userId)=>{
-    // console.log(message.sender)
-    // console.log(typeof sender,typeof userId)
+    console.log(sender)
+    console.log( userId)
 
     
     return (sender!==userId)

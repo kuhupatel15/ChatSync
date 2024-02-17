@@ -16,6 +16,7 @@ const LogoutBtn = () => {
     const submithandler = async () => {
         toast.success("Log out successfully.")
         localStorage.removeItem("jwt_token");
+        localStorage.removeItem("userInfo");
         dispatch(logout());
         navigate('/login')
     }

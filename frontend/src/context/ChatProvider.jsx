@@ -8,7 +8,10 @@ const ChatProvider = ({ children }) => {
   const [fetchAgain, setFetchAgain] = useState(false)
   const [messages, setmessages] = useState([])
   const [passsocket, setSocket] = useState(null)
+  const [isTyping,setIsTyping]=useState(false)
+  const [typing,setTyping]=useState(false)
 
+  const [socketConnected,setSocketConnected]=useState(false)
   // const [loggedUser, setloggedUser] = useState({});
   // useEffect(() => {
   //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -26,7 +29,10 @@ const ChatProvider = ({ children }) => {
         fetchAgain,
         setFetchAgain,
         messages, setmessages,
-        passsocket, setSocket
+        passsocket, setSocket,
+        socketConnected,setSocketConnected,
+        isTyping,setIsTyping,
+        typing,setTyping
       }
     }>
       {children}

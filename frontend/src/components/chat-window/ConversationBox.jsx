@@ -3,20 +3,20 @@ import GroupChatMessage from './GroupChatMessage.jsx'
 import { ChatState } from '../../context/ChatProvider.jsx'
 import { Get_all_messages } from '../../utils/FetchData.js'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+
 import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { UserState } from '../../context/UserProvider.jsx'
 
 const ConversationBox = () => {
   var selectedChatCompare;
-
   const [messages, setmessages] = useState([])
-  const { chatid } = useParams();
-
+  
+  
   const { loggedUser } = UserState();
   const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket } = ChatState();
   const i = 0;
+  console.log(loggedUser)
 
   // const [chatId,setchatId]=useState(null);
   // useEffect(()=>{

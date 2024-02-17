@@ -11,12 +11,16 @@ const BottomNav = () => {
   const [message, setMessage] = useState('');
 
   const sendmessage = async () => {
-    const response = await Send_message({ content: message, chatId: chatid });
+    const response = await Send_message({ content: message, chatId: selectedChat });
     if (response.data) {
       passsocket && passsocket.emit('new-message', response.data);
       setFetchAgain(!fetchAgain);
       setMessage('');
     }
+  }
+  const typingHandler = (e)=>{
+    setMessage(e.target.value)
+    
   }
 
   return (
@@ -25,7 +29,7 @@ const BottomNav = () => {
         isRequired
         size='sm'
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={typingHandler}
         name='message'
         className='w-full'
         type="text"
