@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import baseUrl from "./baseUrl.js";
+import baseUrl from "./baseURL.js";
 
 export const LogIn = async ({ userEmail, password }) => {
   try {
