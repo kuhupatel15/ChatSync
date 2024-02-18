@@ -4,10 +4,11 @@ import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Button, Input, Avatar, Divider, CheckboxGroup, Checkbox, Link, User, Chip, cn } from "@nextui-org/react";
 import { Get_all_users, Create_group } from "../../utils/FetchData.js"
 import UserChat from '../add-chat/UserChat.jsx';
+import { ChatState } from '../../context/ChatProvider.jsx';
 
-const GrpDetsDrawer = ({members}) => {
+const GrpDetsDrawer = ({ members }) => {
   const { groupDrawerOpen, setgroupDrawerOpen, grpDetsDrawerOpen, setgrpDetsDrawerOpen } = GroupChatState();
-
+  const { fetchAgain, setFetchAgain } = ChatState();
   const [grpName, setgrpName] = useState("");
 
   const createGroup = async (e) => {
@@ -18,6 +19,7 @@ const GrpDetsDrawer = ({members}) => {
       setgrpName('');
       setgroupDrawerOpen(!groupDrawerOpen);
       setgrpDetsDrawerOpen(!grpDetsDrawerOpen);
+      setFetchAgain(!fetchAgain)
     }
   };
 

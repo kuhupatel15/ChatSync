@@ -25,7 +25,6 @@ const AddChatNav = () => {
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);
-    console.log(showDiv)
   };
 
 

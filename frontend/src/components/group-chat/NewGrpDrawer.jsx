@@ -18,7 +18,6 @@ const NewGrpDrawer = () => {
   const getAllusers = async () => {
     const response = await Get_all_users();
     setUsers(response.data)
-    console.log(response.data)
   }
 
   useEffect(() => {

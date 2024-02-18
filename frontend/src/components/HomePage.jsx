@@ -12,7 +12,6 @@ const HomePage = () => {
   const { selectedChat } = ChatState();
   const {loggedUser} = UserState();
 
-  console.log(loggedUser)
   return (
     <div>
       {/* <GroupChatProvider> */}
