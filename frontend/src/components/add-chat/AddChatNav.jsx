@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import { UserState } from "../../context/UserProvider.jsx"
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Listbox, ListboxItem } from "@nextui-org/react";
+import toast from 'react-hot-toast';
 
 
 const AddChatNav = () => {
@@ -19,17 +20,17 @@ const AddChatNav = () => {
 
   const { setgroupDrawerOpen, groupDrawerOpen } = GroupChatState()
   const { setChats, chats, fetchAgain, setFetchAgain } = ChatState();
-  // const { loggedUser, setLoggedUser } = UserState();
-  const loggedUser = useSelector((state)=>state.User.userdata)
+  const { loggedUser, setLoggedUser } = UserState();
 
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);
+    console.log(showDiv)
   };
 
 
   const search_users = async (param) => {
-    const response = await Search_user({ query: param })
+    const response = await Search_user({ name: param })
     setusers(response.data)
   }
 
@@ -54,7 +55,7 @@ const AddChatNav = () => {
         </div>
       </div>
 
-      <div className='h-[5vw] w-full flex flex-col items-center p-2 border-b-[1px] border-black'>
+      <div className='h-[5vw] flex flex-col gap-10 w-full items-center p-2 border-b-[1px] border-white'>
         <Input
           autoComplete='off'
           size="sm"
@@ -62,41 +63,42 @@ const AddChatNav = () => {
           className='w-full h-[2vh]'
           type="text"
           placeholder="Add new conversation...."
-          onChange={(e) => search_users(e.target.value)}
-          onClick={toggleDiv}
+          // onChange={(e) => search_users(e.target.value)}
+          onClick={(e)=>{
+            toggleDiv();
+            search_users('')
+          }}
+          onInput={(e) => search_users(e.target.value)}
           startContent={
             <HiSearch />
           }
         />
         {showDiv && (
-          // <Listbox
-          //   aria-label="Actions"
-          // >
-          //   {users.length === 0 && (
-          //     <ListboxItem key="new">
-          //       <span className="ml-4 space-y-1 font-medium dark:text-white">No results</span>
-          //     </ListboxItem>
-          //   )}
+          <div className="bg-white w-full z-[9999] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+            <Listbox >
 
-          //   {users.map((user) => (
-          //     <ListboxItem className='z-[99999]' key={user._id} onClick={() => create_chat(user._id)} >
-          //       <Avatar img={user.profileImg} rounded size="sm" />
-          //       <span className="ml-4 space-y-1 font-medium dark:text-white">{user.userName}</span>
-          //     </ListboxItem>
-          //   ))}
-          // </Listbox>
-          <Listbox
-        aria-label="Actions"
-        onAction={(key) => alert(key)}
-      >
-        <ListboxItem key="new">New file</ListboxItem>
-        <ListboxItem key="copy">Copy link</ListboxItem>
-        <ListboxItem key="edit">Edit file</ListboxItem>
-        <ListboxItem key="delete" className="text-danger" color="danger">
-          Delete file
-        </ListboxItem>
-      </Listbox>
+              {users.map((item) => (
+                <ListboxItem key={item._id} textValue={item.userName} onClick={()=> create_chat(item._id)}>
+                  <div className="flex gap-2 items-center">
+                    <Avatar alt={item.userName} className="flex-shrink-0" size="sm" src={item.profileimg} />
+                    <div className="flex flex-col">
+                      <span className="text-small">{item.userName}</span>
+                      <span className="text-tiny text-default-400">{item.userEmail}</span>
+                    </div>
+                  </div>
+                </ListboxItem>
+              ))}
+
+              {users.length === 0 && (
+                <ListboxItem key="new">
+                  <span>No results</span>
+                </ListboxItem>
+              )}
+
+            </Listbox>
+          </div>
         )}
+
       </div>
     </div>
   )

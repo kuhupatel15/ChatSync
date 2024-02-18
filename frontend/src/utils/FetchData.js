@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import baseUrl from "./baseURL.js";
 
+
 export const LogIn = async ({ userEmail, password }) => {
   try {
     let response = await baseUrl.post(
@@ -22,6 +23,7 @@ export const LogIn = async ({ userEmail, password }) => {
 };
 
 export const Register = async ({ userEmail, userName, password }) => {
+
   try {
     let response = await baseUrl.post(
       "/user/register",
@@ -89,9 +91,9 @@ export const Get_all_users = async () => {
   }
 };
 
-export const Search_user = async ({ query }) => {
+export const Search_user = async ({ name }) => {
   try {
-    let response = await baseUrl.get(`/user/search/${query}`, {
+    let response = await baseUrl.get(`/user/search?name=${name}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,

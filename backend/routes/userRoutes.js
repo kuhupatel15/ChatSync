@@ -19,7 +19,7 @@ app.post("/login", UserLogin);
 app.post("/forgot-password", ForgotPassword);
 app.post("/reset-password", ResetPassword);
 app.get("/get-all-users", isAuthenticated, GetAllUsers);
-app.get("/search/:query", isAuthenticated, SearchUser);
+app.get("/search", isAuthenticated, SearchUser);
 
 app.post("/upload", upload.single("file"), uploadController);
 

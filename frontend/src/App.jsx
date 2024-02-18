@@ -17,7 +17,6 @@ function App() {
         <Route path='/verify-otp' element={<VerifyOtp />}></Route>
         <Route path='/home' element={<Protected Component={HomePage} />}></Route>
         <Route path='/chat/:chatid' element={<Protected Component={HomePage} />}></Route>
-
         <Route path='/forgot-password' element={<ForgotPassword />} ></Route>
         <Route path='user/reset-password/:id/:token' element={<ResetPassword />}></Route>
 

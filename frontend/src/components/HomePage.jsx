@@ -6,13 +6,16 @@ import DefaulChatBox from './DefaultChatBox.jsx'
 import NewGrpDrawer from './group-chat/NewGrpDrawer.jsx'
 import GrpDetsDrawer from './group-chat/GrpDetsDrawer.jsx'
 import GroupChatProvider from '../context/GroupChatProvider.jsx'
+import { UserState } from '../context/UserProvider.jsx'
 
 const HomePage = () => {
   const { selectedChat } = ChatState();
+  const {loggedUser} = UserState();
 
+  console.log(loggedUser)
   return (
     <div>
-      <GroupChatProvider>
+      {/* <GroupChatProvider> */}
         <div className='flex h-[100vh] overflow-hidden'>
           <div className='w-[40vw] relative h-full bg-[#2F3136]'>
             <AddChatNav />
@@ -23,7 +26,7 @@ const HomePage = () => {
             {selectedChat ? <ChatWindow /> : <DefaulChatBox />}
           </div>
         </div>
-      </GroupChatProvider>
+      {/* </GroupChatProvider> */}
     </div>
   )
 }

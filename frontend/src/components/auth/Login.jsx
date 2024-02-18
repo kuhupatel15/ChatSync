@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Input, Button } from "@nextui-org/react";
 import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
@@ -12,21 +12,43 @@ import { UserState } from '../../context/UserProvider.jsx';
 
 const Login = () => {
 
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const {setLoggedUser} = UserState();
+  const { setLoggedUser } = UserState();
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  // const submithandler = async (data) => {
+  //   dispatch(login(data));
+  //   const res = await LogIn(data);
+  //   if (res) {
+  //     dispatch(userData(res.data.user))
+  //     setLoggedUser(res.data.user)
+  //     localStorage.setItem("userInfo", JSON.stringify(res.data.user));
+  //     navigate('/home')
+  //   }
+  // }
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('userInfo');
+    if (storedUser) {
+      setLoggedUser(JSON.parse(storedUser));
+    }
+  }, [setLoggedUser]);
 
   const submithandler = async (data) => {
     dispatch(login(data));
     const res = await LogIn(data);
-    dispatch(userData(res.data.user))
-    localStorage.setItem("userInfo", JSON.stringify(res.data.user));
-    
-    if (res) navigate('/home')
-  }
+    if (res) {
+      dispatch(userData(res.data.user));
+      localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+      setLoggedUser(res.data.user); 
+      navigate('/home');
+    }
+  };
 
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >

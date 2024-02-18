@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import store from '../store/store.js'
 import ChatProvider from './context/ChatProvider.jsx'
 import UserProvider from './context/UserProvider.jsx'
+import GroupChatProvider from './context/GroupChatProvider.jsx';
+
 import { NextUIProvider } from '@nextui-org/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,11 +16,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <BrowserRouter>
         <UserProvider>
-          <ChatProvider>
-            <main className="dark">
-              <App />
-            </main>
-          </ChatProvider>
+          <GroupChatProvider>
+            <ChatProvider>
+              <main className="dark">
+                <App />
+              </main>
+            </ChatProvider>
+          </GroupChatProvider>
         </UserProvider>
       </BrowserRouter>
     </Provider>

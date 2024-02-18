@@ -13,8 +13,8 @@ const UserChatsContainer = () => {
   const [temp, settemp] = useState()
 
   const { loggedUser } = UserState();
-  // const loggedUser = useSelector((state)=>state.User.userdata)
   console.log(loggedUser)
+  
   const { setSelectedChat, chats, setChats, fetchAgain, setSocket,setSocketConnected } = ChatState();
   var socket;
 

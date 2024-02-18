@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
@@ -12,7 +13,10 @@ const ChatProvider = ({ children }) => {
   const [typing,setTyping]=useState(false)
 
   const [socketConnected,setSocketConnected]=useState(false)
-  // const [loggedUser, setloggedUser] = useState({});
+  const [loggedUser, setloggedUser] = useState({});
+
+  // const navigate = useNavigate();
+
   // useEffect(() => {
   //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   //   setloggedUser(userInfo);
