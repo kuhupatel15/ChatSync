@@ -14,8 +14,9 @@ const BottomNav = () => {
     const response = await Send_message({ content: message, chatId: selectedChat });
     if (response.data) {
       passsocket && passsocket.emit('new-message', response.data);
-      setFetchAgain(!fetchAgain);
       setMessage('');
+      setmessages([...messages,response.data])
+      setFetchAgain(!fetchAgain);
     }
   }
   const typingHandler = (e)=>{

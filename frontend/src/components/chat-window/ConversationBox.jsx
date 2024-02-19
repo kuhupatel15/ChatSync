@@ -10,11 +10,11 @@ import { UserState } from '../../context/UserProvider.jsx'
 
 const ConversationBox = () => {
   var selectedChatCompare;
-  const [messages, setmessages] = useState([])
+  
   
   
   const { loggedUser } = UserState();
-  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket } = ChatState();
+  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket,messages, setmessages } = ChatState();
   const i = 0;
 
   // const [chatId,setchatId]=useState(null);
@@ -46,8 +46,10 @@ const ConversationBox = () => {
         console.log()
       }
       else {
-        setmessages([...messages, msg])
+        
+        setmessages([...messages,msg]);
       }
+      
     })
   })
 

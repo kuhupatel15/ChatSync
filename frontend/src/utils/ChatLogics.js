@@ -9,3 +9,7 @@ export const getOppUser = (loggedUser, users) => {
   ? users[1] 
   : users[0];
 };
+
+export const getAdmin = (admin,userid)=>{
+  return admin===userid
+}

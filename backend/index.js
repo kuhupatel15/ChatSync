@@ -76,12 +76,12 @@ io.on("connection", (socket) => {
 
   socket.on("new-message", (msg) => {
     var chat = msg.chat;
-    console.log(msg)
     if (!chat.users) return console.log("chat.users not defined");
     
     chat.users.forEach((user) => {
       if (user == msg.sender) return;
       socket.to(user).emit("message-recieved", msg, (ack) => {
+        
         if (ack === "success") {
           console.log("Socket emit successful");
         } else {

@@ -75,7 +75,7 @@ const UserProvider = ({ children }) => {
         const storedUser = localStorage.getItem('userInfo');
         return storedUser ? JSON.parse(storedUser) : null;
     });
-
+    
     // Update localStorage whenever loggedUser changes
     useEffect(() => {
         localStorage.setItem('userInfo', JSON.stringify(loggedUser));

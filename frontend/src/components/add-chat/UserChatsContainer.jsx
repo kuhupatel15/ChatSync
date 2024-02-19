@@ -22,7 +22,7 @@ const UserChatsContainer = () => {
     setChats(response.data.chat);
     console.log(response.data.chat)
   }
-
+  
   useEffect(() => {
     socket = io(backendUri);
     setSocket(socket)

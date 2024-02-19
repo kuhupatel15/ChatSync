@@ -11,7 +11,7 @@ const ChatProvider = ({ children }) => {
   const [passsocket, setSocket] = useState(null)
   const [isTyping,setIsTyping]=useState(false)
   const [typing,setTyping]=useState(false)
-
+  
   const [socketConnected,setSocketConnected]=useState(false)
   const [loggedUser, setloggedUser] = useState({});
 

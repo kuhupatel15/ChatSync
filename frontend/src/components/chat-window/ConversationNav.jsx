@@ -5,9 +5,11 @@ import { ChatState } from '../../context/ChatProvider.jsx';
 import { getOppUserName } from '../../utils/ChatLogics.js';
 import { UserState } from '../../context/UserProvider.jsx'
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const ConversationNav = () => {
+  const { chatid } = useParams();
   const { selectedChat } = ChatState();
   const { loggedUser } = UserState();
 
@@ -19,7 +21,7 @@ const ConversationNav = () => {
         {selectedChat &&
           <div className='flex gap-4 items-center'>
             <Avatar src={selectedChat.grpProfileimg} size="md" />
-            <Link to={`/profile/${selectedChat._id}`} className='text-white'>{!selectedChat.isGroupChat ? getOppUserName(loggedUser, selectedChat.users) : selectedChat.chatName}
+            <Link to={`/profile/${chatid}`} className='text-white'>{!selectedChat.isGroupChat ? getOppUserName(loggedUser, selectedChat.users) : selectedChat.chatName}
             </Link>
           </div>
         }
