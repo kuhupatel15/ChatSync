@@ -63,7 +63,7 @@ const AddChatNav = () => {
           type="text"
           placeholder="Add new conversation...."
           // onChange={(e) => search_users(e.target.value)}
-          onClick={(e)=>{
+          onClick={(e) => {
             toggleDiv();
             search_users('')
           }}
@@ -77,7 +77,7 @@ const AddChatNav = () => {
             <Listbox >
 
               {users.map((item) => (
-                <ListboxItem key={item._id} textValue={item.userName} onClick={()=> create_chat(item._id)}>
+                <ListboxItem key={item._id} textValue={item.userName} onClick={() => create_chat(item._id)}>
                   <div className="flex gap-2 items-center">
                     <Avatar alt={item.userName} className="flex-shrink-0" size="sm" src={item.profileimg} />
                     <div className="flex flex-col">

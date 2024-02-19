@@ -10,22 +10,10 @@ import { UserState } from '../context/UserProvider.jsx'
 
 const HomePage = () => {
   const { selectedChat } = ChatState();
-  const {loggedUser} = UserState();
 
   return (
     <div>
-      {/* <GroupChatProvider> */}
-        <div className='flex h-[100vh] overflow-hidden'>
-          <div className='w-[40vw] relative h-full bg-[#2F3136]'>
-            <AddChatNav />
-            <UserChatsContainer />
-            <NewGrpDrawer />
-          </div>
-          <div className='w-[60vw] bg-[#36393F]'>
-            {selectedChat ? <ChatWindow /> : <DefaulChatBox />}
-          </div>
-        </div>
-      {/* </GroupChatProvider> */}
+      {selectedChat ? <ChatWindow /> : <DefaulChatBox />}
     </div>
   )
 }

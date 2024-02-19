@@ -37,9 +37,8 @@ const UserChatsContainer = () => {
   return (
     <div className='max-h-[40vw] my-2 flex flex-col  overflow-scroll scrollbar-hide' >
       {chats && chats.length > 0 && chats.map((user) => (
-        
+
         <div key={user._id} onClick={() => setSelectedChat(user)}>
-          {console.log(user.grpProfileimg)}
           <UserChat
             name={user.users.length > 2 ? user.chatName : getOppUserName(loggedUser, user.users)}
             chatid={user._id}

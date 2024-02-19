@@ -16,7 +16,6 @@ const ConversationBox = () => {
   const { loggedUser } = UserState();
   const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket } = ChatState();
   const i = 0;
-  console.log(loggedUser)
 
   // const [chatId,setchatId]=useState(null);
   // useEffect(()=>{
