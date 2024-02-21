@@ -196,8 +196,10 @@ export const Remove_member_from_group = async ({ chatId, memberId }) => {
   }
 };
 
-export const Add_to_group = async ({ chatId, memberId }) => {
+export const Add_to_group = async ({ chatId, memberid }) => {
   try {
+    const memberId=memberid[0]
+    console.log(chatId,memberId)
     let response = await baseUrl.post(
       "/chat/add-to-group",
       { chatId, memberId },
