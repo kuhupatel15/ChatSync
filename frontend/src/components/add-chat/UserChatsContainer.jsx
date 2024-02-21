@@ -39,12 +39,12 @@ const UserChatsContainer = () => {
       {chats && chats.length > 0 && chats.map((user) => (
 
         <div key={user._id} onClick={() => setSelectedChat(user)}>
-          <UserChat
-            name={user.users.length > 2 ? user.chatName : getOppUserName(loggedUser, user.users)}
-            chatid={user._id}
-            lastmsg={user.latestMessage && user.latestMessage.content}
-            lastmsgtime={user.latestMessage && user.latestMessage.createdAt}
-            grpProfileimg={user.grpProfileimg}
+          <UserChat chat={user}
+            // name={user.users.length > 2 ? user.chatName : getOppUserName(loggedUser, user.users)}
+            // chatid={user._id}
+            // lastmsg={user.latestMessage && user.latestMessage.content}
+            // lastmsgtime={user.latestMessage && user.latestMessage.createdAt}
+            // grpProfileimg={user.grpProfileimg}
           />
         </div>
       ))}

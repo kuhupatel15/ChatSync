@@ -137,7 +137,7 @@ const CustomCheckbox = ({ user }) => {
           description={
             // <Link isExternal href={user.url} size="sm">
             <span>
-              @{user.userName}
+              {user.userEmail}
             </span>
             // </Link>
           }

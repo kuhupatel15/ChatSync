@@ -186,8 +186,7 @@ exports.SearchUser = async (req, res) => {
         userName: { $regex: req.query.name, $options: "i" },
       });
       return res.status(200).json(users);
-    } 
-    else {
+    } else {
       const users = await User.find({
         _id: { $ne: req.user._id },
       });
@@ -199,9 +198,12 @@ exports.SearchUser = async (req, res) => {
   }
 };
 
-exports.uploadController = async (req, res) => {
+exports.uploadProfileImg = async (req, res) => {
   try {
-    res.json("Successfully uploaded " + req.file.location + " location!");
+    var user = await User.findById(req.user);
+    user.profileImg = req.file.location;
+    await user.save();
+    return res.status(200).json({msg: "Profile image is uploaded successfully", user});
   } catch (err) {
     res.json(err);
   }
