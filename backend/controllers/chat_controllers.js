@@ -96,7 +96,7 @@ exports.removeMemberFromGrp = async (req, res) => {
     const { chatId, memberId } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    if (grp.groupAdmin !== req.user._id) {
+    if (String(grp.groupAdmin) !== String(req.user._id)) {
       return res
         .status(401)
         .json({ msg: "Only group admins can change the name of the group" });
@@ -119,7 +119,8 @@ exports.addMemberInGrp = async (req, res) => {
     const { chatId, memberId } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    if (grp.groupAdmin !== req.user._id) {
+    console.log(grp.groupAdmin,req.user._id)
+    if (toString(grp.groupAdmin) !== toString(req.user._id)) {
       return res
         .status(401)
         .json({ msg: "Only group admins can change the name of the group" });
