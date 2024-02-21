@@ -7,7 +7,7 @@ import { Divider } from "@nextui-org/react";
 const UserChat = (chat) => {
 
   var chat = chat.chat;
-  console.log(chat)
+  // console.log(chat)
 
   return (
     <div className="hover:bg-zinc-800 hover:cursor-pointer px-2 py-4">

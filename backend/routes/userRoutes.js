@@ -21,6 +21,6 @@ app.post("/reset-password", ResetPassword);
 app.get("/get-all-users", isAuthenticated, GetAllUsers);
 app.get("/search", isAuthenticated, SearchUser);
 
-app.post("/upload-profileimg/:chatId", isAuthenticated, upload.single("file"), uploadProfileImg);
+app.post("/upload-profileimg", isAuthenticated, upload.single("file"), uploadProfileImg);
 
 module.exports = app;

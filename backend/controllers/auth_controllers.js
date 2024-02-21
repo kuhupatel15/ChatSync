@@ -200,11 +200,15 @@ exports.SearchUser = async (req, res) => {
 
 exports.uploadProfileImg = async (req, res) => {
   try {
-    var user = await User.findById(req.user);
+    const user = await User.findOne({ _id: req.user._id });
     user.profileImg = req.file.location;
     await user.save();
-    return res.status(200).json({msg: "Profile image is uploaded successfully", user});
+    return res.status(200).json({
+      msg: "Profile image is successfully uploaded",
+      user,
+    });
   } catch (err) {
-    res.json(err);
+    console.log(err);
+    return res.status(500).json({ err });
   }
 };

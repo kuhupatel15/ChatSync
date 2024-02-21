@@ -12,7 +12,7 @@ import { UserState } from "../../context/UserProvider.jsx"
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import toast from 'react-hot-toast';
-
+import ProfilePage from '../drawers/ProfilePage.jsx';
 
 const AddChatNav = () => {
   const [showDiv, setShowDiv] = useState(false);
@@ -22,11 +22,14 @@ const AddChatNav = () => {
   const { setChats, chats, fetchAgain, setFetchAgain } = ChatState();
   const { loggedUser, setLoggedUser } = UserState();
 
+  const [isProfileOpen, setIsProfileOpen] = useState(true);
+
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };
 
+  console.log("LOGGED USER ---> ", loggedUser)
 
   const search_users = async (param) => {
     const response = await Search_user({ name: param })
@@ -39,13 +42,18 @@ const AddChatNav = () => {
     setFetchAgain(!fetchAgain)
   }
 
+  // console.log(isProfileOpen)
+
   return (
     <div>
       <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]  border-b-[1px] border-black'>
-        <div className='flex gap-4 items-center'>
-          <Avatar src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" size="md" />
-          <h6 className='text-white'>{loggedUser?.userName}</h6>
-        </div>
+        <Button
+          variant='light'
+          startContent={<Avatar src={loggedUser?.profileImg} size="md" />}
+          onClick={()=>setIsProfileOpen(!isProfileOpen)}
+        >
+          <span className='text-white'>{loggedUser?.userName}</span>
+        </Button>
         <div className='flex gap-4 text-3xl text-[#8E9297]' >
           <Button isIconOnly className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
             <HiOutlineUserGroup className='text-xl' />
@@ -99,6 +107,8 @@ const AddChatNav = () => {
         )}
 
       </div>
+
+      <ProfilePage isProfileOpen={isProfileOpen} setIsProfileOpen={setIsProfileOpen} user={loggedUser} />
     </div>
   )
 }
