@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import baseUrl from "./baseURL.js";
 
-
 export const LogIn = async ({ userEmail, password }) => {
   try {
     let response = await baseUrl.post(
@@ -23,7 +22,6 @@ export const LogIn = async ({ userEmail, password }) => {
 };
 
 export const Register = async ({ userEmail, userName, password }) => {
-
   try {
     let response = await baseUrl.post(
       "/user/register",
@@ -140,7 +138,7 @@ export const Fetch_chat = async () => {
 
 export const Create_group = async ({ users, grpname }) => {
   try {
-    console.log(users, grpname)
+    console.log(users, grpname);
     let response = await baseUrl.post(
       "/chat/create-group",
       { users, grpname },
@@ -208,6 +206,29 @@ export const Add_to_group = async ({ chatId, memberid }) => {
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+      }
+    );
+    toast.success(response.data.msg);
+    return response;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    console.log(error);
+  }
+};
+
+export const Upload_profileimg_of_group = async ({ chatId, file }) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    let response = await baseUrl.post(
+      `/chat/upload-profileimg/${chatId}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
         },
       }

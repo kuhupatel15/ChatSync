@@ -4,30 +4,57 @@ import { Link } from 'react-router-dom'
 import { getTime } from '../../utils/msg.js'
 import { Divider } from "@nextui-org/react";
 
-const UserChat = (props) => {
+const UserChat = (chat) => {
+
+  var chat = chat.chat;
+  console.log(chat)
 
   return (
-
     <div className="hover:bg-zinc-800 hover:cursor-pointer px-2 py-4">
-      <Link to={`/chat/${props.chatid}`}>
-        <div className="flex px-4 w-full items-center gap-6">
-          <div className="relative col-span-6 md:col-span-4">
-            <Avatar src={props.grpProfileimg} size="lg" />
-          </div>
-          <div className="w-full flex flex-col col-span-6 md:col-span-8">
-            <div className="flex justify-between">
-              <div className="w-full flex flex-col gap-2">
-                <h3 className="font-semibold text-white">{props.name}</h3>
-                <p className="text-small text-foreground/80">{props.lastmsg}</p>
+      {!chat.isGroupChat ?
+        (
+          <Link to={`/chat/${chat._id}`}>
+            <div className="flex px-4 w-full items-center gap-6">
+              <div className="relative col-span-6 md:col-span-4">
+                <Avatar src={chat.users[1].profileImg} size="lg" />
               </div>
-              {props.lastmsg &&
-                <small className=' text-gray-400'>{getTime(props.lastmsgtime)}</small>
-              }
+              <div className="w-full flex flex-col col-span-6 md:col-span-8">
+                <div className="flex justify-between">
+                  <div className="w-full flex flex-col gap-2">
+                    <h3 className="font-semibold text-white">{chat.users[1].userName}</h3>
+                    <p className="text-small text-foreground/80">{chat.latestMessage.content}</p>
+                  </div>
+                  {chat.latestMessage &&
+                    <small className=' text-gray-400'>{getTime(chat.latestMessage.createdAt)}</small>
+                  }
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </Link>
-    </div>
+          </Link>
+        )
+        :
+        (
+          <Link to={`/chat/${chat._id}`}>
+            <div className="flex px-4 w-full items-center gap-6">
+              <div className="relative col-span-6 md:col-span-4">
+                <Avatar src={chat.grpProfileimg} size="lg" />
+              </div>
+              <div className="w-full flex flex-col col-span-6 md:col-span-8">
+                <div className="flex justify-between">
+                  <div className="w-full flex flex-col gap-2">
+                    <h3 className="font-semibold text-white">{chat.chatName}</h3>
+                    <p className="text-small text-foreground/80">{chat.latestMessage && chat.latestMessage.content}</p>
+                  </div>
+                  {chat.latestMessage &&
+                    <small className=' text-gray-400'>{getTime(chat.latestMessage.createdAt)}</small>
+                  }
+                </div>
+              </div>
+            </div>
+          </Link>
+        )
+      }
+    </div >
 
   )
 }
