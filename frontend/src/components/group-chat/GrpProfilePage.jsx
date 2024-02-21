@@ -19,8 +19,6 @@ const GrpProfilePage = () => {
   useEffect(() => {
   }, []);
 
-  console.log(selectedChat.users[1])
-
   const getAllusers = async () => {
     let response = await Get_all_users();
     console.log(response.data)

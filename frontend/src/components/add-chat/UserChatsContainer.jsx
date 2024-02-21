@@ -20,7 +20,7 @@ const UserChatsContainer = () => {
   const getallchats = async () => {
     const response = await Fetch_chat();
     setChats(response.data.chat);
-    console.log(response.data.chat)
+    // console.log(response.data.chat)
   }
   
   useEffect(() => {

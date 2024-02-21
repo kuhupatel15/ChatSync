@@ -272,3 +272,26 @@ export const Get_all_messages = async ({ chatId }) => {
     console.log(error);
   }
 };
+
+export const Upload_profileimg = async ({ file }) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    let response = await baseUrl.post(
+      `/user/upload-profileimg`,
+      formData,
+      {
+        headers: {
+          "Content-Type": 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+      }
+    );
+    toast.success(response.data.msg);
+    return response;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    console.log(error);
+  }
+};
