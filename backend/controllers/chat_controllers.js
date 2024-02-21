@@ -105,10 +105,10 @@ exports.removeMemberFromGrp = async (req, res) => {
 exports.addMemberInGrp = async (req, res) => {
     try {
         const { chatId, memberId } = req.body;
-
+        // console.log(req.user._id,chatId,memberId)
         const grp = await Chat.findOne({ _id: chatId });
-        if (grp.groupAdmin !== req.user._id) {
-            return res.status(401).json({ msg: 'Only group admins can change the name of the group' })
+        if (grp.groupAdmin != req.user._id) {
+            return res.status(401).json({ msg: 'Only group admins can add member to the group' })
         }
 
         const updatedChat = await Chat.findByIdAndUpdate(chatId, { $push: { users: memberId }, }, { new: true, })

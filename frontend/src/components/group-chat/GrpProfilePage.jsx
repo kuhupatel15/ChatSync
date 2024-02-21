@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Divider, Avatar,Chip ,Button} from '@nextui-org/react';
+import { Divider, Avatar,Chip ,Button,CheckboxGroup,Checkbox,cn,User} from '@nextui-org/react';
 import { ChatState } from '../../context/ChatProvider.jsx';
 import { RxCross1 } from "react-icons/rx";
 import { useParams } from 'react-router-dom';
 import { MdOutlineModeEdit } from "react-icons/md";
 import {getAdmin} from "../../utils/ChatLogics.js"
 import { MdOutlinePersonAdd } from "react-icons/md";
-import {Get_all_users} from "../../utils/FetchData.js"
+import {Get_all_users,Add_to_group} from "../../utils/FetchData.js"
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
+
 const GrpProfilePage = () => {
   const { selectedChat } = ChatState();
   const { chatid } = useParams();
   const [users,setUsers]=useState([]);
+  const [member,setMember]=useState([]);
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
   useEffect(() => {
   }, []);
-  const idAdded=(user) => {return !selectedChat.users.includes(user)}
+  // const idAdded=(user) => {return !selectedChat.users.includes(user)}
   const getAllusers = async ()=>{
+    onOpen();
     let response = await Get_all_users();
-    console.log(response.data)
-    let filteredUsers = response.data.filter(idAdded)
+    
+    let filteredUsers = response.data.filter(user=>!selectedChat.users.some(item=>item._id===user._id))
     setUsers(filteredUsers)
   }
-  // console.log(users)
+  const addToGroup =async (chatid,member)=>{
+    let response = await Add_to_group({chatId:chatid,memberid:member});
+    console.log(response)
+    
+  }
   return (
     <div className='h-[120vh]'>
       <div className="w-full h-[5vw] flex gap-6 justify-start items-center text-white p-[2vw] border-b-[1px] border-black">
@@ -34,7 +44,47 @@ const GrpProfilePage = () => {
       <div className="w-full mt-2 flex flex-col  p-10 ">
         <div className='flex justify-between w-full text-xl text-white'><span>Group members</span><span>{selectedChat.users.length} members</span></div>
         <Button onClick={getAllusers} className='flex items-center mt-4 gap-6 w-full text-white bg-gradient-to-br from-purple-500  to-cyan-500'><MdOutlinePersonAdd className='text-2xl  '></MdOutlinePersonAdd><span>Add Members</span></Button>
-
+        <Modal 
+        backdrop="opaque" 
+        isOpen={isOpen} 
+        onOpenChange={onOpenChange}
+        classNames={{
+          backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
+          base:"bg-white"
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Add Member</ModalHeader>
+              <ModalBody>
+              <CheckboxGroup
+            
+            value={member}
+            onChange={setMember}
+            classNames={{
+              base: "w-full",
+            }}
+          >
+            {users && users.length > 0 && users.map((user) => (
+             <CustomCheckbox key={user._id} user={user} member={member} />
+            ))}
+          </CheckboxGroup>
+          
+        
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onClick={()=>addToGroup(selectedChat._id,member)}>
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
         <div className="flex flex-col gap-4 mt-6">
           {selectedChat.users.map((item) => (
             <div key={item._id} className="flex gap-2 items-center">
@@ -48,12 +98,44 @@ const GrpProfilePage = () => {
             </div>
           ))}
         </div>
-        <div className='h-[50vh] w-[30vw] bg-white'>
-            {/* <span>{users}</span> */}
-        </div>
+        
       </div>
     </div>
   );
 };
 
 export default GrpProfilePage;
+
+const CustomCheckbox = ({ user,member }) => {
+  return (
+    <Checkbox
+      aria-label={user.userName}
+      classNames={{
+        base: cn(
+          "inline-flex max-w-md w-full bg-content1 bg-black m-0",
+          "hover:bg-zinc-900 items-center justify-start",
+          "cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent",
+          "data-[selected=true]:border-primary",
+          `${member.length===1&&member!=user._id?"pointer-events-none bg-gray-500":"pointer-events-auto"}`
+        ),
+        label: "w-full",
+
+      }}
+      value={user._id}
+    >
+      <div className="w-full flex justify-between  text-white gap-2">
+        <User
+          avatarProps={{ size: "md", src: user.profileimg }}
+          description={
+            // <Link isExternal href={user.url} size="sm">
+            <span>
+              {/* @{user.userName} */}
+            </span>
+            // </Link>
+          }
+          name={user.userName}
+        />
+      </div>
+    </Checkbox>
+  );
+};
