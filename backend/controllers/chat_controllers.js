@@ -71,7 +71,7 @@ exports.renameGroup = async (req, res) => {
     const { chatId, newgrpname } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    if (grp.groupAdmin !== req.user._id) {
+    if (toString(grp.groupAdmin) !== toString(req.user._id) ){
       return res
         .status(401)
         .json({ msg: "Only group admins can change the name of the group" });

@@ -32,3 +32,11 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
+
+.grpname{
+  min-width:20vw;
+  border-bottom: #e2e8f0 solid 1px;
+  transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+  
+  outline: none;
+}
