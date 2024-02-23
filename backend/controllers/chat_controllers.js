@@ -96,7 +96,7 @@ exports.removeMemberFromGrp = async (req, res) => {
     const { chatId, memberId } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    if (String(grp.groupAdmin) !== String(req.user._id)) {
+    if (toString(grp.groupAdmin) !== toString(req.user._id)) {
       return res
         .status(401)
         .json({ msg: "Only group admins can change the name of the group" });
@@ -108,6 +108,29 @@ exports.removeMemberFromGrp = async (req, res) => {
       { new: true }
     );
     return res.status(200).json({ msg: "Removed successfully.", updatedChat });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ err });
+  }
+};
+
+exports.ExitFromGrp = async (req, res) => {
+  try {
+    const { chatId, memberId } = req.body;
+
+    const grp = await Chat.findOne({ _id: chatId });
+    // if (toString(grp.groupAdmin) !== toString(req.user._id)) {
+    //   return res
+    //     .status(401)
+    //     .json({ msg: "Only group admins can change the name of the group" });
+    // }
+
+    const updatedChat = await Chat.findByIdAndUpdate(
+      chatId,
+      { $pull: { users: memberId } },
+      { new: true }
+    );
+    return res.status(200).json({ msg: "Exit successfully.", updatedChat });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ err });
@@ -159,3 +182,16 @@ exports.uploadProfileImgOfGrp = async (req, res) => {
     return res.status(500).json({ err });
   }
 };
+
+exports.SelectedChat_Info = async(req,res)=>{
+  try{
+    // const {chatId} = req.query.search;
+    console.log(req.query.search)
+    const chat =await Chat.findOne({_id:req.query.search}).populate("users", "-password").populate("latestMessage")
+    
+    return res.status(200).json(chat);
+  }
+  catch(err){
+    return res.status(500).json({msg:err.message})
+  }
+}

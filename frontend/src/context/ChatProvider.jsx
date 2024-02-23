@@ -6,7 +6,7 @@ const ChatProvider = ({ children }) => {
   const [selectedChat, setSelectedChat] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
-  const [fetchAgain, setFetchAgain] = useState(false)
+  const [fetchAgain, setFetchAgain] = useState(false);
   const [messages, setmessages] = useState([])
   const [passsocket, setSocket] = useState(null)
   const [isTyping,setIsTyping]=useState(false)

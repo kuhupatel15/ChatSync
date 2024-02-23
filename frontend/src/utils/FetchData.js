@@ -136,6 +136,20 @@ export const Fetch_chat = async () => {
   }
 };
 
+export const SelectedChatInfo = async ({chatId}) => {
+  try {
+    let response = await baseUrl.get(`/chat/selected-chat?search=${chatId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const Create_group = async ({ users, grpname }) => {
   try {
     console.log(users, grpname);
@@ -195,6 +209,27 @@ export const Remove_member_from_group = async ({ chatId, memberId }) => {
     console.log(error);
   }
 };
+
+export const Exit_from_group = async ({ chatId, memberId }) => {
+  try {
+    let response = await baseUrl.put(
+      "/chat/exit-group",
+      { chatId, memberId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+      }
+    );
+    toast.success(response.data.msg);
+    return response;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    console.log(error);
+  }
+};
+
 
 export const Add_to_group = async ({ chatId, memberid }) => {
   try {

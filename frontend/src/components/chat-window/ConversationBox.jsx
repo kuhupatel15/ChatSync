@@ -55,17 +55,23 @@ const ConversationBox = () => {
 
   return (
     <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col border-t-[1px] border-black'>
-      {messages && messages.map((message) => (
-        isSendByUser(loggedUser._id, message.sender) ?
-          <IncomingMessage
-            content={message.content}
-            time={message.createdAt}
-          />
-          : <OutgoingMsg
-            content={message.content}
-            time={message.createdAt}
-          />
+      {/* {selectedChat && selectedChat.isGroupChat ? */}
+        {selectedChat && !selectedChat.isGroupChat&&messages && messages.map((message) => (
+          isSendByUser(loggedUser._id, message.sender._id) ?
+            <IncomingMessage
+              content={message.content}
+              time={message.createdAt}
+            />
+            : <OutgoingMsg
+              content={message.content}
+              time={message.createdAt}
+            />
+        ))}
+      {selectedChat && selectedChat.isGroupChat&&messages && messages.map((message) => (
+        <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg}/>
+          
       ))}
+      {/* } */}
     </div>
   )
 }

@@ -6,10 +6,11 @@ const Message = require('../models/messageModel')
 exports.GetAllMessages = async (req, res) => {
     try {
         const { chatId } = req.params;
-        const allmessages = await Message.find({ chat: chatId });
+        const allmessages = await Message.find({ chat: chatId }).populate("sender","profileImg userName")
         return res.status(200).json(allmessages);
     } catch (err) {
-        return res.status(500).json({ msg: err.message })
+        
+        return res.status(500).json({ msg: err })
     }
 }
 
