@@ -143,7 +143,7 @@ const GrpProfilePage = () => {
               <div className="flex flex-col gap-4 mt-6">
                 {selectedChat.users.map((item) => (
                   <div key={item._id} className="flex gap-2 items-center ">
-                    <Avatar alt={item.userName} className="flex-shrink-0" size="md" src={item.profileimg} />
+                    <Avatar alt={item.userName} className="flex-shrink-0" size="md" src={item.profileImg} />
                     <div className="flex flex-col text-[1.2vw]">
                       <span className=" text-white">{item.userName}</span>
                       <span className="text-small text-gray-500">{item.userEmail}</span>
@@ -202,7 +202,7 @@ const CustomCheckbox = ({ user, member }) => {
     >
       <div className="w-full flex justify-between  text-white gap-2">
         <User
-          avatarProps={{ size: "md", src: user.profileimg }}
+          avatarProps={{ size: "md", src: user.profileImg }}
           description={
             // <Link isExternal href={user.url} size="sm">
             <span>

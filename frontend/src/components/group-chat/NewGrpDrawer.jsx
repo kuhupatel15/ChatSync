@@ -133,7 +133,7 @@ const CustomCheckbox = ({ user }) => {
     >
       <div className="w-full flex justify-between gap-2">
         <User
-          avatarProps={{ size: "md", src: user.profileimg }}
+          avatarProps={{ size: "md", src: user.profileImg }}
           description={
             // <Link isExternal href={user.url} size="sm">
             <span>

@@ -3,9 +3,10 @@ import { Card, CardBody, Button } from "@nextui-org/react";
 import { Link } from 'react-router-dom'
 import { getTime } from '../../utils/msg.js'
 import { Divider } from "@nextui-org/react";
-
+import {getOppUserName ,getOppUser} from '../../utils/ChatLogics.js'
+import {UserState} from '../../context/UserProvider.jsx'
 const UserChat = (chat) => {
-
+  const {loggedUser} = UserState();
   var chat = chat.chat;
   // console.log(chat)
 
@@ -16,12 +17,12 @@ const UserChat = (chat) => {
           <Link to={`/chat/${chat._id}`}>
             <div className="flex px-4 w-full items-center gap-6">
               <div className="relative col-span-6 md:col-span-4">
-                <Avatar src={chat.users[1].profileImg} size="lg" />
+                <Avatar src={getOppUser(loggedUser,chat.users).profileImg} size="lg" />
               </div>
               <div className="w-full flex flex-col col-span-6 md:col-span-8">
                 <div className="flex justify-between">
                   <div className="w-full flex flex-col gap-2">
-                    <h3 className="font-semibold text-white">{chat.users[1].userName}</h3>
+                    <h3 className="font-semibold text-white">{getOppUserName(loggedUser,chat.users)}</h3>
                     <p className="text-small text-foreground/80">{chat.latestMessage.content}</p>
                   </div>
                   {chat.latestMessage &&

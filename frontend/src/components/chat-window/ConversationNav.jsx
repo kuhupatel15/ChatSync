@@ -2,7 +2,7 @@ import React from 'react'
 import { Avatar, Button, Divider } from "@nextui-org/react";
 import { CiMenuKebab } from "react-icons/ci";
 import { ChatState } from '../../context/ChatProvider.jsx';
-import { getOppUserName } from '../../utils/ChatLogics.js';
+import { getOppUserName ,getOppUser} from '../../utils/ChatLogics.js';
 import { UserState } from '../../context/UserProvider.jsx'
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ const ConversationNav = () => {
       <div className='w-full h-[5vw] flex justify-between items-center p-[2vw]'>
         {selectedChat &&
           <div className='flex gap-4 items-center'>
-            <Avatar src={selectedChat.grpProfileimg} size="md" />
+            <Avatar src={selectedChat.isGroupChat?selectedChat.grpProfileimg:getOppUser(loggedUser,selectedChat.users).profileImg} size="md" />
             <Link to={`/profile/${chatid}`} className='text-white'>{!selectedChat.isGroupChat ? getOppUserName(loggedUser, selectedChat.users) : selectedChat.chatName}
             </Link>
           </div>
