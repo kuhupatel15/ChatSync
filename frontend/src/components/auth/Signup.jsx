@@ -25,7 +25,7 @@ const Signup = () => {
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
 
-      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[70vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+      <form onSubmit={handleSubmit(submithandler)} className="flex md:w-[40vw] md:h-[70vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
         <h1 className='text-white text-xl text-center font-bold'>Create an account</h1>
         <div>
         <label htmlFor="Email" className='ml-2 '>Email</label>

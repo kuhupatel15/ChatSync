@@ -136,7 +136,7 @@ export const Fetch_chat = async () => {
   }
 };
 
-export const SelectedChatInfo = async ({chatId}) => {
+export const SelectedChatInfo = async ({ chatId }) => {
   try {
     let response = await baseUrl.get(`/chat/selected-chat?search=${chatId}`, {
       headers: {
@@ -150,15 +150,40 @@ export const SelectedChatInfo = async ({chatId}) => {
   }
 };
 
-export const Create_group = async ({ users, grpname }) => {
+export const Create_group = async ({ users, grpname, file }) => {
   try {
-    console.log(users, grpname);
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+    formData.append("users", JSON.stringify(users));
+    formData.append("grpname", grpname);
+
+    let response = await baseUrl.post("/chat/create-group", formData, {
+      headers: {
+        // "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    });
+    toast.success(response.data.msg);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Upload_profileimg_of_group = async ({ chatId, file }) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
     let response = await baseUrl.post(
-      "/chat/create-group",
-      { users, grpname },
+      `/chat/upload-profileimg/${chatId}`,
+      formData,
       {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
         },
       }
@@ -166,6 +191,7 @@ export const Create_group = async ({ users, grpname }) => {
     toast.success(response.data.msg);
     return response;
   } catch (error) {
+    toast.error(error.response.data.msg);
     console.log(error);
   }
 };
@@ -230,40 +256,16 @@ export const Exit_from_group = async ({ chatId, memberId }) => {
   }
 };
 
-
 export const Add_to_group = async ({ chatId, memberid }) => {
   try {
-    const memberId=memberid[0]
-    console.log(chatId,memberId)
+    const memberId = memberid[0];
+    console.log(chatId, memberId);
     let response = await baseUrl.post(
       "/chat/add-to-group",
       { chatId, memberId },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-        },
-      }
-    );
-    toast.success(response.data.msg);
-    return response;
-  } catch (error) {
-    toast.error(error.response.data.msg);
-    console.log(error);
-  }
-};
-
-export const Upload_profileimg_of_group = async ({ chatId, file }) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    let response = await baseUrl.post(
-      `/chat/upload-profileimg/${chatId}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
         },
       }
@@ -315,16 +317,12 @@ export const Upload_profileimg = async ({ file }) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    let response = await baseUrl.post(
-      `/user/upload-profileimg`,
-      formData,
-      {
-        headers: {
-          "Content-Type": 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-        },
-      }
-    );
+    let response = await baseUrl.post(`/user/upload-profileimg`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    });
     toast.success(response.data.msg);
     return response;
   } catch (error) {

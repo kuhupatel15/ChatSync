@@ -23,10 +23,10 @@ const UserChat = (chat) => {
                 <div className="flex justify-between">
                   <div className="w-full flex flex-col gap-2">
                     <h3 className="font-semibold text-white">{getOppUserName(loggedUser,chat.users)}</h3>
-                    <p className="text-small text-foreground/80">{chat.latestMessage.content}</p>
+                    <p className="text-small text-foreground/80">{chat.latestMessage?.content}</p>
                   </div>
                   {chat.latestMessage &&
-                    <small className=' text-gray-400'>{getTime(chat.latestMessage.createdAt)}</small>
+                    <small className=' text-gray-400'>{getTime(chat.latestMessage?.createdAt)}</small>
                   }
                 </div>
               </div>

@@ -10,20 +10,10 @@ import { UserState } from '../../context/UserProvider.jsx'
 
 const ConversationBox = () => {
   var selectedChatCompare;
-  
-  
-  
-  const { loggedUser } = UserState();
-  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket,messages, setmessages } = ChatState();
-  const i = 0;
 
-  // const [chatId,setchatId]=useState(null);
-  // useEffect(()=>{
-  //   socket=io(Endpoint);
-  // setSocket(socketCopy)
-  //   socket.emit('setup',loggedUser._id)
-  //   console.log(socket)
-  // },[])
+  const { loggedUser } = UserState();
+  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket, messages, setmessages } = ChatState();
+  const i = 0;
 
   const getmessages = async () => {
     if (!selectedChat) return;
@@ -46,30 +36,32 @@ const ConversationBox = () => {
         console.log()
       }
       else {
-        
-        setmessages([...messages,msg]);
+
+        setmessages([...messages, msg]);
       }
-      
+
     })
   })
 
   return (
     <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col border-t-[1px] border-black'>
       {/* {selectedChat && selectedChat.isGroupChat ? */}
-        {selectedChat && !selectedChat.isGroupChat&&messages && messages.map((message) => (
-          isSendByUser(loggedUser._id, message.sender._id) ?
-            <IncomingMessage
-              content={message.content}
-              time={message.createdAt}
-            />
-            : <OutgoingMsg
-              content={message.content}
-              time={message.createdAt}
-            />
-        ))}
-      {selectedChat && selectedChat.isGroupChat&&messages && messages.map((message) => (
-        <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg}/>
-          
+      {selectedChat && !selectedChat.isGroupChat && messages && messages.map((message) => (
+        isSendByUser(loggedUser._id, message.sender._id) ?
+          <IncomingMessage
+            key={message._id}
+            content={message.content}
+            time={message.createdAt}
+          />
+          : <OutgoingMsg
+            key={message._id}
+            content={message.content}
+            time={message.createdAt}
+          />
+      ))}
+      {selectedChat && selectedChat.isGroupChat && messages && messages.map((message) => (
+        <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg} />
+
       ))}
       {/* } */}
     </div>

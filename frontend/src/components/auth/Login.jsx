@@ -52,15 +52,13 @@ const Login = () => {
 
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
-
-      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[60vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+      <form onSubmit={handleSubmit(submithandler)} className="flex md:w-[40vw] md:h-[60vh] flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
         <h1 className='text-white text-xl text-center font-bold'>Welcome Back !</h1>
         <div>
           <label htmlFor="Email" className='ml-2 '>Email</label>
           <Input
             isRequired
             type="email"
-
             size="sm"
             placeholder="name@gmail.com"
             className="w-full mt-2"
@@ -72,7 +70,6 @@ const Login = () => {
           <label htmlFor="Password" className='ml-2 '>Password</label>
           <Input
             size="sm"
-
             isRequired
             placeholder="Enter your password"
             endContent={
@@ -95,7 +92,7 @@ const Login = () => {
             </Button>
           </div>
         </div>
-        <p className='text-white'>Does not have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
+        <p className='text-white text-sm md:text-md'>Doesn't have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
       </form>
 
     </div>

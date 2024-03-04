@@ -23,34 +23,37 @@ const LogoutBtn = () => {
 
     return (
         <div>
-            <Button isIconOnly onPress={onOpen} className='mt-2  bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
+            <Button isIconOnly onPress={onOpen} className='bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
                 <HiOutlineLogout className='text-2xl' />
             </Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Log out account</ModalHeader>
-                            <ModalBody>
-                                <p>
-                                  Are you sure you want to log out your account ?
-                                </p>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
-                                </Button>
-                                <Button color="primary" onPress={() => {
-                                    onClose();
-                                    submithandler();
-                                }}>
-                                    Log out
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+
+            <div className='absolute'>
+                <Modal placement='top-center' isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader className="flex flex-col gap-1">Log out account</ModalHeader>
+                                <ModalBody>
+                                    <p>
+                                        Are you sure you want to log out your account ?
+                                    </p>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="danger" variant="light" onPress={onClose}>
+                                        Close
+                                    </Button>
+                                    <Button color="primary" onPress={() => {
+                                        onClose();
+                                        submithandler();
+                                    }}>
+                                        Log out
+                                    </Button>
+                                </ModalFooter>
+                            </>
+                        )}
+                    </ModalContent>
+                </Modal>
+            </div>
         </div>
     )
 }

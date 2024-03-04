@@ -29,8 +29,6 @@ const AddChatNav = () => {
     setShowDiv(!showDiv);
   };
 
-  console.log("LOGGED USER ---> ", loggedUser)
-
   const search_users = async (param) => {
     const response = await Search_user({ name: param })
     setusers(response.data)
@@ -42,32 +40,29 @@ const AddChatNav = () => {
     setFetchAgain(!fetchAgain)
   }
 
-  // console.log(isProfileOpen)
-
   return (
     <div>
-      <div className='w-full h-[5vw] flex justify-between items-center p-[1vw]  border-b-[1px] border-black'>
+      <div className='py-3 px-4 w-full flex justify-between items-center border-b-[1px] border-black'>
         <Button
           variant='light'
           startContent={<Avatar src={loggedUser?.profileImg} size="md" />}
-          onClick={()=>setIsProfileOpen(!isProfileOpen)}
-        >
+          onClick={() => setIsProfileOpen(!isProfileOpen)}>
           <span className='text-white'>{loggedUser?.userName}</span>
         </Button>
         <div className='flex gap-4 text-3xl text-[#8E9297]' >
-          <Button isIconOnly className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
+          <Button isIconOnly className='bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
             <HiOutlineUserGroup className='text-xl' />
           </Button>
           <Logout />
         </div>
       </div>
 
-      <div className='h-[5vw] flex flex-col gap-10 w-full items-center p-2 border-b-[1px] border-white'>
+      <div className='flex flex-col gap-10 w-full p-2 border-b-[1px] border-white'>
         <Input
           autoComplete='off'
           size="sm"
           isRequired
-          className='w-full h-[2vh]'
+          className='w-full'
           type="text"
           placeholder="Add new conversation...."
           // onChange={(e) => search_users(e.target.value)}
@@ -81,9 +76,8 @@ const AddChatNav = () => {
           }
         />
         {showDiv && (
-          <div className="bg-white w-full z-[9999] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+          <div className="bg-white mt-12 mx-2 absolute w-max z-[9999] border-small rounded-small ">
             <Listbox >
-
               {users.map((item) => (
                 <ListboxItem key={item._id} textValue={item.userName} onClick={() => create_chat(item._id)}>
                   <div className="flex gap-2 items-center">
