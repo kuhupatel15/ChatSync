@@ -27,7 +27,7 @@ const BottomNav = () => {
   const sendmessage = async () => {
     passsocket.emit("stop typing", selectedChat._id);
     // setTyping(false);
-    const response = await Send_message({ content: message, chatId: selectedChat });
+    const response = await Send_message({ content: message, chatId: selectedChat._id });
     if (response.data) {
       passsocket && passsocket.emit('new-message', response.data);
       setMessage('');
@@ -61,7 +61,7 @@ const BottomNav = () => {
       setTyping(false);
     }
   }
-
+ 
   return (
     <div>
       {istyping ? (

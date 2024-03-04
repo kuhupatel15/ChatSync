@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import baseUrl from "./baseURL.js";
 
-export const LogIn = async ({ userEmail, password }) => {
+export const LogIn = async ({ userEmail, password, email }) => {
   try {
     let response = await baseUrl.post(
       "/user/login",
-      { userEmail, password },
+      { userEmail, password,email },
       {}
     );
     localStorage.setItem("jwt_token", response.data.token);

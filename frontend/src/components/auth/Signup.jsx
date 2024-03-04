@@ -21,7 +21,7 @@ const Signup = () => {
     dispatch(userData(user.data))
     navigate('/verify-otp')
   }
-
+  
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
 

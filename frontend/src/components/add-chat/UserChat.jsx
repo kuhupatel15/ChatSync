@@ -1,15 +1,15 @@
-import { Avatar, Badge } from "@nextui-org/react";
-import { Card, CardBody, Button } from "@nextui-org/react";
+import { Avatar ,Chip} from "@nextui-org/react";
 import { Link } from 'react-router-dom'
 import { getTime } from '../../utils/msg.js'
-import { Divider } from "@nextui-org/react";
 import {getOppUserName ,getOppUser} from '../../utils/ChatLogics.js'
 import {UserState} from '../../context/UserProvider.jsx'
+import { ChatState} from '../../context/ChatProvider.jsx'
 const UserChat = (chat) => {
   const {loggedUser} = UserState();
   var chat = chat.chat;
   // console.log(chat)
-
+  const {notifications,setNotifications}=ChatState();
+  console.log(notifications.has(chat._id))
   return (
     <div className="hover:bg-zinc-800 hover:cursor-pointer px-2 py-4">
       {!chat.isGroupChat ?
@@ -24,10 +24,12 @@ const UserChat = (chat) => {
                   <div className="w-full flex flex-col gap-2">
                     <h3 className="font-semibold text-white">{getOppUserName(loggedUser,chat.users)}</h3>
                     <p className="text-small text-foreground/80">{chat.latestMessage?.content}</p>
+                    <p>{notifications.has(chat._id)}</p>
                   </div>
-                  {chat.latestMessage &&
-                    <small className=' text-gray-400'>{getTime(chat.latestMessage?.createdAt)}</small>
-                  }
+                  
+                    <small className=' text-gray-400'>{notifications.has(chat._id)?<Chip color="primary">{notifications.get(chat._id).length}</Chip>:
+ getTime(chat.latestMessage?.createdAt)}</small>
+                  
                 </div>
               </div>
             </div>
@@ -44,11 +46,12 @@ const UserChat = (chat) => {
                 <div className="flex justify-between">
                   <div className="w-full flex flex-col gap-2">
                     <h3 className="font-semibold text-white">{chat.chatName}</h3>
-                    <p className="text-small text-foreground/80">{chat.latestMessage && chat.latestMessage.content}</p>
+                    <p className="text-small text-foreground/80">{chat.latestMessage?.content}</p>
                   </div>
-                  {chat.latestMessage &&
-                    <small className=' text-gray-400'>{getTime(chat.latestMessage.createdAt)}</small>
-                  }
+                  
+                    <small className=' text-gray-400'>{notifications.has(chat._id)?<Chip color="primary">{notifications.get(chat._id).length}</Chip>:
+ getTime(chat.latestMessage?.createdAt)}</small>
+                  
                 </div>
               </div>
             </div>

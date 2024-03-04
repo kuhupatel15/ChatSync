@@ -9,7 +9,7 @@ import GroupChatProvider from '../context/GroupChatProvider.jsx'
 import { UserState } from '../context/UserProvider.jsx'
 
 const HomePage = () => {
-  const { selectedChat } = ChatState();
+  const { selectedChat,passsocket } = ChatState();
 
   return (
     <div className='hidden md:block'>

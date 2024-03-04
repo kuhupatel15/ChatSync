@@ -14,7 +14,7 @@ const UserChatsContainer = () => {
 
   const { loggedUser } = UserState();
 
-  const { setSelectedChat, chats, setChats, fetchAgain, setSocket, setSocketConnected } = ChatState();
+  const { setSelectedChat, notifications,chats, setChats, fetchAgain, setSocket, setSocketConnected } = ChatState();
   var socket;
 
   const getallchats = async () => {
@@ -32,15 +32,18 @@ const UserChatsContainer = () => {
 
   useEffect(() => {
     getallchats();
-  }, [fetchAgain])
+  }, [fetchAgain,notifications])
 
+  // const handleChat = (user)=>{
+
+  // }
   return (
     <div className=''>
       <div className='max-h-[80vh] my-2 flex flex-col  overflow-scroll' >
         {chats && chats.length > 0 && chats.map((user) => (
-
-          <div key={user._id} onClick={() => setSelectedChat(user)}>
-            <UserChat chat={user}
+        <div key={user._id} onClick={() => {setSelectedChat(user);if(notifications.has(user._id)){
+          notifications.delete(user._id)}}}>
+          <UserChat chat={user}
             // name={user.users.length > 2 ? user.chatName : getOppUserName(loggedUser, user.users)}
             // chatid={user._id}
             // lastmsg={user.latestMessage && user.latestMessage.content}

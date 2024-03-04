@@ -9,6 +9,9 @@ import { LogIn } from '../../utils/FetchData.js';
 import { userData } from '../../../store/reducers/UserSlice.js';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
 import { UserState } from '../../context/UserProvider.jsx';
+import { useGoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
 
@@ -31,6 +34,23 @@ const Login = () => {
   //     navigate('/home')
   //   }
   // }
+  // const loginResponse = (response)=>{
+  //   const resp = jwtDecode(response.credential)
+  //   console.log(resp)
+  // }
+  // const errorResponse = (error)=>{
+  //   console.log(error)
+  // }
+  //   const login = useGoogleLogin({
+  //     onSuccess: (response)=>{
+  //       const resp = jwtDecode(response)
+  //       console.log(resp)
+  //       // const res= Login(resp.email)
+  //       // console.log(res.data)
+  //     },
+  //     onError:  (error)=>{
+  //       console.log(error)}
+  // });
 
   useEffect(() => {
     const storedUser = localStorage.getItem('userInfo');
@@ -45,14 +65,15 @@ const Login = () => {
     if (res) {
       dispatch(userData(res.data.user));
       localStorage.setItem('userInfo', JSON.stringify(res.data.user));
-      setLoggedUser(res.data.user); 
+      setLoggedUser(res.data.user);
       navigate('/home');
     }
   };
 
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
-      <form onSubmit={handleSubmit(submithandler)} className="flex md:w-[40vw] md:h-[60vh] flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+
+      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[60vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
         <h1 className='text-white text-xl text-center font-bold'>Welcome Back !</h1>
         <div>
           <label htmlFor="Email" className='ml-2 '>Email</label>
@@ -91,10 +112,13 @@ const Login = () => {
               Log-In
             </Button>
           </div>
+
         </div>
         <p className='text-white text-sm md:text-md'>Doesn't have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
       </form>
-
+      {/* <Button onClick={login} className="mt-2 w-full bg-gradient-to-br from-purple-500  to-cyan-500" variant="solid" startContent={<FcGoogle className='text-2xl'/>}>
+        Sign-In with Google
+      </Button> */}
     </div>
   )
 }
