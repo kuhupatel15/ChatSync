@@ -11,7 +11,7 @@ const BottomNav = () => {
   const [message, setMessage] = useState('');
 
   const sendmessage = async () => {
-    const response = await Send_message({ content: message, chatId: selectedChat });
+    const response = await Send_message({ content: message, chatId: selectedChat._id });
     if (response.data) {
       passsocket && passsocket.emit('new-message', response.data);
       setMessage('');
@@ -23,7 +23,7 @@ const BottomNav = () => {
     setMessage(e.target.value)
     
   }
-
+ 
   return (
     <div className='flex items-center gap-2 p-2 '>
       <Input

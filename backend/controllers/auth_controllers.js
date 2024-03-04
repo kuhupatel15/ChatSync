@@ -91,6 +91,20 @@ exports.VerifyOTP = async (req, res) => {
 
 exports.UserLogin = async (req, res) => {
   try {
+    if(req.body.email){
+      const user = await User.findOne({ userEmail });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "User not found or user not verified" });
+    }
+    const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
+      expiresIn: env_config.jwt_token_expire,
+    });
+    return res
+      .status(200)
+      .json({ token, user, msg: "User logged in successfully" });
+    }else{
     const { userEmail, password } = req.body;
     const user = await User.findOne({ userEmail });
     if (!user || user.verified === false) {
@@ -107,8 +121,9 @@ exports.UserLogin = async (req, res) => {
     });
     return res
       .status(200)
-      .json({ token, user, msg: "User logged in successfully" });
-  } catch (err) {
+      .json({ token, user, msg: "User logged in successfully" });}
+  } 
+  catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Internal Server Error" });
   }

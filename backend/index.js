@@ -17,7 +17,10 @@ const cors = require("cors");
 //   })
 // );
 app.use(cors({ credentials: true, origin: true }));
-
+// app.use((req, res, next) => {
+//   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin; report-to=default');
+//   next();
+// });
 
 // logger
 const logger = require("morgan");

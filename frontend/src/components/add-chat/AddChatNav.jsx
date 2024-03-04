@@ -29,7 +29,7 @@ const AddChatNav = () => {
     setShowDiv(!showDiv);
   };
 
-  console.log("LOGGED USER ---> ", loggedUser)
+  // console.log("LOGGED USER ---> ", loggedUser)
 
   const search_users = async (param) => {
     const response = await Search_user({ name: param })

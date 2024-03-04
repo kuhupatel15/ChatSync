@@ -11,7 +11,7 @@ const ChatProvider = ({ children }) => {
   const [passsocket, setSocket] = useState(null)
   const [isTyping,setIsTyping]=useState(false)
   const [typing,setTyping]=useState(false)
-  
+  const [notifications,setNotifications]=useState(new Map());
   const [socketConnected,setSocketConnected]=useState(false)
   const [loggedUser, setloggedUser] = useState({});
 
@@ -36,7 +36,8 @@ const ChatProvider = ({ children }) => {
         passsocket, setSocket,
         socketConnected,setSocketConnected,
         isTyping,setIsTyping,
-        typing,setTyping
+        typing,setTyping,
+        notifications,setNotifications
       }
     }>
       {children}
