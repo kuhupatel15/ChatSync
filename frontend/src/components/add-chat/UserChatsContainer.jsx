@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import UserChat from './UserChat.jsx'
 import { Fetch_chat } from '../../utils/FetchData.js'
 import { ChatState } from '../../context/ChatProvider.jsx'
+
 import { getOppUserName, getOppUser } from "../../utils/ChatLogics.js"
 import { userData } from '../../../store/reducers/UserSlice.js'
 import { useSelector } from 'react-redux'
@@ -23,22 +24,19 @@ const UserChatsContainer = () => {
     // console.log(response.data.chat)
   }
   
-  useEffect(() => {
-    socket = io(backendUri);
-    setSocket(socket)
-    if (loggedUser) socket.emit('setup', loggedUser._id)
-    socket.on('connected', () => setSocketConnected(true))
-  }, [])
+  
 
   useEffect(() => {
     getallchats();
+
   }, [fetchAgain,notifications])
 
   // const handleChat = (user)=>{
 
   // }
+  console.log(notifications)
   return (
-    <div className='max-h-[40vw] my-2 flex flex-col  overflow-scroll scrollbar-hide' >
+    <div className='max-h-[40vw]  flex flex-col  overflow-scroll scrollbar-hide' >
       {chats && chats.length > 0 && chats.map((user) => (
 
         <div key={user._id} onClick={() => {setSelectedChat(user);if(notifications.has(user._id)){
@@ -51,6 +49,7 @@ const UserChatsContainer = () => {
             // grpProfileimg={user.grpProfileimg}
           />
         </div>
+
       ))}
     </div>
   )

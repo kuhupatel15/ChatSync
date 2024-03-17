@@ -13,7 +13,7 @@ const ConversationNav = () => {
   const { selectedChat } = ChatState();
   const { loggedUser } = UserState();
 
-  console.log(selectedChat)
+  // console.log(selectedChat)
 
   return (
     <div>

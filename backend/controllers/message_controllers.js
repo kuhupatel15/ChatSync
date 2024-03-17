@@ -20,9 +20,11 @@ exports.sendMessage = async (req, res) => {
         var message = await Message.create({
             content,
             sender: req.user._id,
-            chat: chatId
-        })
+            chat: chatId,
+            readBy:[req.user._id]
+            })
         const msg =await Message.findById(message._id).populate("chat")
+        // if(toString(req.user._id)===toString(msg.sender))
         await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
         return res.status(200).json(msg);
     }
@@ -31,3 +33,23 @@ exports.sendMessage = async (req, res) => {
     }
 }
 
+exports.SetReadBy = async (req,res)=>{
+    try{
+        const {userId,msgId} = req.body;
+        const updatedMsg = await Message.findByIdAndUpdate(
+            msgId,
+            { $push: { readBy: userId } },
+            { new: true }
+          );
+        //   const updateChat = await Chat.findByIdAndUpdate(
+        //     updatedMsg.chat ,
+        //     {latestMessage:updatedMsg.content}
+        //   );
+          
+          return res.status(200).json({ msg: "Readed successfully.",updatedMsg });
+        }
+        catch(err){
+            console.log(err)
+            res.status(500).json({msg:err.message});
+        }
+}
