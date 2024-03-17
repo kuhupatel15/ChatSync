@@ -47,13 +47,13 @@ const DefaultLayout = ({ children }) => {
   console.log(notifications)
   return (
     <div>
-      <div className='flex h-[100vh] overflow-hidden'>
-        <div className='w-[40vw] h-full relative bg-[#2F3136]'>
+      <div className='flex h-screen overflow-hidden'>
+        <div className='w-full md:w-[40vw] h-full relative bg-[#2F3136]'>
           <AddChatNav />
           <UserChatsContainer />
           <NewGrpDrawer />
         </div>
-        <div className='w-[60vw] overflow-y-auto h-full bg-[#36393F]'>
+        <div className='md:w-[60vw] overflow-y-auto h-full bg-[#36393F]'>
           {children}
         </div>
       </div>

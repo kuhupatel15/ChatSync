@@ -48,18 +48,31 @@ exports.fetchChat = async (req, res) => {
 exports.createGroup = async (req, res) => {
   try {
     const { users, grpname } = req.body;
-    //var members = JSON.parse(users);
-    users.push(req.user);
-    var grpchat = await Chat.create({
+
+    var members = JSON.parse(users);
+    members.push(req.user);
+
+    let Profileimg = null;
+
+    if (req.file && req.file.location) {
+      Profileimg = req.file.location;
+    }
+
+    var object = {
       chatName: grpname,
       isGroupChat: true,
-      users: users,
+      users: members,
       groupAdmin: req.user,
-    });
+      grpProfileimg: Profileimg,
+    };
+
+    var grpchat = await Chat.create(object);
+
     return res.status(200).json({
       msg: `Group ${grpchat.chatName} has been created successfully`,
       grpchat,
     });
+
   } catch (err) {
     console.log(err);
     return res.status(500).json({ err });
@@ -71,7 +84,7 @@ exports.renameGroup = async (req, res) => {
     const { chatId, newgrpname } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    if (toString(grp.groupAdmin) !== toString(req.user._id) ){
+    if (toString(grp.groupAdmin) !== toString(req.user._id)) {
       return res
         .status(401)
         .json({ msg: "Only group admins can change the name of the group" });
@@ -142,7 +155,7 @@ exports.addMemberInGrp = async (req, res) => {
     const { chatId, memberId } = req.body;
 
     const grp = await Chat.findOne({ _id: chatId });
-    console.log(grp.groupAdmin,req.user._id)
+    console.log(grp.groupAdmin, req.user._id);
     if (toString(grp.groupAdmin) !== toString(req.user._id)) {
       return res
         .status(401)
@@ -164,34 +177,31 @@ exports.addMemberInGrp = async (req, res) => {
 exports.uploadProfileImgOfGrp = async (req, res) => {
   try {
     const { chatId } = req.params;
-    console.log(chatId)
-    console.log(req.file)
 
     const grp = await Chat.findOne({ _id: chatId });
 
     grp.grpProfileimg = req.file.location;
     await grp.save();
-    return res
-      .status(200)
-      .json({
-        msg: "Profile image of the group is successfully uploaded",
-        grp,
-      });
+    return res.status(200).json({
+      msg: "Profile image of the group is successfully uploaded",
+      grp,
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ err });
   }
 };
 
-exports.SelectedChat_Info = async(req,res)=>{
-  try{
+exports.SelectedChat_Info = async (req, res) => {
+  try {
     // const {chatId} = req.query.search;
-    console.log(req.query.search)
-    const chat =await Chat.findOne({_id:req.query.search}).populate("users", "-password").populate("latestMessage")
-    
+    console.log(req.query.search);
+    const chat = await Chat.findOne({ _id: req.query.search })
+      .populate("users", "-password")
+      .populate("latestMessage");
+
     return res.status(200).json(chat);
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
   }
-  catch(err){
-    return res.status(500).json({msg:err.message})
-  }
-}
+};

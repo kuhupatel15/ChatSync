@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { Avatar, Chip, Button, CheckboxGroup, Checkbox, cn, User, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem  } from '@nextui-org/react';
+import { Avatar, Chip, Button, CheckboxGroup, Checkbox, cn, User, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@nextui-org/react';
 import { ChatState } from '../../context/ChatProvider.jsx';
 import { RxCross1 } from "react-icons/rx";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAdmin } from "../../utils/ChatLogics.js"
-import { MdOutlinePersonAdd,MdDone,MdOutlineModeEdit } from "react-icons/md";
-import { Get_all_users,Remove_member_from_group, Upload_profileimg_of_group,SelectedChatInfo ,Add_to_group, Rename_group} from "../../utils/FetchData.js"
+import { MdOutlinePersonAdd, MdDone, MdOutlineModeEdit } from "react-icons/md";
+import { Get_all_users, Remove_member_from_group, Upload_profileimg_of_group, SelectedChatInfo, Add_to_group, Rename_group } from "../../utils/FetchData.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 import "../../index.css"
 import { IoIosArrowDown } from "react-icons/io";
 import { UserState } from '../../context/UserProvider.jsx'
 
 const GrpProfilePage = () => {
-  const { selectedChat,setSelectedChat,fetchAgain, setFetchAgain } = ChatState();
+  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain } = ChatState();
   const { chatid } = useParams();
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
@@ -24,15 +24,15 @@ const GrpProfilePage = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [grpname, setGrpname] = useState("")
 
-  const getSelectedChat = async ()=>{
-    let response = await SelectedChatInfo({chatId:chatid})
+  const getSelectedChat = async () => {
+    let response = await SelectedChatInfo({ chatId: chatid })
     setSelectedChat(response.data)
     // console.log(response)
   }
 
   useEffect(() => {
     getSelectedChat();
-    }, []);
+  }, []);
 
   const getAllusers = async () => {
     onOpen();
@@ -59,13 +59,14 @@ const GrpProfilePage = () => {
     setFetchAgain(!fetchAgain)
     setEdit(!edit)
   }
-  
-  const removeFromGroup = async (memberId)=>{
-    let response = await Remove_member_from_group({chatId:selectedChat._id,memberId:memberId})
+
+  const removeFromGroup = async (memberId) => {
+    let response = await Remove_member_from_group({ chatId: selectedChat._id, memberId: memberId })
     getSelectedChat();
   }
-  const exitFromGroup = async (memberId)=>{
-    let response = await Remove_member_from_group({chatId:selectedChat._id,memberId:memberId})
+
+  const exitFromGroup = async (memberId) => {
+    let response = await Remove_member_from_group({ chatId: selectedChat._id, memberId: memberId })
     setFetchAgain(!fetchAgain)
     navigate('/home')
     setSelectedChat()
@@ -152,29 +153,43 @@ const GrpProfilePage = () => {
                     <Dropdown className='bg-black text-white' >
                       <DropdownTrigger>
                         <Button
-                          isIconOnly variant='light' 
+                          isIconOnly variant='light'
                         >
-                          <IoIosArrowDown className='text-white'/>
+                          <IoIosArrowDown className='text-white' />
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu aria-label="Dynamic Actions"  >
-                        
-                          <DropdownItem key="remove" onClick={()=>removeFromGroup(item._id)}> 
-                            Remove
-                          </DropdownItem>
-                      
+
+                        <DropdownItem key="remove" onClick={() => removeFromGroup(item._id)}>
+                          Remove
+                        </DropdownItem>
+
                       </DropdownMenu>
                     </Dropdown>
                   </div>
                 ))}
               </div>
-              <Button className='mt-6' onClick={()=>exitFromGroup(loggedUser._id)}  color="danger" variant="bordered" startContent={<RxCross1/>}>
-        Exit Group
-      </Button>
+              <Button className='mt-6' onClick={() => exitFromGroup(loggedUser._id)} color="danger" variant="bordered" startContent={<RxCross1 />}>
+                Exit Group
+              </Button>
             </div>
           </div>
         ) : (
-          <></>
+          <div className='h-[120vh]'>
+            <div className="w-full h-[5vw] flex gap-6 justify-start items-center text-white p-[2vw] border-b-[1px] border-black">
+              <RxCross1 onClick={() => navigate(`/chat/${selectedChat._id}`)} className='hover:cursor-pointer' />
+              <span className="text-xl">Profile</span>
+            </div>
+
+            <div className="w-full flex flex-col justify-center text-white text-[1.5vw] bg-[#2F3136] items-center py-2 px-10 ">
+              <div className=" w-[12vw] h-[12vw] relative">
+                <Avatar src={selectedChat.users[1].profileImg} className="w-full h-full absolute top-0 left-0 opacity-70" />
+              </div>
+              <div className='flex items-center justify-center gap-4 mt-4'>
+                <span>{selectedChat.users[1].userName}</span>
+              </div>
+            </div>
+          </div>
         )
       }
     </div>

@@ -12,7 +12,7 @@ const HomePage = () => {
   const { selectedChat,passsocket } = ChatState();
 
   return (
-    <div>
+    <div className='hidden md:block'>
       {selectedChat ? <ChatWindow /> : <DefaulChatBox />}
     </div>
   )

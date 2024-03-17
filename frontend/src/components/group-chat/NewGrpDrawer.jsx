@@ -40,75 +40,57 @@ const NewGrpDrawer = () => {
 
   return (
     <div className='bg-white' style={{ position: "absolute", height: "100vh", transform: `translateX(${!groupDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
-      <div className='h-[10vh] bg-gray-300 flex justify-between items-center px-4 text-xl'>
-        <span>Create Group</span>
-        <RxCross1 className='hover:cursor-pointer' onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} />
-      </div>
+      <div className='flex flex-col h-screen'>
+        <div className='bg-gray-300 p-4 flex justify-between items-center'>
+          <span className='text-lg'>Create Group</span>
+          <RxCross1 className='hover:cursor-pointer' onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} />
+        </div>
 
-      <div className='h-max px-2 py-6'>
-        {/* <form onSubmit={createGroup}>
-          <Avatar />
-          <Input
-            size='md'
-            onChange={(e) => setgrpName(e.target.value)}
-            label="Group name"
-            placeholder='Enter the group name'
-          />
-          <Button color="primary" type='submit'>Create</Button>
-        </form> */}
+        <div className='px-2 h-full overflow-y-auto'>
+          <div className='h-full overflow-y-scroll'>
+            <CheckboxGroup
+              value={members}
+              onChange={setMembers}
+              classNames={{
+                base: "w-full",
+              }}
+            >
+              {users && users.length > 0 && users.map((user) => (
+                <CustomCheckbox key={user._id} user={user} />
+              ))}
+            </CheckboxGroup>
+          </div>
+        </div>
 
-        <div className='max-h-[40vw] overflow-scroll scrollbar-hide' >
-          <p className="mt-4 ml-1 text-black">
-            Selected:
-            {members.map((member, index) => (
-              <Chip key={index} color="primary" size="sm" variant="flat" className='mx-1'>
-                {member}
-              </Chip>
-            ))}
-          </p>
-
-          <CheckboxGroup
-            label="Add group members: "
-            value={members}
-            onChange={setMembers}
-            classNames={{
-              base: "w-full",
-            }}
-          >
-            {users && users.length > 0 && users.map((user) => (
-              <CustomCheckbox key={user._id} user={user} />
-            ))}
-          </CheckboxGroup>
-
+        <div className='mt-auto py-2 flex justify-center'>
           {members.length > 1 ? (
             <Button
               onClick={() => setgrpDetsDrawerOpen(!grpDetsDrawerOpen)}
               isIconOnly
               color="primary"
               variant="faded"
-              aria-label="Take a photo"
+              className='cursor-pointer'
             >
               <ArrowRightIcon className='text-xl' />
             </Button>
           ) : (
             <Button
-              disabled
               isIconOnly
-              onClick={()=>toast.error(`Atleast 2 members needs to be selected to create the group. `)}
+              onPress={() => alert('At least 2 members need to be selected to create the group.')}
               color="primary"
               variant="faded"
-              aria-label="Take a photo"
+              className='cursor-pointer'
             >
               <ArrowRightIcon className='text-xl' />
             </Button>
           )}
         </div>
-
       </div>
-      <GrpDetsDrawer members={members} />
 
+      <GrpDetsDrawer members={members} />
     </div>
-  )
+  );
+
 }
 
 export default NewGrpDrawer
