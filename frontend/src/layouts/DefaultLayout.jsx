@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import io from 'socket.io-client';
 import { backendUri } from '../utils/BackendUri.js';
 import { UserState } from '../context/UserProvider.jsx'
+import { Get_all_messages, Read_Message } from '../utils/FetchData.js'
 
 const DefaultLayout = ({ children }) => {
   var socket;
@@ -17,8 +18,47 @@ const DefaultLayout = ({ children }) => {
     if (loggedUser) socket.emit('setup', loggedUser._id)
     socket.on('connected', () => setSocketConnected(true))
   }, [])
-
+  const setReadBy = async (msgid) => {
+    const response = await Read_Message({ msgId: msgid, userId: loggedUser._id })
+    console.log(response)
+  }
   console.log(socket)
+  useEffect(() => {
+    console.log('msg')
+    passsocket && passsocket.on("message-recieved", (msg) => {
+      console.log(msg)
+      if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
+        console.log("setnotification")
+        
+        console.log(notifications.has(msg.chat._id))
+        if(notifications?.has(msg.chat._id)){
+          let pre = notifications.get(msg.chat._id)
+          !pre.includes(msg) && setNotifications(notifications.set(msg.chat._id,[...pre,msg]))
+        }
+        else{
+          
+          setNotifications(notifications.set(msg.chat._id,[msg]))
+        }
+        console.log(notifications?.get(msg.chat._id)?.length)
+        // setFetchAgain(!fetchAgain)
+      }
+      else {
+        if(notifications.has(selectedChat._id)){
+          console.log("deletenotification")
+          notifications.delete(selectedChat._id)
+        }
+        console.log(!msg.readBy.includes(loggedUser._id))
+
+        // !msg.readBy.includes(loggedUser._id) && 
+        setReadBy(msg._id)
+        setmessages([...messages, msg]);
+        
+        // setFetchAgain(!fetchAgain)
+        }
+      
+    })
+  })
+
   
   // useEffect(() => {
   //   console.log('msg')

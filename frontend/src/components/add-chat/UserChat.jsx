@@ -28,7 +28,7 @@ const UserChat = (chat) => {
                     {/* <p>{notifications.has(chat._id)}</p> */}
                   </div>
 
-                  <small className=' text-gray-400'>{notifications.has(chat._id) ? <Chip color="primary">{notifications.get(chat._id).length}</Chip> :
+                  <small className=' text-gray-400'>{notifications?.has(chat._id) ? <Chip color="primary">{notifications?.get(chat._id)?.length}</Chip> :
                     getMsgTime(chat.latestMessage?.createdAt)}</small>
 
                 </div>

@@ -10,11 +10,14 @@ import { CameraIcon } from '@radix-ui/react-icons'
 import "../../index.css"
 import { IoIosArrowDown } from "react-icons/io";
 import { UserState } from '../../context/UserProvider.jsx'
+import { getOppUserName ,getOppUser} from '../../utils/ChatLogics.js';
 
 const GrpProfilePage = () => {
-  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain } = ChatState();
+  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain ,chats} = ChatState();
   const { chatid } = useParams();
   const [users, setUsers] = useState([]);
+  const [commonchat, setCommonchat] = useState([]);
+
   const navigate = useNavigate();
   const { loggedUser } = UserState();
 
@@ -32,6 +35,7 @@ const GrpProfilePage = () => {
 
   useEffect(() => {
     getSelectedChat();
+    groupIncommon();
   }, []);
 
   const getAllusers = async () => {
@@ -71,7 +75,12 @@ const GrpProfilePage = () => {
     navigate('/home')
     setSelectedChat()
   }
-
+  const contact=getOppUser(loggedUser,selectedChat.users)._id;
+  const groupIncommon = ()=>{
+    const commonChats= chats.filter(chat=> chat.isGroupChat&&(chat.users.some(item => (item._id === loggedUser._id)&&chat.users.some(item => item._id === contact))))
+    setCommonchat(commonChats);
+    console.log(chats)
+  }
   return (
     <div>
       {selectedChat && selectedChat.isGroupChat ?
@@ -175,19 +184,33 @@ const GrpProfilePage = () => {
             </div>
           </div>
         ) : (
-          <div className='h-[120vh]'>
+          <div className='h-min-[100vh]'>
             <div className="w-full h-[5vw] flex gap-6 justify-start items-center text-white p-[2vw] border-b-[1px] border-black">
               <RxCross1 onClick={() => navigate(`/chat/${selectedChat._id}`)} className='hover:cursor-pointer' />
-              <span className="text-xl">Profile</span>
+              <span className="text-xl">Contact info</span>
             </div>
 
-            <div className="w-full flex flex-col justify-center text-white text-[1.5vw] bg-[#2F3136] items-center py-2 px-10 ">
+            <div className="w-full flex flex-col mb-6 justify-center text-white text-[1.5vw] bg-[#2F3136] items-center py-2 px-10 ">
               <div className=" w-[12vw] h-[12vw] relative">
-                <Avatar src={selectedChat.users[1].profileImg} className="w-full h-full absolute top-0 left-0 opacity-70" />
+                <Avatar src={getOppUser(loggedUser,selectedChat?.users).profileImg} className="w-full h-full absolute top-0 left-0 opacity-70" />
               </div>
               <div className='flex items-center justify-center gap-4 mt-4'>
-                <span>{selectedChat.users[1].userName}</span>
+                <span>{getOppUserName(loggedUser, selectedChat?.users)}</span>
               </div>
+            </div>
+            <span className='text-xl text-white px-10 '>Groups in Common</span>
+            <div className='w-full bg-[#2F3136] px-10 py-6 flex flex-col gap-4 mt-6'>
+            {
+              commonchat.map((item )=>(
+                <div key={item._id} className="flex gap-2 items-center ">
+                    <Avatar alt={item.userName} className="flex-shrink-0" size="md" src={item.grpProfileimg} />
+                    <div className="flex flex-col text-[1.2vw]">
+                      <span className=" text-white">{item.chatName}</span>
+                      
+                    </div>
+                </div> 
+              ))
+            }
             </div>
           </div>
         )

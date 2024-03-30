@@ -17,12 +17,12 @@ const BottomNav = () => {
   // console.log(socketConnected)
   // console.log(passsocket)
 
-  useEffect(() => {
-    if (passsocket) {
-      passsocket.on("typing", () => setIsTyping(true));
-      passsocket.on("stop typing", () => setIsTyping(false))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (passsocket) {
+  //     passsocket.on("typing", () => setIsTyping(true));
+  //     passsocket.on("stop typing", () => setIsTyping(false))
+  //   }
+  // }, [])
 
   const sendmessage = async () => {
     passsocket.emit("stop typing", selectedChat._id);

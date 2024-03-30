@@ -49,7 +49,8 @@ export const compareTime = (arr,index)=>{
     const day = currMsgTime[1]- prevMsgTime[1];
     
     if(day>0){
-        return getMsgTime(arr[index].createdAt,'divider')
+        return getMsgTime(arr[index].createdAt,'divider'
+        )
     }
     else {
         return;

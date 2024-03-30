@@ -13,7 +13,7 @@ const ChatWindow = () => {
     //     socket.emit('setup',loggedUser._id)
     // },[])
     // console.log(passsocket)
-
+    
     return (
         <div className='w-[60vw] bg-[#36393F] flex flex-col h-screen '>
             <ConversationNav />
