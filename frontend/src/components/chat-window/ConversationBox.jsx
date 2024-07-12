@@ -8,14 +8,22 @@ import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { UserState } from '../../context/UserProvider.jsx'
 
-const ConversationBox = () => {
-  var selectedChatCompare;
+const ConversationBox = ({selectedChat}) => {
+  const [selectedChatCompare, setselectedChatCompare] = useState();
   
   
   
   const { loggedUser } = UserState();
-  const { selectedChat, setSelectedChat, fetchAgain, setFetchAgain, passsocket,messages, setmessages } = ChatState();
+  const { notifications,setNotifications, setSelectedChat, fetchAgain, setFetchAgain, passsocket,messages, setmessages } = ChatState();
   const i = 0;
+
+  // const [chatId,setchatId]=useState(null);
+  // useEffect(()=>{
+  //   socket=io(Endpoint);
+  // setSocket(socketCopy)
+  //   socket.emit('setup',loggedUser._id)
+  //   console.log(socket)
+  // },[])
 
   const getmessages = async () => {
     if (!selectedChat) return;
@@ -27,23 +35,28 @@ const ConversationBox = () => {
     getmessages();
     setselectedChatCompare(selectedChat)
   }, [selectedChat, fetchAgain])
-
-  useEffect(() => {
-    passsocket && passsocket.on("message-recieved", (msg) => {
-      if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== msg.chat._id
-      ) {
-        console.log()
-      }
-      else {
-        
-        setmessages([...messages,msg]);
-      }
+  
+  // console.log(selectedChatCompare)
+  // useEffect(() => {
+  //   passsocket && passsocket.on("message-recieved", (msg) => {
+  //     if (
+  //       !selectedChatCompare ||
+  //       selectedChatCompare._id !== msg.chat._id
+  //     ) {
+  //       setNotifications(notifications.set(msg.chat._id,[msg._id]))
+  //       // setFetchAgain(!fetchAgain)
+  //     }
+  //     else {
+  //       // if(notifications.has(selectedChatCompare._id)){
+  //       //   notifications.delete(selectedChatCompare._id)
+  //       // }else{
+  //       setmessages([...messages,msg]);
+  //       setFetchAgain(!fetchAgain) }
+  //     // }
       
-    })
-  })
-
+  //   })
+  // })
+  // console.log(notifications)
   return (
     <div className='h-[41vw] px-4 py-2 overflow-scroll scrollbar-hide flex flex-col border-t-[1px] border-black'>
       {/* {selectedChat && selectedChat.isGroupChat ? */}
@@ -59,7 +72,7 @@ const ConversationBox = () => {
             />
         ))}
       {selectedChat && selectedChat.isGroupChat&&messages && messages.map((message) => (
-        <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg}/>
+        <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg} sender={message.sender.userName}/>
           
       ))}
       {/* } */}

@@ -68,14 +68,17 @@ exports.VerifyOTP = async (req, res) => {
     }
 
     const userToBeVerified = await userVerification.find({ userID });
+
     if (userToBeVerified.length <= 0) {
       res.status(400).json({ msg: "Account record doesn't exist" });
-    } else {
+    } 
+    else {
       const hashedotp = userToBeVerified[0].otp;
       const validotp = await bcrypt.compare(otp, hashedotp);
       if (!validotp) {
         res.status(400).json({ msg: "Invalid otp" });
-      } else {
+      } 
+      else {
         await User.updateOne({ _id: userID }, { verified: true });
         await userVerification.deleteMany({ userID });
         res.status(200).json({

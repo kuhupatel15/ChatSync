@@ -9,7 +9,7 @@ const UserChat = (chat) => {
   var chat = chat.chat;
   // console.log(chat)
   const {notifications,setNotifications}=ChatState();
-  console.log(notifications.has(chat._id))
+  // console.log(notifications.has(chat._id))
   return (
     <div className="hover:bg-zinc-800 hover:cursor-pointer px-2 py-4">
       {!chat.isGroupChat ?

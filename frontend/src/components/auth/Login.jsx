@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input, Button } from "@nextui-org/react";
 import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
 import { useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form';
+import { get, useForm } from 'react-hook-form';
 import { login } from "../../../store/reducers/AuthSlice.js"
 import { LogIn } from '../../utils/FetchData.js';
 import { userData } from '../../../store/reducers/UserSlice.js';
@@ -52,12 +52,25 @@ const Login = () => {
   //       console.log(error)}
   // });
 
+  const [height, setheight] = useState("")
+  const [width, setwidth] = useState("")
+
+  const dim  = () =>{
+    const hgt = window.innerHeight;
+    const wdt = window.innerWidth;
+    setheight(hgt);
+    setwidth(wdt)
+    console.log(height, width)
+  }
+
   useEffect(() => {
     const storedUser = localStorage.getItem('userInfo');
     if (storedUser) {
       setLoggedUser(JSON.parse(storedUser));
     }
-  }, [setLoggedUser]);
+    dim();
+  }, [setLoggedUser, height, width]);
+
 
   const submithandler = async (data) => {
     dispatch(login(data));

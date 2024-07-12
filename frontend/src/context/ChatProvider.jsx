@@ -15,23 +15,19 @@ const ChatProvider = ({ children }) => {
   const [socketConnected,setSocketConnected]=useState(false)
   const [loggedUser, setloggedUser] = useState({});
 
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  //   setloggedUser(userInfo);
-  //   if (!userInfo){ navigate("/");}
-  // }, [navigate]);
 
   return (
     <ChatContext.Provider value={
       {
         selectedChat,
         setSelectedChat,
+
         chats,
         setChats,
+      
         fetchAgain,
         setFetchAgain,
+      
         messages, setmessages,
         passsocket, setSocket,
         socketConnected,setSocketConnected,

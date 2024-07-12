@@ -280,7 +280,6 @@ export const Add_to_group = async ({ chatId, memberid }) => {
 
 export const Send_message = async ({ content, chatId }) => {
   try {
-    console.log(chatId);
     let response = await baseUrl.post(
       "/message/send-message",
       { content, chatId },

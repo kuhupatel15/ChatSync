@@ -6,7 +6,6 @@ const env_config = require("./config/env_config.js");
 require("./middlewares/mongoConnection.js").connectDB();
 require("dotenv").config({ path: "./.env" });
 
-
 // cors
 const cors = require("cors");
 // app.use(
@@ -27,8 +26,8 @@ const logger = require("morgan");
 app.use(logger("tiny"));
 
 // bodyparser
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: false, limit: '50mb' }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 
 // session and cookie
 const session = require("express-session");
@@ -56,7 +55,7 @@ const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
     // origin: "http://localhost:5173",
-    origin: env_config.frontend_url
+    origin: env_config.frontend_url,
   },
 });
 
@@ -67,29 +66,28 @@ io.on("connection", (socket) => {
     socket.emit("connected");
   });
 
-  socket.on("typing", (room) => socket.in(room).emit("typing"));
-  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
-
   socket.on("join-room", (roomid) => {
     // console.log(roomid)
     socket.join(roomid);
     console.log("User Joined Room: " + roomid);
   });
 
+  socket.on("typing", (room) => {
+    socket.to(room).emit("typing", room);
+});
+
+  socket.on("stop typing", (room) => {
+    socket.to(room).emit("stop typing", room);
+  });
+
+
   socket.on("new-message", (msg) => {
     var chat = msg.chat;
     if (!chat.users) return console.log("chat.users not defined");
-    
+
     chat.users.forEach((user) => {
       if (user == msg.sender) return;
-      socket.to(user).emit("message-recieved", msg, (ack) => {
-        
-        if (ack === "success") {
-          console.log("Socket emit successful");
-        } else {
-          console.log("Socket emit failed");
-        }
-      });
+      socket.to(user).emit("message-recieved", msg);
     });
   });
 });

@@ -19,7 +19,10 @@ const BottomNav = () => {
 
   useEffect(() => {
     if (passsocket) {
-      passsocket.on("typing", () => setIsTyping(true));
+
+      passsocket.on("typinginroom", () => {
+        setIsTyping(true);
+      });
       passsocket.on("stop typing", () => setIsTyping(false))
     }
   }, [])
@@ -40,28 +43,28 @@ const BottomNav = () => {
     setMessage(e.target.value);
 
     if (!typing) {
-      setTyping(true);
+      // console.log(selectedChat._id)
       passsocket.emit("typing", selectedChat._id)
+      setTyping(true);
     }
 
     let lastTypingTime = new Date().getTime();
     // console.log(lastTypingTime)
-    // var timerLength = 3000;
-    // setTimeout(() => {
-    //   var timeNow = new Date().getTime();
-    //   var timeDiff = timeNow - lastTypingTime;
-    //   if (timeDiff >= timerLength && typing) {
-    //     passsocket.emit("stop typing", selectedChat._id);
-    //     setTyping(false);
-    //   }
-    // }, timerLength);
-    if(message.length === 0){
-      // console.log("stop typing", message.length)
-      passsocket.emit("stop typing", selectedChat._id);
-      setTyping(false);
-    }
+    var timerLength = 3000;
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timeDiff = timeNow - lastTypingTime;
+      if (timeDiff >= timerLength && typing) {
+        passsocket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
+    // if(message.length === 0){
+    //   passsocket.emit("stop typing", selectedChat._id);
+    //   setTyping(false);
+    // }
   }
- 
+
   return (
     <div>
       {istyping ? (
