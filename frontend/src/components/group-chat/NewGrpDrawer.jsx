@@ -43,7 +43,7 @@ const NewGrpDrawer = () => {
       <div className='flex flex-col h-screen'>
         <div className='bg-gray-300 p-4 flex justify-between items-center'>
           <span className='text-lg'>Create Group</span>
-          <RxCross1 className='hover:cursor-pointer' onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} />
+          <RxCross1 className='hover:cursor-pointer' onClick={() => {setgroupDrawerOpen(!groupDrawerOpen);setMembers([])}} />
         </div>
 
         <div className='px-2 h-full overflow-y-auto'>
@@ -102,7 +102,7 @@ const CustomCheckbox = ({ user }) => {
   return (
     <Checkbox
       aria-label={user.userName}
-      classNames={{
+      classNames={{ 
         base: cn(
           "inline-flex max-w-md w-full bg-content1 m-0",
           "hover:bg-content2 items-center justify-start",

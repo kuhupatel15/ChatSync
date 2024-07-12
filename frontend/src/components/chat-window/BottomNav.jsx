@@ -14,9 +14,6 @@ const BottomNav = () => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
 
-  // console.log(socketConnected)
-  // console.log(passsocket)
-
   useEffect(() => {
     if (passsocket) {
 
