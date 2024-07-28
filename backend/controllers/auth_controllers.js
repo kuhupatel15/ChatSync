@@ -39,10 +39,10 @@ exports.UserRegister = async (req, res, next) => {
       password: hash,
     });
 
-    await user.save().then((result) => {
+    var r=await user.save().then((result) => {
       sendOTPverification(result, res);
+      // console.log(result,res)
     });
-
     const token = jwt.sign({ _id: user._id }, env_config.jwt_secret, {
       expiresIn: env_config.jwt_token_expire,
     });

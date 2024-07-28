@@ -32,6 +32,7 @@ exports.sendOTPverification = async ({ _id, userEmail }, res) => {
         })
         
         await transporter.sendMail(mailOptions);
+        console.log(newOTPverification)
         res.status(200).json({ msg: "Verification email sent" })
     }
     catch (error) {

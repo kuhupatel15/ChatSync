@@ -9,7 +9,7 @@ const UserChat = (chat) => {
   const { notifications, setNotifications } = ChatState();
   var chat = chat.chat;
   // console.log(chat)
-  console.log(notifications.has(chat._id))
+  // console.log(notifications.has(chat._id))
   // compareTime();
   return (
     <div className="hover:bg-zinc-800 hover:cursor-pointer px-2 py-4">
