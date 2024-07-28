@@ -10,6 +10,4 @@ export default myhook=()=>{
     return width,height;
 }
 
-// const [width,height]=myhook();
-// console.log(width,height);
 
