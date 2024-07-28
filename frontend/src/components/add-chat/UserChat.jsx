@@ -29,8 +29,7 @@ const UserChat = (chat) => {
                   </div>
 
                   <small className=' text-gray-400'>{notifications?.has(chat._id) ? <Chip color="primary">{notifications?.get(chat._id)?.length}</Chip> :
-                    getMsgTime(chat.latestMessage?.createdAt)}</small>
-
+                    chat.latestMessage?.createdAt&&getMsgTime(chat.latestMessage?.createdAt)}</small>
                 </div>
               </div>
             </div>
@@ -51,7 +50,7 @@ const UserChat = (chat) => {
                   </div>
 
                   <small className=' text-gray-400'>{notifications.has(chat._id) ? <Chip color="primary">{notifications.get(chat._id).length}</Chip> :
-                    getTime(chat.latestMessage?.createdAt)}</small>
+                  chat.latestMessage?.createdAt&&  getTime(chat.latestMessage?.createdAt)}</small>
 
                 </div>
               </div>

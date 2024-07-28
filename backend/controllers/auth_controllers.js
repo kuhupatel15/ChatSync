@@ -227,3 +227,27 @@ exports.uploadProfileImg = async (req, res) => {
     return res.status(500).json({ err });
   }
 };
+exports.renameUser = async (req, res) => {
+  try {
+    const { userId, newusername } = req.body;
+
+    // const grp = await User.findOne({ _id: userId });
+    // if (toString(grp.groupAdmin) !== toString(req.user._id)) {
+    //   return res
+    //     .status(401)
+    //     .json({ msg: "Only group admins can change the name of the group" });
+    // }
+
+    const updatedChat = await User.findByIdAndUpdate(
+      {_id:userId},
+      { userName: newusername },
+      { new: true }
+    );
+    return res
+      .status(200)
+      .json({ msg: `User has been renamed successfully`, updatedChat });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ err });
+  }
+};

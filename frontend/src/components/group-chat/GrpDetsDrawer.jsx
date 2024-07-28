@@ -51,7 +51,7 @@ const GrpDetsDrawer = ({ members }) => {
             <div className=" w-[12vw] h-[12vw] relative">
               <Avatar
                 className="w-full h-full absolute top-0 left-0 opacity-70"
-                src='https://www.tenniscall.com/images/chat.jpg'
+                src="https://www.tenniscall.com/images/chat.jpg"
               />
               <div className="w-full h-full flex flex-col items-center justify-center absolute top-0 left-0 rounded-full opacity-0 bg-black hover:opacity-80 hover: hover:cursor-pointer"
                 onClick={() => inputRef.current.click()}

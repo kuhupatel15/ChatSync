@@ -8,7 +8,8 @@ const {
   ForgotPassword,
   ResetPassword,
   GetAllUsers,
-  uploadProfileImg
+  uploadProfileImg,
+  renameUser
 } = require("../controllers/auth_controllers");
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const upload = require("../utils/multer");
@@ -20,7 +21,7 @@ app.post("/forgot-password", ForgotPassword);
 app.post("/reset-password", ResetPassword);
 app.get("/get-all-users", isAuthenticated, GetAllUsers);
 app.get("/search", isAuthenticated, SearchUser);
-
+app.post("/rename-user",isAuthenticated,renameUser);
 app.post("/upload-profileimg", isAuthenticated, upload.single("file"), uploadProfileImg);
 
 module.exports = app;

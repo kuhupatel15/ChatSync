@@ -6,13 +6,14 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogout } from "react-icons/hi";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { UserState } from '../../context/UserProvider.jsx'
 
 
 const LogoutBtn = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
+    const {setLoggedUser}=UserState();
     const submithandler = async () => {
         toast.success("Log out successfully.")
         localStorage.removeItem("jwt_token");

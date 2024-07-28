@@ -70,11 +70,13 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [loggedUser, setLoggedUser] = useState(() => {
+    const [loggedUser, setLoggedUser] = useState(
+        () => {
         // Load logged user from localStorage if it exists
         const storedUser = localStorage.getItem('userInfo');
         return storedUser ? JSON.parse(storedUser) : null;
-    });
+    }
+);
     
     // Update localStorage whenever loggedUser changes
     useEffect(() => {

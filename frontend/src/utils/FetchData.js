@@ -216,6 +216,27 @@ export const Rename_group = async ({ chatId, newgrpname }) => {
   }
 };
 
+export const Rename_user = async ({ userId, newusername }) => {
+  try {
+    let response = await baseUrl.post(
+      "/user/rename-user",
+      { userId, newusername },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+      }
+    );
+    toast.success(response.data.msg);
+    return response;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    console.log(error);
+  }
+};
+
+
 export const Remove_member_from_group = async ({ chatId, memberId }) => {
   try {
     let response = await baseUrl.post(

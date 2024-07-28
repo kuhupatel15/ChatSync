@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel.js");
-
+const Chat = require("../models/chatModel.js")
 exports.isAuthenticated = async (req, res, next) => {
     let token;
     if (
@@ -20,3 +20,19 @@ exports.isAuthenticated = async (req, res, next) => {
         res.status(401).json("Not authorized, no token");
     }
 };
+ exports.isAdmin = async (req,res,next)=>{
+    const {chatId}=req.body;
+    try{
+        let user =req.user;
+        
+        let grp =await Chat.findById(chatId);
+            if(String(grp.groupAdmin)===String(user._id)){
+                next();
+            }else{
+                res.status(401).json({msg:'You are not an Admin !'})
+            }
+        
+    }catch(error){
+        res.status(500).json('Something went wrong!')
+    }
+ }

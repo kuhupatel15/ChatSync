@@ -39,15 +39,15 @@ const NewGrpDrawer = () => {
   };
 
   return (
-    <div className='bg-white' style={{ position: "absolute", height: "100vh", transform: `translateX(${!groupDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
+    <div className='bg-[#2F3136]' style={{ position: "absolute", height: "100vh", transform: `translateX(${!groupDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
       <div className='flex flex-col h-screen'>
-        <div className='bg-gray-300 p-4 flex justify-between items-center'>
-          <span className='text-lg'>Create Group</span>
+        <div className='bg-[#36393F] p-4 text-white flex justify-between items-center'>
+          <span className='text-lg text-white'>Create Group</span>
           <RxCross1 className='hover:cursor-pointer' onClick={() => {setgroupDrawerOpen(!groupDrawerOpen);setMembers([])}} />
         </div>
 
         <div className='px-2 h-full overflow-y-auto'>
-          <div className='h-full overflow-y-scroll'>
+          <div className='h-full pt-8 overflow-y-scroll'>
             <CheckboxGroup
               value={members}
               onChange={setMembers}
@@ -55,9 +55,9 @@ const NewGrpDrawer = () => {
                 base: "w-full",
               }}
             >
-              {users && users.length > 0 && users.map((user) => (
+              {users?.length > 0 ?users.map((user) => (
                 <CustomCheckbox key={user._id} user={user} />
-              ))}
+              )):<span> No users found !</span>}
             </CheckboxGroup>
           </div>
         </div>
