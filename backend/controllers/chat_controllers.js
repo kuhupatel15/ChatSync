@@ -131,24 +131,46 @@ exports.ExitFromGrp = async (req, res) => {
   try {
     const { chatId, memberId } = req.body;
 
-    const grp = await Chat.findOne({ _id: chatId });
-    // if (toString(grp.groupAdmin) !== toString(req.user._id)) {
-    //   return res
-    //     .status(401)
-    //     .json({ msg: "Only group admins can change the name of the group" });
-    // }
+    const grp = await Chat.findById(chatId);
+    if (!grp) {
+      return res.status(404).json({ msg: "Group not found" });
+    }
 
-    const updatedChat = await Chat.findByIdAndUpdate(
-      chatId,
-      { $pull: { users: memberId } },
-      { new: true }
-    );
+    let updatedChat;
+
+    // Check if the exiting member is the admin
+    if (String(grp.groupAdmin) === String(memberId)) {
+      // Choose a random user as the new admin, excluding the exiting member
+      const remainingUsers = grp.users.filter(user => String(user) !== String(memberId));
+      if (remainingUsers.length === 0) {
+        // If no users are left, we cannot set a new admin
+        const delGrp= await Chat.findByIdAndDelete(chatId);
+        return res.status(400).json({ msg: "Group is deleted as the admin is the only member in the group" });
+      }
+      const newAdmin = remainingUsers[Math.floor(Math.random() * remainingUsers.length)];
+    
+      updatedChat = await Chat.findByIdAndUpdate(
+        chatId,
+        { $pull: { users: memberId }, groupAdmin: newAdmin },
+        { new: true }
+      );console.log("----->",updatedChat)
+      
+    } else {
+      // Remove the user from the group
+      updatedChat = await Chat.findByIdAndUpdate(
+        chatId,
+        { $pull: { users: memberId } },
+        { new: true }
+      );
+    }
+
     return res.status(200).json({ msg: "Exit successfully.", updatedChat });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ err });
   }
 };
+
 
 exports.addMemberInGrp = async (req, res) => {
   try {

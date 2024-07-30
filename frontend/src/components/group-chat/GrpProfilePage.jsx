@@ -5,7 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAdmin } from "../../utils/ChatLogics.js"
 import { MdOutlinePersonAdd, MdDone, MdOutlineModeEdit } from "react-icons/md";
-import { Get_all_users, Remove_member_from_group, Upload_profileimg_of_group, SelectedChatInfo, Add_to_group, Rename_group } from "../../utils/FetchData.js"
+import { Get_all_users, Remove_member_from_group, Upload_profileimg_of_group, SelectedChatInfo, Add_to_group, Rename_group ,Exit_from_group} from "../../utils/FetchData.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 import "../../index.css"
 import { IoIosArrowDown } from "react-icons/io";
@@ -70,12 +70,12 @@ const GrpProfilePage = () => {
   }
 
   const exitFromGroup = async (memberId) => {
-    let response = await Remove_member_from_group({ chatId: selectedChat._id, memberId: memberId })
+    let response = await Exit_from_group({ chatId: selectedChat._id, memberId: memberId })
     setFetchAgain(!fetchAgain)
     navigate('/home')
     setSelectedChat()
   }
-  const contact=getOppUser(loggedUser,selectedChat.users)._id;
+  const contact=getOppUser(loggedUser,selectedChat?.users)?._id;
   const groupIncommon = ()=>{
     const commonChats= chats.filter(chat=> chat.isGroupChat&&(chat.users.some(item => (item._id === loggedUser._id)&&chat.users.some(item => item._id === contact))))
     setCommonchat(commonChats);

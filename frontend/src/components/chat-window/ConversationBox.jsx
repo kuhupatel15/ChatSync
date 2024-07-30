@@ -154,11 +154,14 @@ const ConversationBox = ({ selectedChat }) => {
           : <OutgoingMsg
             content={message.content}
             time={message.createdAt}
-          />}
+          />
+          }
           </>
       ))}
+
       {selectedChat?.isGroupChat && messages?.map((message,index) => (
        <>{compareTime(messages,index) && <Chip color="secondary" className='mx-auto my-2 p-2'>{compareTime(messages, index)} </Chip>}
+        {console.log(message)}
         {isSendByUser(loggedUser._id, message.sender._id) ?
           <GroupChatMessage user={isSendByUser(loggedUser._id, message.sender._id)} msg={message.content} time={message.createdAt} profileImg={message.sender.profileImg} sender={message.sender.userName} />
           : <OutgoingMsg content={message.content} time={message.createdAt}/>}

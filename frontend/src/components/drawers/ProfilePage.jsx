@@ -54,9 +54,9 @@ const {fetchAgain,setFetchAgain}=ChatState();
             </div>
           </div>
           <div className='flex items-center h-[7vh] justify-center gap-4 mt-4'><h6 inputMode='text' onInput={(e) => setUsername(e.currentTarget.textContent)} contentEditable={edit} className={edit ? 'grpname' : "min-w-[8vw] duration-100 ease-in-out"}>{user?.userName}</h6>
-                {edit ? <Button isIconOnly onClick={() => rename(user._id, username)} className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
+                {edit && <Button isIconOnly onClick={() => rename(user._id, username)} className='mt-2 bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" aria-label="Take a photo">
                   <MdDone></MdDone>
-                </Button> : <></>}
+                </Button> }
                 <MdOutlineModeEdit onClick={() => setEdit(!edit)}></MdOutlineModeEdit>
               </div>
           {/* <div className='flex items-center justify-center gap-4 mt-4'><span>{user.userName}</span><MdOutlineModeEdit></MdOutlineModeEdit></div> */}
