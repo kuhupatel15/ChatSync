@@ -33,11 +33,11 @@ const ProfilePage = ({ isProfileOpen, setIsProfileOpen, user }) => {
   return (
     <div
       className='bg-white'
-      style={{ position: "absolute", height: "100vh", transform: `translateX(${!isProfileOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}
+      style={{ position: "absolute", height: "100vh", transform: `translateX(${isProfileOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}
     >
       <div className='h-[15vh] bg-sec text-white flex justify-between  items-center px-4 text-xl'>
         <span>Profile</span>
-        <RxCross1 className='hover:cursor-pointer' onClick={() => setIsProfileOpen(!isProfileOpen)} />
+        <RxCross1 className='hover:cursor-pointer' onClick={() => setIsProfileOpen(false)} />
       </div>
 
       <div className='h-[120vh]'>

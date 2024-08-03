@@ -16,19 +16,19 @@ const GrpDetsDrawer = ({ grpDetsDrawerOpen, setgrpDetsDrawerOpen, members }) => 
     if (grpName.length > 0 && members.length > 0) {
       await Create_group({ users: members, grpname: grpName, file: e.target.file.files[0] });
       setgrpName('');
-      setgrpDetsDrawerOpen(!grpDetsDrawerOpen);
+      setgrpDetsDrawerOpen(false);
     }
   };
 
   return (
     <div
       className='bg-white'
-      style={{ position: "absolute", height: "100vh", transform: `translateX(${!grpDetsDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}
+      style={{ position: "absolute", height: "100vh", transform: `translateX(${grpDetsDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}
     >
       <div className='flex flex-col h-screen'>
         <div className='bg-gray-300 p-4 flex justify-between items-center'>
           <span className='text-lg'>Create Group</span>
-          <RxCross1 className='hover:cursor-pointer' onClick={() => setgrpDetsDrawerOpen(!grpDetsDrawerOpen)} />
+          <RxCross1 className='hover:cursor-pointer' onClick={() => setgrpDetsDrawerOpen(false)} />
         </div>
 
         <div className='h-full p-2'>

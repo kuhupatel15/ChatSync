@@ -1,8 +1,16 @@
-import React, { useEffect } from 'react';
-import { logout } from '../../store/reducers/UserSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
+
+const PrivateRoutes = () => {
+    const token = localStorage.getItem("jwt_token");
+
+    return token ? <Outlet /> : <Navigate to="/login" />;
+};
+
+export default PrivateRoutes;
+
+
 
 // const ProtectedLayout = ({ children }) => {
 //     const navigate = useNavigate();
@@ -26,14 +34,3 @@ import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 // };
 
 // export default ProtectedLayout;
-
-
-
-
-const PrivateRoutes = () => {
-    const isAuthenticated = useSelector(({ auth }) => auth.status)
-
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
-};
-
-export default PrivateRoutes;

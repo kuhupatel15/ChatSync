@@ -35,7 +35,7 @@ const CustomCheckbox = ({ user }) => {
   );
 };
 
-const NewGrpDrawer = ({isGrpOpen, setisGrpOpen}) => {
+const NewGrpDrawer = ({ isGrpOpen, setisGrpOpen }) => {
   const [users, setUsers] = useState([]);
   const [members, setMembers] = useState([]);
   const [grpDetsDrawerOpen, setgrpDetsDrawerOpen] = useState(false)
@@ -50,13 +50,16 @@ const NewGrpDrawer = ({isGrpOpen, setisGrpOpen}) => {
   }, []);
 
   return (
-    <div className='bg-pri' style={{ position: "absolute", height: "100vh", transform: `translateX(${!isGrpOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
+    <div className='bg-pri' style={{ position: "absolute", height: "100vh", transform: `translateX(${isGrpOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
       <div className='flex flex-col h-screen'>
         <div className='bg-sec p-4 text-white flex justify-between items-center'>
           <span className='text-lg text-white'>Create Group</span>
           <RxCross1
             className='hover:cursor-pointer'
-            onClick={() => { setisGrpOpen(!isGrpOpen); setMembers([]) }}
+            onClick={() => {
+              setisGrpOpen(false);
+              setMembers([])
+            }}
           />
         </div>
 

@@ -9,7 +9,8 @@ import { logout } from "../../../store/reducers/UserSlice.js"
 import { clearAllChats} from "../../../store/reducers/AllChatsSlice.js"
 import { clearchat } from "../../../store/reducers/chatSlice.js"
 import { clearmessages } from "../../../store/reducers/messagesSlice.js"
-import { clearnotifications } from "../../../store/reducers/notificationsSlice.js"
+import { clearNotifications } from "../../../store/reducers/notificationsSlice.js"
+import {clearsocket} from '../../../store/reducers/socketSlice.js'
 
 
 const LogoutBtn = () => {
@@ -19,13 +20,13 @@ const LogoutBtn = () => {
 
     const submithandler = async () => {
         toast.success("Log out successfully.")
-        // localStorage.removeItem("jwt_token");
-        // localStorage.removeItem("userInfo");
+        localStorage.removeItem("jwt_token");
         dispatch(logout());
         dispatch(clearmessages())
         dispatch(clearAllChats())
         dispatch(clearchat())
-        dispatch(clearnotifications())
+        dispatch(clearNotifications())
+        dispatch(clearsocket())
         navigate('/login')
     }
 

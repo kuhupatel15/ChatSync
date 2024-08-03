@@ -10,7 +10,8 @@ import { Toaster } from 'react-hot-toast';
 // import Protected from './layouts/Protected.jsx';
 import DefaultLayout from './layouts/DefaultLayout.jsx'
 import ChatWindow from './components/chat-window/ChatWindow.jsx';
-import PrivateRoutes from './layouts/Protected.jsx';
+import PrivateRoutes from './layouts/PrivateRoutes.jsx';
+import PublicRoutes from './layouts/PublicRoutes.jsx'
 import { useSelector } from 'react-redux';
 
 
@@ -21,13 +22,13 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Signup />}></Route>
-
-        <Route path='/login' element={<Login />} />
-        <Route path='/verify-otp' element={<VerifyOtp />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/user/reset-password/:id/:token' element={<ResetPassword />} />
-
+        <Route element={<PublicRoutes />}>
+          `<Route path='/' element={<Signup />}></Route>
+          <Route path='/login' element={<Login />} />
+          <Route path='/verify-otp' element={<VerifyOtp />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/user/reset-password/:id/:token' element={<ResetPassword />} />`
+        </Route>
 
         <Route element={<PrivateRoutes />}>
           <Route path='/home' element={

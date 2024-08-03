@@ -10,7 +10,10 @@ export const socketSlice = createSlice({
     setsocket: (state, action) => {
       state.socket = action.payload;
     },
+    clearsocket: (state, action) => {
+      state.socket = null;
+    },
   },
 });
-export const { setsocket } = socketSlice.actions;
+export const { setsocket, clearsocket } = socketSlice.actions;
 export default socketSlice.reducer;

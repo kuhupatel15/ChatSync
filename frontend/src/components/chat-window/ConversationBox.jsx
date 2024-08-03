@@ -8,7 +8,7 @@ import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setmessages } from '../../../store/reducers/messagesSlice.js'
-import { setnotifications } from '../../../store/reducers/notificationsSlice.js'
+import { addNotification, removeNotification } from '../../../store/reducers/notificationsSlice.js'
 
 const ConversationBox = ({ selectedChat }) => {
   const dispatch = useDispatch();
@@ -45,17 +45,17 @@ const ConversationBox = ({ selectedChat }) => {
     socket && socket.on("message-recieved", (msg) => {
       console.log("REcieved message --> ", msg)
       if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
-        // if (notifications?.has(msg.chat._id)) {
-        //   let pre = notifications.get(msg.chat._id)
-        //   !pre.includes(msg) && dispatch(setnotifications(notifications.set(msg.chat._id, [...pre, msg])))
-        // }
-        // else {
-        //   dispatch(setnotifications(notifications.set(msg.chat._id, [msg])))
-        // }
+        if (notifications?.has(msg.chat._id)) {
+          let pre = notifications.get(msg.chat._id)
+          !pre.includes(msg) && dispatch(addNotification(msg.chat._id, [...pre, msg]))
+        }
+        else {
+          dispatch(addNotification(msg.chat._id, [msg]))
+        }
       }
       else {
         if (notifications.has(selectedChat._id)) {
-          notifications.delete(selectedChat._id)
+          dispatch(removeNotification(selectedChat._id))
         }
         setReadBy(msg._id)
         dispatch(setmessages([...messages,msg]))
