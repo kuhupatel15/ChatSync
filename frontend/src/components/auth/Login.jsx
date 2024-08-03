@@ -1,71 +1,35 @@
-import React, { useEffect } from 'react'
-import { Input, Button } from "@nextui-org/react";
+import React, { useEffect, useState } from 'react'
+import { Input, Button, useSelect } from "@nextui-org/react";
 import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form';
-import { login } from "../../../store/reducers/AuthSlice.js"
-import { LogIn } from '../../utils/FetchData.js';
-import { userData } from '../../../store/reducers/UserSlice.js';
+import { login } from "../../../store/reducers/UserSlice.js"
+import { LogIn } from '../../Routes/AuthRoutes.js'
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
-import { UserState } from '../../context/UserProvider.jsx';
-import { useGoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode'
-import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-
-
-
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
   const { register, handleSubmit } = useForm();
-  const { setLoggedUser } = UserState();
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  // const submithandler = async (data) => {
-  //   dispatch(login(data));
-  //   const res = await LogIn(data);
-  //   if (res) {
-  //     dispatch(userData(res.data.user))
-  //     setLoggedUser(res.data.user)
-  //     localStorage.setItem("userInfo", JSON.stringify(res.data.user));
-  //     navigate('/home')
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('userInfo');
+  //   if (storedUser) {
+  //     dispatch(login(JSON.parse(storedUser)))
   //   }
-  // }
-  // const loginResponse = (response)=>{
-  //   const resp = jwtDecode(response.credential)
-  //   console.log(resp)
-  // }
-  // const errorResponse = (error)=>{
-  //   console.log(error)
-  // }
-  //   const login = useGoogleLogin({
-  //     onSuccess: (response)=>{
-  //       const resp = jwtDecode(response)
-  //       console.log(resp)
-  //       // const res= Login(resp.email)
-  //       // console.log(res.data)
-  //     },
-  //     onError:  (error)=>{
-  //       console.log(error)}
-  // });
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('userInfo');
-    if (storedUser) {
-      setLoggedUser(JSON.parse(storedUser));
-    }
-  }, [setLoggedUser]);
+  // }, [dispatch]);
 
   const submithandler = async (data) => {
-    dispatch(login(data));
     const res = await LogIn(data);
     if (res) {
-      dispatch(userData(res.data.user));
-      localStorage.setItem('userInfo', JSON.stringify(res.data.user));
-      setLoggedUser(res.data.user);
+      dispatch(login(res.data.user));
+      // localStorage.setItem('userInfo', JSON.stringify(res.data.user));
       navigate('/home');
     }
   };
@@ -95,11 +59,7 @@ const Login = () => {
             placeholder="Enter your password"
             endContent={
               <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-                {isVisible ? (
-                  <EyeOpenIcon />
-                ) : (
-                  <EyeClosedIcon />
-                )}
+                {isVisible ? <EyeOpenIcon /> : <EyeClosedIcon />}
               </button>
             }
             type={isVisible ? "text" : "password"}
@@ -114,11 +74,11 @@ const Login = () => {
           </div>
 
         </div>
-        <p className='text-white text-sm md:text-md'>Doesn't have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link></p>
+
+        <p className='text-white text-sm md:text-md'>
+          Doesn't have an account ? <Link to={'/'}><button className='text-sky-400'>Sign Up</button></Link>
+        </p>
       </form>
-      {/* <Button onClick={login} className="mt-2 w-full bg-gradient-to-br from-purple-500  to-cyan-500" variant="solid" startContent={<FcGoogle className='text-2xl'/>}>
-        Sign-In with Google
-      </Button> */}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { Forgot_Password } from '../../utils/FetchData.js';
 import toast from 'react-hot-toast';
+import { Forgot_Password } from '../../Routes/AuthRoutes';
 
 const ForgotPassword = () => {
   const { register, handleSubmit } = useForm()

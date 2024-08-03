@@ -1,17 +1,17 @@
 import React from 'react'
-import { Input, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import '../../index.css'
 import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { Verify } from '../../utils/FetchData.js';
+import { Verify } from '../../Routes/AuthRoutes';
+
 
 const VerifyOtp = () => {
 
-  const userID = useSelector((state) => state.User.userdata.user._id)
   const navigate = useNavigate()
+  const userID = useSelector((state) => state.user.login.user._id)
 
   const [otp, setOtp] = useState('');
 

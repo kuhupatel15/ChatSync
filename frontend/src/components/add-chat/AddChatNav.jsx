@@ -3,32 +3,29 @@ import { HiSearch } from 'react-icons/hi';
 import { HiOutlineUserGroup } from "react-icons/hi";
 import Logout from '../auth/LogoutBtn.jsx';
 import { Input, Button, Avatar } from "@nextui-org/react";
-import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
-import { Add_chat, Search_user } from '../../utils/FetchData.js';
+import { Add_chat } from '../../Routes/ChatRoutes.js';
+import { Search_user} from '../../Routes/UserRoutes.js'
 import { ChatState } from '../../context/ChatProvider.jsx'
-import { userData } from '../../../store/reducers/UserSlice.js'
-import { useSelector } from 'react-redux'
-import { UserState } from "../../context/UserProvider.jsx"
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Listbox, ListboxItem } from "@nextui-org/react";
-import toast from 'react-hot-toast';
 import ProfilePage from '../drawers/ProfilePage.jsx';
+import { useSelector } from 'react-redux';
 
 const AddChatNav = () => {
+
+  const user = useSelector(({auth}) => auth.userData);
+
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([]);
+  const [isProfileOpen, setIsProfileOpen] = useState(true);
 
   const { setgroupDrawerOpen, groupDrawerOpen } = GroupChatState()
-  const { setChats, chats, fetchAgain, setFetchAgain } = ChatState();
-  const { loggedUser, setLoggedUser } = UserState();
-
-  const [isProfileOpen, setIsProfileOpen] = useState(true);
+  const { fetchAgain, setFetchAgain } = ChatState();
 
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);
   };
-
 
   const search_users = async (param) => {
     const response = await Search_user({ name: param })
@@ -46,12 +43,20 @@ const AddChatNav = () => {
       <div className='py-3 px-4 w-full flex justify-between items-center border-b-[1px] border-black'>
         <Button
           variant='light'
-          startContent={<Avatar src={loggedUser?.profileImg} size="md" />}
-          onClick={() => setIsProfileOpen(!isProfileOpen)}>
-          <span className='text-white'>{loggedUser?.userName}</span>
+          startContent={<Avatar src={user?.profileImg} size="md" />}
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
+        >
+          <span className='text-white'>{user?.userName}</span>
         </Button>
+
         <div className='flex gap-4 text-3xl text-[#8E9297]' >
-          <Button isIconOnly className='bg-gradient-to-br from-purple-500  to-cyan-500' variant="faded" onClick={() => setgroupDrawerOpen(!groupDrawerOpen)} aria-label="Take a photo">
+          <Button
+            isIconOnly
+            className='bg-gradient-to-br from-purple-500  to-cyan-500'
+            variant="faded"
+            onClick={() => setgroupDrawerOpen(!groupDrawerOpen)}
+            aria-label="Take a photo"
+          >
             <HiOutlineUserGroup className='text-xl' />
           </Button>
           <Logout />
@@ -66,15 +71,12 @@ const AddChatNav = () => {
           className='w-full'
           type="text"
           placeholder="Add new conversation...."
-          // onChange={(e) => search_users(e.target.value)}
           onClick={(e) => {
             toggleDiv();
             search_users('')
           }}
           onInput={(e) => search_users(e.target.value)}
-          startContent={
-            <HiSearch />
-          }
+          startContent={<HiSearch />}
         />
         {showDiv && (
           <div className="bg-white mt-12 mx-2 absolute w-max z-[9999] border-small rounded-small ">
@@ -100,10 +102,9 @@ const AddChatNav = () => {
             </Listbox>
           </div>
         )}
-
       </div>
 
-      <ProfilePage isProfileOpen={isProfileOpen} setIsProfileOpen={setIsProfileOpen} user={loggedUser} />
+      <ProfilePage isProfileOpen={isProfileOpen} setIsProfileOpen={setIsProfileOpen} user={user} />
     </div>
   )
 }

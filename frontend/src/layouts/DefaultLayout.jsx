@@ -5,51 +5,26 @@ import { ChatState } from '../context/ChatProvider.jsx'
 import { useEffect } from 'react'
 import io from 'socket.io-client';
 import { backendUri } from '../utils/BackendUri.js';
-import { UserState } from '../context/UserProvider.jsx'
-import { Get_all_messages, Read_Message } from '../utils/FetchData.js'
+import { useSelector } from 'react-redux'
 
 const DefaultLayout = ({ children }) => {
+
+  const user = useSelector(({auth}) => auth.userData)
+  const { setSocket, setSocketConnected } = ChatState();
+
   var socket;
-  const { loggedUser } = UserState();
-  const { notifications,setNotifications,selectedChat,setSocket, setSelectedChat,socketConnected, fetchAgain, setSocketConnected,setFetchAgain, passsocket,messages, setmessages } = ChatState();
+
   useEffect(() => {
     socket = io(backendUri);
     setSocket(socket)
-    if (loggedUser) socket.emit('setup', loggedUser._id)
+    if (user){
+      socket.emit('setup', user._id)
+      console.log('\x1b[33m%s\x1b[0m',"2 ", "sent ", "setup(user._id) --> backend ", user._id)
+    } 
     socket.on('connected', () => setSocketConnected(true))
+    console.log('\x1b[33m%s\x1b[0m',"6 ", "recieved ", "connected")
   }, [])
-  const setReadBy = async (msgid) => {
-    const response = await Read_Message({ msgId: msgid, userId: loggedUser._id })
-    // console.log(response)
-  }
-  // console.log(socket)
-  
-  
-  // useEffect(() => {
-  //   console.log('msg')
-  //   passsocket && passsocket.on("message-recieved", (msg) => {
-  //     console.log(msg)
-  //     if (
-  //       !selectedChat || (selectedChat._id != msg.chat._id)
-  //     ) {
-  //       console.log("setnotification")
-  //       setNotifications(notifications.set(msg.chat._id,[msg._id]))
-  //       // setFetchAgain(!fetchAgain)
-  //     }
-  //     else {
-  //       if(notifications.has(selectedChat._id)){
-  //         console.log("deletenotification")
-  //         notifications.delete(selectedChat._id)
-  //       }else{
-  //         console.log("setmessage")
-  //       setmessages([...messages,msg]);
-  //       setFetchAgain(!fetchAgain) 
-  //     }
-  //     }
-  //   })
-  // })
-  // console.log(selectedChat)
-  // console.log(notifications)
+
   return (
     <div>
       <div className='flex h-screen overflow-hidden'>
@@ -58,6 +33,7 @@ const DefaultLayout = ({ children }) => {
           <UserChatsContainer />
           <NewGrpDrawer />
         </div>
+
         <div className='md:w-[60vw] overflow-y-auto h-full bg-[#36393F]'>
           {children}
         </div>

@@ -62,9 +62,13 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
+
   socket.on("setup", (userData) => {
+    console.log('\x1b[33m%s\x1b[0m',"3 ", "recieved ", "setup(user._id)", userData)
     socket.join(userData);
+    console.log('\x1b[33m%s\x1b[0m',"4 ", "joined room ", userData)
     socket.emit("connected");
+    console.log('\x1b[33m%s\x1b[0m',"5 ", "sent ", "connected --> frontend")
   });
 
   socket.on("typing", (room) => socket.in(room).emit("typing"));

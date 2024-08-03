@@ -1,7 +1,6 @@
 import React from 'react'
 import { getTime } from '../../utils/msg.js'
 
-
 const IncomingMsg = (props) => {
   return (
     <div className='flex '>

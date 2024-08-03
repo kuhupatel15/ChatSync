@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from 'react'
+
 const GroupChatContext = createContext();
 
 const GroupChatProvider = ({ children }) => {
@@ -7,14 +8,12 @@ const GroupChatProvider = ({ children }) => {
 
   return (
     <GroupChatContext.Provider
-      value={
-        {
-          groupDrawerOpen,
-          setgroupDrawerOpen,
-          grpDetsDrawerOpen,
-          setgrpDetsDrawerOpen
-        }
-      }>
+      value={{
+        groupDrawerOpen,
+        setgroupDrawerOpen,
+        grpDetsDrawerOpen,
+        setgrpDetsDrawerOpen
+      }}>
       {children}
     </GroupChatContext.Provider>
   )

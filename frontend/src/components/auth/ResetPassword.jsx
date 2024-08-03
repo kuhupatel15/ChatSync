@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form';
-import { Reset_Password } from '../../utils/FetchData.js';
+
 import { useNavigate, useParams } from 'react-router-dom';
+import { Reset_Password } from '../../Routes/AuthRoutes';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
