@@ -15,6 +15,7 @@ import AllChatsSlice from './reducers/AllChatsSlice'
 import chatSlice from './reducers/chatSlice'
 import messagesSlice from './reducers/messagesSlice'
 import notificationsSlice from './reducers/notificationsSlice'
+import socketSlice from "./reducers/socketSlice";
 
 const persistConfig = {
   key: "root",
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   chats: AllChatsSlice,
   selectedchat: chatSlice,
   messages: messagesSlice,
-  notification: notificationsSlice
+  notification: notificationsSlice,
+  socket: socketSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

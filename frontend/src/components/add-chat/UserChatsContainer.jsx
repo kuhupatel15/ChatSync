@@ -12,7 +12,7 @@ const UserChatsContainer = () => {
 
   const [temp, settemp] = useState();
 
-  const { notifications, chats, fetchAgain, setSocket, setSocketConnected } = ChatState();
+  const { notifications } = ChatState();
 
   const getallchats = async () => {
     const response = await Fetch_chat();
@@ -21,7 +21,7 @@ const UserChatsContainer = () => {
 
   useEffect(() => {
     getallchats();
-  }, [fetchAgain, notifications])
+  }, [notifications])
 
   return (
     <div className='max-h-[40vw]  flex flex-col  overflow-scroll scrollbar-hide' >

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Button } from "@nextui-org/react";
 import { IoIosSend } from "react-icons/io";
-import { ChatState } from '../../context/ChatProvider.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setmessages } from '../../../store/reducers/messagesSlice.js';
 import { Send_message } from '../../Routes/MessagesRoutes.js'
@@ -11,8 +10,8 @@ const BottomNav = () => {
   const dispatch = useDispatch();
   const selectedChat = useSelector(({ selectedchat }) => selectedchat.chat)
   const messages = useSelector(({ messages }) => messages.messages)
+  const socket = useSelector((state)=> state.socket.socket)
 
-  const { setFetchAgain, fetchAgain, passsocket } = ChatState();
 
   const [message, setMessage] = useState('');
 
@@ -20,10 +19,9 @@ const BottomNav = () => {
     const response = await Send_message({ content: message, chatId: selectedChat._id });
     console.log("SEND MESSAGE --> ",response.data)
     if (response.data) {
-      passsocket && passsocket.emit('new-message', response.data);
+      socket && socket.emit('new-message', response.data);
       setMessage('');
       dispatch(setmessages([...messages, response.data]))
-      setFetchAgain(!fetchAgain);
     }
   }
 

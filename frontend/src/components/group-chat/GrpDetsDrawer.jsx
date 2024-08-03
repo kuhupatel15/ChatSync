@@ -9,7 +9,6 @@ import { CameraIcon } from '@radix-ui/react-icons'
 
 const GrpDetsDrawer = ({ members }) => {
   const { groupDrawerOpen, setgroupDrawerOpen, grpDetsDrawerOpen, setgrpDetsDrawerOpen } = GroupChatState();
-  const { fetchAgain, setFetchAgain } = ChatState();
 
   const [grpName, setgrpName] = useState("");
   const [fileName, setfileName] = useState('')
@@ -23,7 +22,6 @@ const GrpDetsDrawer = ({ members }) => {
       setgrpName('');
       setgroupDrawerOpen(!groupDrawerOpen);
       setgrpDetsDrawerOpen(!grpDetsDrawerOpen);
-      setFetchAgain(!fetchAgain)
     }
   };
 

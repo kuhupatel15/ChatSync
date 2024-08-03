@@ -15,9 +15,9 @@ const ConversationBox = ({ selectedChat }) => {
   const dispatch = useDispatch();
   const user = useSelector(({auth}) => auth.userData)
   const messages = useSelector(({messages}) => messages.messages)
-
   const [selectedChatCompare, setselectedChatCompare] = useState();
-  const { notifications, fetchAgain, passsocket } = ChatState();
+  const { notifications } = ChatState();
+  const socket = useSelector((state)=> state.socket.socket)
 
   const msgBox = useRef(null);
 
@@ -29,7 +29,7 @@ const ConversationBox = ({ selectedChat }) => {
     if (!selectedChat) return;
     const response = await Get_all_messages({ chatId: selectedChat._id })
     dispatch(setmessages(response.data))
-    passsocket.emit('join-room', selectedChat._id)
+    socket.emit('join-room', selectedChat._id)
   }
 
   const setReadBy = async (msgid) => {
@@ -39,11 +39,11 @@ const ConversationBox = ({ selectedChat }) => {
   useEffect(() => {
     getmessages();
     setselectedChatCompare(selectedChat)
-  }, [selectedChat, fetchAgain])
+  }, [selectedChat])
 
 
   useEffect(() => {
-    passsocket && passsocket.on("message-recieved", (msg) => {
+    socket && socket.on("message-recieved", (msg) => {
       console.log("REcieved message --> ", msg)
       if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
         if (notifications?.has(msg.chat._id)) {

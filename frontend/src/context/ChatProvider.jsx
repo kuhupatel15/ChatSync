@@ -2,16 +2,11 @@ import { createContext, useState, useContext } from "react";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
-  const [fetchAgain, setFetchAgain] = useState(false);
-  const [passsocket, setSocket] = useState(null)
   const [notifications, setNotifications] = useState(new Map());
   const [socketConnected, setSocketConnected] = useState(false)
 
   return (
     <ChatContext.Provider value={{
-      fetchAgain,
-      setFetchAgain,
-      passsocket, setSocket,
       socketConnected, setSocketConnected,
       notifications, setNotifications
     }}>

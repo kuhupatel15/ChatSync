@@ -53,7 +53,6 @@ const GrpProfilePage = () => {
   const user = useSelector((state) => state.auth.userData);
   const allchats = useSelector((state) => state.chats.chats)
 
-  const { fetchAgain, setFetchAgain } = ChatState();
 
   const [users, setUsers] = useState([]);
   const [commonchat, setCommonchat] = useState([]);
@@ -93,7 +92,6 @@ const GrpProfilePage = () => {
 
   const rename = async (chatid, grpname) => {
     await Rename_group({ chatId: chatid, newgrpname: grpname })
-    setFetchAgain(!fetchAgain)
     setEdit(!edit)
   }
 
@@ -104,7 +102,6 @@ const GrpProfilePage = () => {
 
   const exitFromGroup = async (memberId) => {
     await Exit_from_group({ chatId: selectedChat._id, memberId: memberId })
-    setFetchAgain(!fetchAgain)
     navigate('/home')
     dispatch(setchat())
   }

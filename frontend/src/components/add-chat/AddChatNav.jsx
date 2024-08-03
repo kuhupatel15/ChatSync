@@ -20,7 +20,6 @@ const AddChatNav = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(true);
 
   const { setgroupDrawerOpen, groupDrawerOpen } = GroupChatState()
-  const { fetchAgain, setFetchAgain } = ChatState();
 
 
   const toggleDiv = () => {
@@ -35,7 +34,6 @@ const AddChatNav = () => {
   const create_chat = async (id) => {
     const response = await Add_chat({ receiver_id: id })
     toggleDiv();
-    setFetchAgain(!fetchAgain)
   }
 
   return (
