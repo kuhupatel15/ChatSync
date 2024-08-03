@@ -6,7 +6,7 @@ const GroupChatMessage = (props) => {
         <div className='flex gap-2 ' >
             <Avatar rounded size='sm' className='self-start mt-2' src={props.profileImg} />
             
-            <div className={'max-w-[40vw] text-[1.1vw] bg-[#303339] rounded text-gray-300  flex flex-col p-2 mb-[0.5vw]'}>
+            <div className={'max-w-[40vw] text-[1.1vw] bg-pri rounded text-gray-300  flex flex-col p-2 mb-[0.5vw]'}>
                 <h6 className="text-purple-600">{props.sender}</h6>
 
                 <div className="flex ">

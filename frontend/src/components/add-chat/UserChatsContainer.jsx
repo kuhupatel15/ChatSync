@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import UserChat from './UserChat.jsx'
-import { ChatState } from '../../context/ChatProvider.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllChats } from '../../../store/reducers/AllChatsSlice.js'
 import { setchat } from '../../../store/reducers/chatSlice.js'
-import { Fetch_chat } from '../../Routes/ChatRoutes.js'
+import { Fetch_chat } from '../../routes/ChatRoutes.js'
 
 const UserChatsContainer = () => {
   const dispatch = useDispatch();
   const allchats = useSelector(({chats}) => chats.chats)
 
-  const [temp, settemp] = useState();
 
-  const { notifications } = ChatState();
+  const notifications = useSelector((state)=>state.notifications.notifications)
 
   const getallchats = async () => {
     const response = await Fetch_chat();

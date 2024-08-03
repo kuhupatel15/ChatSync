@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { Reset_Password } from '../../Routes/AuthRoutes';
+import { Reset_Password } from '../../routes/AuthRoutes';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const ResetPassword = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(submitPassword)}>
-        <input type="text" {...register("password")} />
+        <input type="text" {...register("password")} className=''/>
         <button type='submit'>Submit</button>
       </form>
     </div>

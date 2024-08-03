@@ -5,7 +5,7 @@ import '../../index.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import { login } from "../../../store/reducers/UserSlice.js"
-import { LogIn } from '../../Routes/AuthRoutes.js'
+import { LogIn } from '../../routes/AuthRoutes.js'
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
 
 const Login = () => {
@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
 
-      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[60vh]  flex-col gap-4 text-left my-auto bg-[#37393F] p-4">
+      <form onSubmit={handleSubmit(submithandler)} className="flex w-[40vw] h-[60vh]  flex-col gap-4 text-left my-auto bg-pri p-4">
         <h1 className='text-white text-xl text-center font-bold'>Welcome Back !</h1>
         <div>
           <label htmlFor="Email" className='ml-2 '>Email</label>
@@ -46,7 +46,7 @@ const Login = () => {
             type="email"
             size="sm"
             placeholder="name@gmail.com"
-            className="w-full mt-2"
+            className="w-full mt-2 "
             {...register("userEmail")}
           />
         </div>
@@ -63,7 +63,7 @@ const Login = () => {
               </button>
             }
             type={isVisible ? "text" : "password"}
-            className="w-full mt-2"
+            className="w-full mt-2 "
             {...register("password")}
           />
           <div className='flex flex-col'>

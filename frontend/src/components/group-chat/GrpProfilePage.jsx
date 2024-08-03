@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Avatar, Chip, Button, CheckboxGroup, Checkbox, cn, User, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@nextui-org/react';
-import { ChatState } from '../../context/ChatProvider.jsx';
 import { RxCross1 } from "react-icons/rx";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAdmin } from "../../utils/ChatLogics.js"
 import { MdOutlinePersonAdd, MdDone, MdOutlineModeEdit } from "react-icons/md";
-import { Remove_member_from_group, Upload_profileimg_of_group, Add_to_group, Rename_group,Exit_from_group } from "../../Routes/GroupRoutes.js"
-import { Get_all_users } from "../../Routes/UserRoutes.js"
-import { SelectedChatInfo } from "../../Routes/ChatRoutes.js"
+import { Remove_member_from_group, Upload_profileimg_of_group, Add_to_group, Rename_group,Exit_from_group } from "../../routes/GroupRoutes.js"
+import { Get_all_users } from "../../routes/UserRoutes.js"
+import { SelectedChatInfo } from "../../routes/ChatRoutes.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 import "../../index.css"
 import { IoIosArrowDown } from "react-icons/io";
@@ -125,7 +124,7 @@ const GrpProfilePage = () => {
               <span className="text-xl">Group info</span>
             </div>
 
-            <div className="w-full flex flex-col justify-center h-[40vh] text-white text-[1.5vw] bg-[#2F3136] items-center py-2 px-10 ">
+            <div className="w-full flex flex-col justify-center h-[40vh] text-white text-[1.5vw] bg-pri items-center py-2 px-10 ">
               <div className=" w-[12vw] h-[12vw] relative">
                 <Avatar src={selectedChat.grpProfileimg} className="w-full h-full absolute top-0 left-0 opacity-70" />
                 <div className="w-full h-full flex flex-col items-center justify-center absolute top-0 left-0 rounded-full opacity-0 bg-black hover:opacity-50 hover: hover:cursor-pointer" onClick={() => inputRef.current.click()}>
@@ -265,7 +264,7 @@ const GrpProfilePage = () => {
               <span className="text-xl">Contact info</span>
             </div>
 
-            <div className="w-full flex flex-col mb-6 justify-center text-white text-[1.5vw] bg-[#2F3136] items-center py-2 px-10 ">
+            <div className="w-full flex flex-col mb-6 justify-center text-white text-[1.5vw] bg-pri items-center py-2 px-10 ">
               <div className=" w-[12vw] h-[12vw] relative">
                 <Avatar src={getOppUser(user, selectedChat?.users).profileImg} className="w-full h-full absolute top-0 left-0 opacity-70" />
               </div>
@@ -277,7 +276,7 @@ const GrpProfilePage = () => {
             </div>
 
             <span className='text-xl text-white px-10 '>Groups in Common</span>
-            <div className='w-full bg-[#2F3136] px-10 py-6 flex flex-col gap-4 mt-6'>
+            <div className='w-full bg-pri px-10 py-6 flex flex-col gap-4 mt-6'>
               {
                 commonchat.map((item) => (
                   <div key={item._id} className="flex gap-2 items-center ">

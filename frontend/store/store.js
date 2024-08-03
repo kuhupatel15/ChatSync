@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   chats: AllChatsSlice,
   selectedchat: chatSlice,
   messages: messagesSlice,
-  notification: notificationsSlice,
+  notifications: notificationsSlice,
   socket: socketSlice
 });
 

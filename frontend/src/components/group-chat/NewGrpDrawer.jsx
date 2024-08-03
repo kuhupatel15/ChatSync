@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RxCross1 } from "react-icons/rx";
-import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Button, CheckboxGroup, Checkbox, User, cn } from "@nextui-org/react";
-import { Get_all_users } from "../../Routes/UserRoutes.js"
+import { Get_all_users } from "../../routes/UserRoutes.js"
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import GrpDetsDrawer from './GrpDetsDrawer.jsx';
 
@@ -36,11 +35,10 @@ const CustomCheckbox = ({ user }) => {
   );
 };
 
-const NewGrpDrawer = () => {
-  const { groupDrawerOpen, setgroupDrawerOpen, grpDetsDrawerOpen, setgrpDetsDrawerOpen } = GroupChatState();
-
+const NewGrpDrawer = ({isGrpOpen, setisGrpOpen}) => {
   const [users, setUsers] = useState([]);
   const [members, setMembers] = useState([]);
+  const [grpDetsDrawerOpen, setgrpDetsDrawerOpen] = useState(false)
 
   const getAllusers = async () => {
     const response = await Get_all_users();
@@ -52,13 +50,13 @@ const NewGrpDrawer = () => {
   }, []);
 
   return (
-    <div className='bg-[#2F3136]' style={{ position: "absolute", height: "100vh", transform: `translateX(${!groupDrawerOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
+    <div className='bg-pri' style={{ position: "absolute", height: "100vh", transform: `translateX(${!isGrpOpen ? "0%" : "-100%"})`, width: "100%", transition: "ease-in-out 0.5s", top: "0%", zIndex: "99999999" }}>
       <div className='flex flex-col h-screen'>
-        <div className='bg-[#36393F] p-4 text-white flex justify-between items-center'>
+        <div className='bg-sec p-4 text-white flex justify-between items-center'>
           <span className='text-lg text-white'>Create Group</span>
           <RxCross1
             className='hover:cursor-pointer'
-            onClick={() => { setgroupDrawerOpen(!groupDrawerOpen); setMembers([]) }}
+            onClick={() => { setisGrpOpen(!isGrpOpen); setMembers([]) }}
           />
         </div>
 
@@ -103,7 +101,7 @@ const NewGrpDrawer = () => {
         </div>
       </div>
 
-      <GrpDetsDrawer members={members} />
+      <GrpDetsDrawer grpDetsDrawerOpen={grpDetsDrawerOpen} setgrpDetsDrawerOpen={setgrpDetsDrawerOpen} members={members} />
     </div>
   );
 

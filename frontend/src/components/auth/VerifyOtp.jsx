@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Verify } from '../../Routes/AuthRoutes';
+import { Verify } from '../../routes/AuthRoutes';
 
 
 const VerifyOtp = () => {
@@ -22,7 +22,7 @@ const VerifyOtp = () => {
 
   return (
     <div className='text-slate-300 w-[100vw] h-[100vh] signup flex  item-center justify-center ' >
-      <div className='bg-[#37393F] flex flex-col gap-4 h-[40vh] w-[30vw] justify-around m-auto item-center p-4'>
+      <div className='bg-pri flex flex-col gap-4 h-[40vh] w-[30vw] justify-around m-auto item-center p-4'>
         <h2 className='text-center text-xl font-bold'>Enter the OTP sent to your registered email to proceed further.</h2>
         <OtpInput
           value={otp}

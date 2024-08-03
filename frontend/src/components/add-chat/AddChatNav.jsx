@@ -3,13 +3,12 @@ import { HiSearch } from 'react-icons/hi';
 import { HiOutlineUserGroup } from "react-icons/hi";
 import Logout from '../auth/LogoutBtn.jsx';
 import { Input, Button, Avatar } from "@nextui-org/react";
-import { Add_chat } from '../../Routes/ChatRoutes.js';
-import { Search_user} from '../../Routes/UserRoutes.js'
-import { ChatState } from '../../context/ChatProvider.jsx'
-import { GroupChatState } from '../../context/GroupChatProvider.jsx';
+import { Add_chat } from '../../routes/ChatRoutes.js';
+import { Search_user} from '../../routes/UserRoutes.js'
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import ProfilePage from '../drawers/ProfilePage.jsx';
 import { useSelector } from 'react-redux';
+import NewGrpDrawer from '../group-chat/NewGrpDrawer.jsx';
 
 const AddChatNav = () => {
 
@@ -17,10 +16,8 @@ const AddChatNav = () => {
 
   const [showDiv, setShowDiv] = useState(false);
   const [users, setusers] = useState([]);
-  const [isProfileOpen, setIsProfileOpen] = useState(true);
-
-  const { setgroupDrawerOpen, groupDrawerOpen } = GroupChatState()
-
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isGrpOpen, setisGrpOpen] = useState(false)
 
   const toggleDiv = () => {
     setShowDiv(!showDiv);
@@ -32,7 +29,7 @@ const AddChatNav = () => {
   }
 
   const create_chat = async (id) => {
-    const response = await Add_chat({ receiver_id: id })
+    await Add_chat({ receiver_id: id })
     toggleDiv();
   }
 
@@ -52,7 +49,7 @@ const AddChatNav = () => {
             isIconOnly
             className='bg-gradient-to-br from-purple-500  to-cyan-500'
             variant="faded"
-            onClick={() => setgroupDrawerOpen(!groupDrawerOpen)}
+            onClick={() => setisGrpOpen(!isGrpOpen)}
             aria-label="Take a photo"
           >
             <HiOutlineUserGroup className='text-xl' />
@@ -66,7 +63,7 @@ const AddChatNav = () => {
           autoComplete='off'
           size="sm"
           isRequired
-          className='w-full'
+          className='w-full '
           type="text"
           placeholder="Add new conversation...."
           onClick={(e) => {
@@ -103,6 +100,7 @@ const AddChatNav = () => {
       </div>
 
       <ProfilePage isProfileOpen={isProfileOpen} setIsProfileOpen={setIsProfileOpen} user={user} />
+      <NewGrpDrawer isGrpOpen={isGrpOpen} setisGrpOpen={setisGrpOpen} />
     </div>
   )
 }

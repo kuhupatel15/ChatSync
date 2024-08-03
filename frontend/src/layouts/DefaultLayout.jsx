@@ -1,7 +1,5 @@
 import AddChatNav from '../components/add-chat/AddChatNav.jsx'
 import UserChatsContainer from '../components/add-chat/UserChatsContainer.jsx'
-import NewGrpDrawer from '../components/group-chat/NewGrpDrawer.jsx'
-import { ChatState } from '../context/ChatProvider.jsx'
 import { useEffect } from 'react'
 import io from 'socket.io-client';
 import { backendUri } from '../utils/BackendUri.js';
@@ -11,7 +9,6 @@ import { setsocket } from '../../store/reducers/socketSlice.js'
 const DefaultLayout = ({ children }) => {
 
   const user = useSelector(({auth}) => auth.userData)
-  const { setSocketConnected } = ChatState();
   const dispatch = useDispatch();
 
   var socket;
@@ -22,19 +19,18 @@ const DefaultLayout = ({ children }) => {
     if (user){
       socket.emit('setup', user._id)
     } 
-    socket.on('connected', () => setSocketConnected(true))
+    socket.on('connected')
   }, [])
 
   return (
     <div>
       <div className='flex h-screen overflow-hidden'>
-        <div className='w-full md:w-[40vw] h-full relative bg-[#2F3136]'>
+        <div className='w-full md:w-[40vw] h-full relative bg-pri'>
           <AddChatNav />
           <UserChatsContainer />
-          <NewGrpDrawer />
         </div>
 
-        <div className='md:w-[60vw] overflow-y-auto h-full bg-[#36393F]'>
+        <div className='md:w-[60vw] overflow-y-auto h-full bg-sec'>
           {children}
         </div>
       </div>

@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { RxCross1 } from "react-icons/rx";
-import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Button, Input, Avatar } from "@nextui-org/react";
-import { Create_group } from "../../Routes/GroupRoutes.js"
-import { ChatState } from '../../context/ChatProvider.jsx';
+import { Create_group } from "../../routes/GroupRoutes.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 
 
-const GrpDetsDrawer = ({ members }) => {
-  const { groupDrawerOpen, setgroupDrawerOpen, grpDetsDrawerOpen, setgrpDetsDrawerOpen } = GroupChatState();
-
+const GrpDetsDrawer = ({ grpDetsDrawerOpen, setgrpDetsDrawerOpen, members }) => {
   const [grpName, setgrpName] = useState("");
   const [fileName, setfileName] = useState('')
 
@@ -20,7 +16,6 @@ const GrpDetsDrawer = ({ members }) => {
     if (grpName.length > 0 && members.length > 0) {
       await Create_group({ users: members, grpname: grpName, file: e.target.file.files[0] });
       setgrpName('');
-      setgroupDrawerOpen(!groupDrawerOpen);
       setgrpDetsDrawerOpen(!grpDetsDrawerOpen);
     }
   };
@@ -71,6 +66,7 @@ const GrpDetsDrawer = ({ members }) => {
               onChange={(e) => setgrpName(e.target.value)}
               placeholder='Enter the group name'
               label="Group name"
+              className=''
             />
             
             <Button color="primary" type='submit'>Create</Button>

@@ -2,12 +2,11 @@ import { Avatar, Chip } from "@nextui-org/react";
 import { Link } from 'react-router-dom'
 import { getTime, compareTime, getMsgTime } from '../../utils/msg.js'
 import { getOppUserName, getOppUser } from '../../utils/ChatLogics.js'
-import { ChatState } from '../../context/ChatProvider.jsx'
 import { useSelector } from "react-redux";
 
 const UserChat = (chat) => {
   const user = useSelector(({auth}) => auth.userData);
-  const { notifications } = ChatState();
+  const notifications = useSelector((state)=>state.notifications.notifications)
 
   var chat = chat.chat;
 
@@ -29,12 +28,12 @@ const UserChat = (chat) => {
                   </div>
 
                   <small className=' text-gray-400'>
-                    {
+                    {/* {
                       notifications?.has(chat._id) ?
                         <Chip color="primary">{notifications?.get(chat._id)?.length}</Chip>
                         :
                         chat.latestMessage?.createdAt && getMsgTime(chat.latestMessage?.createdAt)
-                    }
+                    } */}
                   </small>
                 </div>
               </div>
@@ -57,12 +56,12 @@ const UserChat = (chat) => {
                   </div>
 
                   <small className=' text-gray-400'>
-                    {
+                    {/* {
                       notifications.has(chat._id) ?
                         <Chip color="primary">{notifications.get(chat._id).length}</Chip>
                         :
                         chat.latestMessage?.createdAt && getTime(chat.latestMessage?.createdAt)
-                    }
+                    } */}
                   </small>
                 </div>
               </div>

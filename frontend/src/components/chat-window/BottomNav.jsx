@@ -3,7 +3,7 @@ import { Input, Button } from "@nextui-org/react";
 import { IoIosSend } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { setmessages } from '../../../store/reducers/messagesSlice.js';
-import { Send_message } from '../../Routes/MessagesRoutes.js'
+import { Send_message } from '../../routes/MessagesRoutes.js'
 
 const BottomNav = () => {
 
@@ -33,7 +33,7 @@ const BottomNav = () => {
           size='sm'
           // value={message}
           name='message'
-          className='w-full'
+          className='w-full '
           type="text"
           placeholder="Type a new message...."
           onChange={(e) => setMessage(e.target.value)}

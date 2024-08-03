@@ -7,7 +7,7 @@ const ChatWindow = () => {
     const selectedChat = useSelector(({selectedchat}) => selectedchat.chat)
 
     return (
-        <div className='w-[60vw] bg-[#36393F] flex flex-col h-screen '>
+        <div className='w-[60vw] bg-sec flex flex-col h-screen '>
             <ConversationNav />
             <ConversationBox selectedChat={selectedChat} />
             <BottomNav />

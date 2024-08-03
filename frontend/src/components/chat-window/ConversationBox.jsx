@@ -1,7 +1,6 @@
 import IncomingMessage from './IncomingMsg.jsx'
 import GroupChatMessage from './GroupChatMessage.jsx'
-import { ChatState } from '../../context/ChatProvider.jsx'
-import { Get_all_messages, Read_Message } from '../../Routes/MessagesRoutes.js'
+import { Get_all_messages, Read_Message } from '../../routes/MessagesRoutes.js'
 import { useEffect, useRef, useState } from 'react'
 import { compareTime } from '../../utils/msg.js'
 import { Chip } from "@nextui-org/react";
@@ -16,7 +15,7 @@ const ConversationBox = ({ selectedChat }) => {
   const user = useSelector(({auth}) => auth.userData)
   const messages = useSelector(({messages}) => messages.messages)
   const [selectedChatCompare, setselectedChatCompare] = useState();
-  const { notifications } = ChatState();
+  const notifications = useSelector((state)=>state.notifications.notifications)
   const socket = useSelector((state)=> state.socket.socket)
 
   const msgBox = useRef(null);
@@ -46,13 +45,13 @@ const ConversationBox = ({ selectedChat }) => {
     socket && socket.on("message-recieved", (msg) => {
       console.log("REcieved message --> ", msg)
       if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
-        if (notifications?.has(msg.chat._id)) {
-          let pre = notifications.get(msg.chat._id)
-          !pre.includes(msg) && dispatch(setnotifications(notifications.set(msg.chat._id, [...pre, msg])))
-        }
-        else {
-          dispatch(setnotifications(notifications.set(msg.chat._id, [msg])))
-        }
+        // if (notifications?.has(msg.chat._id)) {
+        //   let pre = notifications.get(msg.chat._id)
+        //   !pre.includes(msg) && dispatch(setnotifications(notifications.set(msg.chat._id, [...pre, msg])))
+        // }
+        // else {
+        //   dispatch(setnotifications(notifications.set(msg.chat._id, [msg])))
+        // }
       }
       else {
         if (notifications.has(selectedChat._id)) {
