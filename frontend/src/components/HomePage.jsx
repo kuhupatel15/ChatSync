@@ -4,12 +4,10 @@ import DefaulChatBox from './DefaultChatBox.jsx'
 import { useSelector } from 'react-redux'
 
 const HomePage = () => {
-  const selectedChat = useSelector(({ selectedchat }) => selectedchat)
-
 
   return (
     <div className='hidden md:block'>
-      {selectedChat ? <ChatWindow /> : <DefaulChatBox />}
+      <DefaulChatBox />
     </div>
   )
 }

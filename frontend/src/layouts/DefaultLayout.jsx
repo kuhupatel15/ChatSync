@@ -6,12 +6,11 @@ import { useEffect } from 'react'
 import io from 'socket.io-client';
 import { backendUri } from '../utils/BackendUri.js';
 import { useDispatch, useSelector } from 'react-redux'
-import { setsocket } from '../../store/reducers/socketSlice.js'
+import { setsocket } from '../../src/store/reducers/socketSlice.js'
 
 const DefaultLayout = ({ children }) => {
 
   const user = useSelector(({auth}) => auth.userData)
-  const { setSocketConnected } = ChatState();
   const dispatch = useDispatch();
 
   var socket;
@@ -22,7 +21,7 @@ const DefaultLayout = ({ children }) => {
     if (user){
       socket.emit('setup', user._id)
     } 
-    socket.on('connected', () => setSocketConnected(true))
+    socket.on('connected')
   }, [])
 
   return (

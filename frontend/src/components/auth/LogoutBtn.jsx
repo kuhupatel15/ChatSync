@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogout } from "react-icons/hi";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useDispatch } from 'react-redux'
-import { logout } from "../../../store/reducers/UserSlice.js"
-import { clearAllChats} from "../../../store/reducers/AllChatsSlice.js"
-import { clearchat } from "../../../store/reducers/chatSlice.js"
-import { clearmessages } from "../../../store/reducers/messagesSlice.js"
-import { clearnotifications } from "../../../store/reducers/notificationsSlice.js"
+import { logout } from "../../../src/store/reducers/UserSlice.js"
+import { clearAllChats} from "../../../src/store/reducers/AllChatsSlice.js"
+import { clearchat } from "../../../src/store/reducers/chatSlice.js"
+import { clearmessages } from "../../../src/store/reducers/messagesSlice.js"
+import { clearnotifications } from "../../../src/store/reducers/notificationsSlice.js"
+import { clearsocket } from '../../store/reducers/socketSlice.js';
 
 
 const LogoutBtn = () => {
@@ -26,6 +27,7 @@ const LogoutBtn = () => {
         dispatch(clearAllChats())
         dispatch(clearchat())
         dispatch(clearnotifications())
+        dispatch(clearsocket())
         navigate('/login')
     }
 

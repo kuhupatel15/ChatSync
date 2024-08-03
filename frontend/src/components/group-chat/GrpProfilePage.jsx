@@ -5,15 +5,15 @@ import { RxCross1 } from "react-icons/rx";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAdmin } from "../../utils/ChatLogics.js"
 import { MdOutlinePersonAdd, MdDone, MdOutlineModeEdit } from "react-icons/md";
-import { Remove_member_from_group, Upload_profileimg_of_group, Add_to_group, Rename_group,Exit_from_group } from "../../Routes/GroupRoutes.js"
-import { Get_all_users } from "../../Routes/UserRoutes.js"
-import { SelectedChatInfo } from "../../Routes/ChatRoutes.js"
+import { Remove_member_from_group, Upload_profileimg_of_group, Add_to_group, Rename_group,Exit_from_group } from "../../routes/GroupRoutes.js"
+import { Get_all_users } from "../../routes/UserRoutes.js"
+import { SelectedChatInfo } from "../../routes/ChatRoutes.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 import "../../index.css"
 import { IoIosArrowDown } from "react-icons/io";
 import { getOppUserName, getOppUser } from '../../utils/ChatLogics.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { setchat } from '../../../store/reducers/chatSlice.js';
+import { setchat } from '../../../src/store/reducers/chatSlice.js';
 
 const CustomCheckbox = ({ user, member }) => {
   return (

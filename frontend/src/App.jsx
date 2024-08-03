@@ -11,14 +11,9 @@ import { Toaster } from 'react-hot-toast';
 import DefaultLayout from './layouts/DefaultLayout.jsx'
 import ChatWindow from './components/chat-window/ChatWindow.jsx';
 import PrivateRoutes from './layouts/Protected.jsx';
-import { useSelector } from 'react-redux';
-import { ChatState } from './context/ChatProvider.jsx';
 
 
 function App() {
-  const store = useSelector((state) => state)
-  console.log("STORE ----> ", store)
-  const context = ChatState();
 
   return (
     <>

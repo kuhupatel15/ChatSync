@@ -4,9 +4,9 @@ import '../../index.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../store/reducers/UserSlice.js';
+import { login } from '../../../src/store/reducers/UserSlice.js';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
-import { Register } from '../../Routes/AuthRoutes.js';
+import { Register } from '../../routes/AuthRoutes.js';
 
 const Signup = () => {
   const navigate = useNavigate();

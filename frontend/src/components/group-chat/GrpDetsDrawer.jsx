@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { RxCross1 } from "react-icons/rx";
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Button, Input, Avatar } from "@nextui-org/react";
-import { Create_group } from "../../Routes/GroupRoutes.js"
+import { Create_group } from "../../routes/GroupRoutes.js"
 import { ChatState } from '../../context/ChatProvider.jsx';
 import { CameraIcon } from '@radix-ui/react-icons'
 

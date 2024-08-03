@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { RxCross1 } from "react-icons/rx";
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Button, CheckboxGroup, Checkbox, User, cn } from "@nextui-org/react";
-import { Get_all_users } from "../../Routes/UserRoutes.js"
+import { Get_all_users } from "../../routes/UserRoutes.js"
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import GrpDetsDrawer from './GrpDetsDrawer.jsx';
 

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Input, Button } from "@nextui-org/react";
 import { IoIosSend } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { setmessages } from '../../../store/reducers/messagesSlice.js';
-import { Send_message } from '../../Routes/MessagesRoutes.js'
+import { setmessages } from '../../../src/store/reducers/messagesSlice.js';
+import { Send_message } from '../../routes/MessagesRoutes.js'
 
 const BottomNav = () => {
 

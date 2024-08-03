@@ -5,8 +5,8 @@ import { RxCross1 } from "react-icons/rx";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { CameraIcon } from '@radix-ui/react-icons'
 import { useDispatch } from 'react-redux';
-import { login } from '../../../store/reducers/UserSlice.js';
-import { Rename_user, Upload_profileimg } from '../../Routes/UserRoutes.js';
+import { login } from '../../../src/store/reducers/UserSlice.js';
+import { Rename_user, Upload_profileimg } from '../../routes/UserRoutes.js';
 
 const ProfilePage = ({ isProfileOpen, setIsProfileOpen, user }) => {
   const inputRef = useRef(null);

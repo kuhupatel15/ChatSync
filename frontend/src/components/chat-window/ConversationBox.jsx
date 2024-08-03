@@ -1,22 +1,22 @@
 import IncomingMessage from './IncomingMsg.jsx'
 import GroupChatMessage from './GroupChatMessage.jsx'
 import { ChatState } from '../../context/ChatProvider.jsx'
-import { Get_all_messages, Read_Message } from '../../Routes/MessagesRoutes.js'
+import { Get_all_messages, Read_Message } from '../../routes/MessagesRoutes.js'
 import { useEffect, useRef, useState } from 'react'
 import { compareTime } from '../../utils/msg.js'
 import { Chip } from "@nextui-org/react";
 import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { setmessages } from '../../../store/reducers/messagesSlice.js'
-import { setnotifications } from '../../../store/reducers/notificationsSlice.js'
+import { setmessages } from '../../../src/store/reducers/messagesSlice.js'
+import { setnotifications } from '../../../src/store/reducers/notificationsSlice.js'
 
 const ConversationBox = ({ selectedChat }) => {
   const dispatch = useDispatch();
   const user = useSelector(({auth}) => auth.userData)
   const messages = useSelector(({messages}) => messages.messages)
   const [selectedChatCompare, setselectedChatCompare] = useState();
-  const { notifications } = ChatState();
+  const notifications = useSelector((state)=> state.notifications.notifications)
   const socket = useSelector((state)=> state.socket.socket)
 
   const msgBox = useRef(null);

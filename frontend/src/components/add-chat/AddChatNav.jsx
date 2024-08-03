@@ -3,9 +3,8 @@ import { HiSearch } from 'react-icons/hi';
 import { HiOutlineUserGroup } from "react-icons/hi";
 import Logout from '../auth/LogoutBtn.jsx';
 import { Input, Button, Avatar } from "@nextui-org/react";
-import { Add_chat } from '../../Routes/ChatRoutes.js';
-import { Search_user} from '../../Routes/UserRoutes.js'
-import { ChatState } from '../../context/ChatProvider.jsx'
+import { Add_chat } from '../../routes/ChatRoutes.js';
+import { Search_user} from '../../routes/UserRoutes.js'
 import { GroupChatState } from '../../context/GroupChatProvider.jsx';
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import ProfilePage from '../drawers/ProfilePage.jsx';
