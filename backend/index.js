@@ -64,36 +64,25 @@ io.on("connection", (socket) => {
   console.log("Connected to socket.io");
 
   socket.on("setup", (userData) => {
-    console.log('\x1b[33m%s\x1b[0m',"3 ", "recieved ", "setup(user._id)", userData)
     socket.join(userData);
-    console.log('\x1b[33m%s\x1b[0m',"4 ", "joined room ", userData)
     socket.emit("connected");
-    console.log('\x1b[33m%s\x1b[0m',"5 ", "sent ", "connected --> frontend")
   });
 
   socket.on("typing", (room) => socket.in(room).emit("typing"));
   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
   socket.on("join-room", (roomid) => {
-    // console.log(roomid)
     socket.join(roomid);
-    console.log("User Joined Room: " + roomid);
   });
 
   socket.on("new-message", (msg) => {
+    console.log("RECIEVED MSG --> ",msg)
     var chat = msg.chat;
     if (!chat.users) return console.log("chat.users not defined");
     
     chat.users.forEach((user) => {
       if (user == msg.sender) return;
-      socket.to(user).emit("message-recieved", msg, (ack) => {
-        
-        if (ack === "success") {
-          console.log("Socket emit successful");
-        } else {
-          console.log("Socket emit failed");
-        }
-      });
+      socket.to(user).emit("message-recieved", msg);
     });
   });
 });

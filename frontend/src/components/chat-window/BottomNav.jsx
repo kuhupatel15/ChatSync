@@ -18,6 +18,7 @@ const BottomNav = () => {
 
   const sendmessage = async () => {
     const response = await Send_message({ content: message, chatId: selectedChat._id });
+    console.log("SEND MESSAGE --> ",response.data)
     if (response.data) {
       passsocket && passsocket.emit('new-message', response.data);
       setMessage('');

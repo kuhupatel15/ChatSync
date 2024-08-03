@@ -19,7 +19,6 @@ function App() {
   const store = useSelector((state) => state)
   console.log("STORE ----> ", store)
   const context = ChatState();
-  console.log("CHAT CONTEXT --> ", context)
 
   return (
     <>
@@ -46,7 +45,9 @@ function App() {
           } />
 
           <Route path='/profile/:chatid' element={
-            <GrpProfilePage />
+            <DefaultLayout>
+              <GrpProfilePage />
+            </DefaultLayout>
           } />
         </Route>
       </Routes>

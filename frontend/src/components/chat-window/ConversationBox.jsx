@@ -44,6 +44,7 @@ const ConversationBox = ({ selectedChat }) => {
 
   useEffect(() => {
     passsocket && passsocket.on("message-recieved", (msg) => {
+      console.log("REcieved message --> ", msg)
       if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
         if (notifications?.has(msg.chat._id)) {
           let pre = notifications.get(msg.chat._id)
@@ -58,7 +59,7 @@ const ConversationBox = ({ selectedChat }) => {
           notifications.delete(selectedChat._id)
         }
         setReadBy(msg._id)
-        dispatch(setmessages(response.data))
+        dispatch(setmessages([...messages,msg]))
       }
     })
   })

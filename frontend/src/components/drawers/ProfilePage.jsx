@@ -76,6 +76,7 @@ const ProfilePage = ({ isProfileOpen, setIsProfileOpen, user }) => {
                 <MdDone />
               </Button>
             }
+            
             <MdOutlineModeEdit onClick={() => setEdit(!edit)}></MdOutlineModeEdit>
           </div>
           
