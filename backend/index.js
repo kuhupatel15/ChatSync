@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const env_config = require("./config/env_config.js");
 require("./middlewares/mongoConnection.js").connectDB();
 require("dotenv").config({ path: "./.env" });
-
+const path = require('path')
 
 // cors
 const cors = require("cors");
@@ -47,6 +47,27 @@ app.use(bodyParser.json());
 app.use("/user", require("./routes/userRoutes.js"));
 app.use("/chat", require("./routes/chatRoutes.js"));
 app.use("/message", require("./routes/messageRoutes.js"));
+
+
+// --------------------------deployment------------------------------
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// --------------------------deployment------------------------------
+
+
 
 const server = app.listen(3000, () => {
   console.log("Server is running on port 3000");
