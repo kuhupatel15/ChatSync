@@ -4,22 +4,25 @@ import { Button, Input, Avatar } from "@nextui-org/react";
 import { Create_group } from "../../routes/GroupRoutes.js"
 import { CameraIcon } from '@radix-ui/react-icons'
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
-
+import { ClipLoader } from 'react-spinners';
 
 const GrpDetsDrawer = ({ grpDetsDrawerOpen, setgrpDetsDrawerOpen, members }) => {
   const [grpName, setgrpName] = useState("");
   const [fileName, setfileName] = useState('')
   const [selectedFile, setselectedFile] = useState()
+  const [isuploading, setisuploading] = useState(false)
 
   const inputRef = useRef(null);
 
   const createGroup = async (e) => {
+    setisuploading(true)
     e.preventDefault();
     if (grpName.length > 0 && members.length > 0) {
       await Create_group({ users: members, grpname: grpName, file: e.target.file.files[0] });
       setgrpName('');
       setgrpDetsDrawerOpen(false);
     }
+    setisuploading(false)
   };
 
   const preview = selectedFile ? URL.createObjectURL(selectedFile) : null;
@@ -71,7 +74,13 @@ const GrpDetsDrawer = ({ grpDetsDrawerOpen, setgrpDetsDrawerOpen, members }) => 
           </div>
 
           {grpName.length > 0 ? (
-            <Button className='mt-6' size='lg' color="primary" type='submit'>Create</Button>
+            <Button
+              startContent={<ClipLoader
+                loading={isuploading}
+                color='white'
+                size={20}
+              />}
+              className='mt-6' size='lg' color="primary" type='submit'>Create</Button>
           ) : (
             <Button isDisabled className='mt-6' size='lg' color="primary" type='submit'>Create</Button>
           )}
