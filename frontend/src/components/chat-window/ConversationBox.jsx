@@ -8,14 +8,14 @@ import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setmessages } from '../../../store/reducers/messagesSlice.js'
-import { addNotification, removeNotification } from '../../../store/reducers/notificationsSlice.js'
+import { setnotifications } from '../../../store/reducers/notificationsSlice.js'
 
 const ConversationBox = ({ selectedChat }) => {
   const dispatch = useDispatch();
   const user = useSelector(({auth}) => auth.userData)
   const messages = useSelector(({messages}) => messages.messages)
   const [selectedChatCompare, setselectedChatCompare] = useState();
-  const notifications = useSelector((state)=>state.notifications.notifications)
+  const notifications = useSelector((state)=> state.notifications.notifications)
   const socket = useSelector((state)=> state.socket.socket)
 
   const msgBox = useRef(null);

@@ -10,7 +10,8 @@ const UserChatsContainer = () => {
   const allchats = useSelector(({chats}) => chats.chats)
 
 
-  const notifications = useSelector((state)=>state.notifications.notifications)
+  const notifications = useSelector((state)=> state.notifications.notifications)
+
 
   const getallchats = async () => {
     const response = await Fetch_chat();
