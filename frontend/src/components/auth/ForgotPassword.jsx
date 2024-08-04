@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Forgot_Password } from '../../routes/AuthRoutes';
+import { Forgot_Password } from '../../routes/AuthRoutes.js';
 import { Button, Input } from '@nextui-org/react';
 import { IoMdArrowBack } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
