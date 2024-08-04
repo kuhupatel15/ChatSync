@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Verify } from '../../routes/AuthRoutes';
-import { login } from '../../../store/reducers/UserSlice';
+import { Verify } from '../../routes/AuthRoutes.js';
+import { login } from '../../../store/reducers/UserSlice.js';
 
 
 const VerifyOtp = () => {

@@ -5,7 +5,7 @@ import '../../index.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import { login } from "../../../store/reducers/UserSlice.js"
-import { LogIn } from '../../routes/AuthRoutes'
+import { LogIn } from '../../routes/AuthRoutes.js'
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons'
 
 const Login = () => {

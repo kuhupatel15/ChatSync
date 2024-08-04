@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { Reset_Password } from '../../routes/AuthRoutes';
+import { Reset_Password } from '../../routes/AuthRoutes.js';
 import { Button, Input } from '@nextui-org/react';
 
 const ResetPassword = () => {
