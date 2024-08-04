@@ -8,7 +8,7 @@ import OutgoingMsg from './OutgoingMsg.jsx'
 import { isSendByUser } from '../../utils/msg.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setmessages } from '../../../store/reducers/messagesSlice.js'
-import { setnotifications } from '../../../store/reducers/notificationsSlice.js'
+import { addNotification } from '../../../store/reducers/notificationsSlice.js'
 
 const ConversationBox = ({ selectedChat }) => {
   const dispatch = useDispatch();
