@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Forgot_Password } from '../../routes/AuthRoutes';
 
+
 const ForgotPassword = () => {
   const { register, handleSubmit } = useForm()
 

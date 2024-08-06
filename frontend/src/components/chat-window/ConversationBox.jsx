@@ -43,9 +43,9 @@ const ConversationBox = ({ selectedChat }) => {
 
   useEffect(() => {
     socket && socket.on("message-recieved", (msg) => {
-      console.log("REcieved message --> ", msg)
       if (!selectedChat || (selectedChat._id !== msg.chat._id)) {
-        if (notifications?.has(msg.chat._id)) {
+        console.log("---------->",typeof notifications , notifications);
+        if (notifications?.has(msg?.chat?._id) && notifications.size()!==0) {
           let pre = notifications.get(msg.chat._id)
           !pre.includes(msg) && dispatch(addNotification(msg.chat._id, [...pre, msg]))
         }
@@ -70,7 +70,7 @@ const ConversationBox = ({ selectedChat }) => {
     >
       {
         !selectedChat?.isGroupChat && messages?.map((message, index) => (
-          <div key={message._id}>
+          <div key={message._id} className='w-full flex flex-col'>
             {
               compareTime(messages, index)
               &&
@@ -94,7 +94,7 @@ const ConversationBox = ({ selectedChat }) => {
 
       {
         selectedChat?.isGroupChat && messages?.map((message, index) => (
-          <div key={message._id}>
+          <div key={message._id} className='w-full flex flex-col'>
             {
               compareTime(messages, index)
               &&

@@ -15,14 +15,20 @@ const BottomNav = () => {
 
   const [message, setMessage] = useState('');
 
+  const enterKeyHandler= (e)=>{
+    if(e.keyCode===13){
+      sendmessage();
+    }
+  }
+
   const sendmessage = async () => {
-    const response = await Send_message({ content: message, chatId: selectedChat._id });
+    if(message.length>0){const response = await Send_message({ content: message, chatId: selectedChat._id });
     console.log("SEND MESSAGE --> ",response.data)
     if (response.data) {
       socket && socket.emit('new-message', response.data);
-      setMessage('');
       dispatch(setmessages([...messages, response.data]))
     }
+    setMessage('');}
   }
 
   return (
@@ -34,11 +40,13 @@ const BottomNav = () => {
           // value={message}
           name='message'
           className='w-full '
+          value={message}
           type="text"
           placeholder="Type a new message...."
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e)=>enterKeyHandler(e)}
           endContent={
-            <Button className="w-max  bg-gradient-to-br from-purple-500  to-cyan-500" onClick={sendmessage}>
+            <Button className="w-max  bg-gradient-to-br from-purple-500  to-cyan-500" onClick={sendmessage} >
               <IoIosSend className='text-xl' />
             </Button>
           }

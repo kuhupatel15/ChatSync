@@ -25,7 +25,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  notifications: new Map(),
+  notifications: [],
 };
 
 const notificationsSlice = createSlice({
@@ -34,6 +34,7 @@ const notificationsSlice = createSlice({
   reducers: {
     addNotification: (state, action) => {
       const { id, ...notification } = action.payload;
+      console.log(action.payload)
       state.notifications.set(id, notification);
     },
     removeNotification: (state, action) => {
@@ -42,7 +43,7 @@ const notificationsSlice = createSlice({
     },
     clearNotifications: (state) => {
       state.notifications.clear();
-    },
+    }, 
   },
 });
 
