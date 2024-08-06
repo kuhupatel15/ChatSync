@@ -9,28 +9,3 @@ const PrivateRoutes = () => {
 };
 
 export default PrivateRoutes;
-
-
-
-// const ProtectedLayout = ({ children }) => {
-//     const navigate = useNavigate();
-//     const dispatch = useDispatch();
-//     const user = useSelector((state) => state.user.userData);
-
-//     useEffect(() => {
-//         let token = localStorage.getItem("jwt_token");
-
-//         if (!token) {
-//             navigate('/login');
-//             return toast.error("Login first to access !!");
-//         }
-//     }, [dispatch, navigate]);
-
-//     return (
-//         <div>
-//             {children}
-//         </div>
-//     );
-// };
-
-// export default ProtectedLayout;

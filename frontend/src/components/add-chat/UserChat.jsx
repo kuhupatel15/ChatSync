@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 const UserChat = (chat) => {
   const user = useSelector(({auth}) => auth.userData);
-  const notifications = useSelector((state)=>state.notifications.notifications)
+  const notifications = useSelector((state)=> state.notifications.notifications)
+
 
   var chat = chat.chat;
 

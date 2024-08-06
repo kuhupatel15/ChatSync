@@ -9,8 +9,8 @@ import { logout } from "../../../store/reducers/UserSlice.js"
 import { clearAllChats} from "../../../store/reducers/AllChatsSlice.js"
 import { clearchat } from "../../../store/reducers/chatSlice.js"
 import { clearmessages } from "../../../store/reducers/messagesSlice.js"
-import { clearNotifications } from "../../../store/reducers/notificationsSlice.js"
-import {clearsocket} from '../../../store/reducers/socketSlice.js'
+import { clearnotifications } from "../../../store/reducers/notificationsSlice.js"
+import { clearsocket } from '../../../store/reducers/socketSlice.js';
 
 
 const LogoutBtn = () => {
@@ -25,7 +25,7 @@ const LogoutBtn = () => {
         dispatch(clearmessages())
         dispatch(clearAllChats())
         dispatch(clearchat())
-        dispatch(clearNotifications())
+        dispatch(clearnotifications())
         dispatch(clearsocket())
         navigate('/login')
     }
